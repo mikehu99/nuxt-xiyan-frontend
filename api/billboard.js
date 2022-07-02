@@ -1,8 +1,5 @@
-import request from '@/utils/request'
-
-export function getBillboard() {
-  return request({
-    url: '/billboard/show',
-    method: 'get'
-  })
-}
+export default $axios => ({
+  getBillboard () {
+    return $axios.$get('/billboard/show')
+  },
+})

@@ -1,13 +1,12 @@
-import request from '@/utils/request'
+export default $axios => ({
+  getList (pageNo, size, tab) {
+    return $axios.$get(
+      '/youtuber/list',
+      { params: {pageNo: pageNo, size: size, tab: tab }})
+  },
+})
 
-// 发布
-export function post(youtuber) {
-    return request({
-        url: '/youtuber/create',
-        method: 'post',
-        data: youtuber
-    })
-}
+/*
 
 // 列表
 export function getList(pageNo, size, tab) {
@@ -27,4 +26,4 @@ export function getYoutuber(id) {
             id: id
         }
     })
-}
+}*/

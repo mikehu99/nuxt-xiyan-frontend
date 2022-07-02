@@ -1,14 +1,23 @@
 <template>
   <div>
-    <div v-for="tag in tagList">
-      <div>{{tag.name}}</div>
+    <div class="box">🔔 {{ billboard.content }}</div>
+    <div class="columns">
+      <div class="column is-three-quarters">
+        <TopicList></TopicList>
+      </div>
+      <div class="column">
+        <CardBar></CardBar>
+      </div>
     </div>
-    <button @click="getTag">点击</button>
   </div>
 </template>
 
 <script>
+  import CardBar from "@/components/card/CardBar"
+  import PostList from '@/components/post/Index'
+
   export default {
+    components: {CardBar, TopicList: PostList},
     head() {
       return {
         title: "夕颜源码 - 专注于技术|源码分享的IT技术平台",
@@ -30,13 +39,15 @@
     },
     data() {
       return {
-        tagList: []
-      }
+        billboard: {
+          content: "",
+        },
+      };
     },
     async asyncData ({ $api }) {
-      const data = await $api.article.getTagList();
+      let data = await $api.billboard.getBillboard();
       console.log(data);
-      return  {tagList:data};
+      return  {billboard:data};
     },
     methods:{
       getTag(){

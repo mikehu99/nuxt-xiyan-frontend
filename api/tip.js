@@ -1,8 +1,5 @@
-import request from '@/utils/request'
-
-export function getTodayTip() {
-  return request({
-    url: '/tip/today',
-    method: 'get'
-  })
-}
+export default $axios => ({
+  getTodayTip () {
+    return $axios.$get('/tip/today')
+  },
+})

@@ -35,10 +35,20 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-
+  css: [
+    "buefy/dist/buefy.css",
+    "@/assets/css/index.css",
+    "@/assets/iconfont/iconfont.css",
+    "@/assets/app.css"
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {
+      //axios
+      src: "@/plugins/element-ui",
+      ssr: true
+    },
     {
       //axios
       src: "@/plugins/axios",
@@ -57,6 +67,14 @@ export default {
     {
       src: "@/plugins/darkreader",
       ssr: false
+    },
+    {
+      src: "@/plugins/scroll-to",
+      ssr: false
+    },
+    {
+      src: "@/plugins/day",
+      ssr: true
     },
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

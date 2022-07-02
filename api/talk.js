@@ -1,13 +1,11 @@
-import request from '@/utils/request'
+export default $axios => ({
+  getList (data) {
+    return $axios.$get(
+      '/talk/list',
+      { params: data})
+  },
+})
 
-// 列表
-export function getList(data) {
-    return request(({
-        url: '/talk/list',
-        method: 'get',
-        params: data
-    }))
-}
 
 // 发布
 export function talk(talk) {

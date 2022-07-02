@@ -32,7 +32,7 @@
         </b-navbar-item>
         <b-navbar-item
           tag="router-link"
-          :to="{ path: '/talk/index' }"
+          :to="{ path: '/talk' }"
         >
           talk
         </b-navbar-item>
