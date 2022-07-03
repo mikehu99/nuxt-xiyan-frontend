@@ -77,7 +77,7 @@
         </div>
         <!--图片-->
         <el-upload
-          action="http://192.168.31.72:8000/upload/uploadFile"
+          action="http://192.168.31.76:8000/upload/uploadFile"
           list-type="picture-card"
           :file-list="fileList"
           :on-preview="handlePictureCardPreview"
@@ -105,10 +105,6 @@
   import RangeUtil from "@/utils/rangeUtil";
 
   import {mapGetters} from 'vuex';
-  import {talk} from '@/api/talk';
-  import {location} from '@/api/talk';
-  import {getTagList} from "@/api/tag"
-  import {getCommunityList} from "@/api/community"
 
 
   export default {
@@ -260,9 +256,9 @@
 
         //设置communityId
         this.weibo.communityId = this.communityIdTemp;
-        talk(this.weibo).then((response) => {
+        this.$api.talk.talk(this.weibo).then((response) => {
           this.clearWeibo();
-          this.$message.success("创建成功");
+          this.$message.success("发布成功");
           setTimeout(() => {
             this.$emit('changeType');
           }, 800);
@@ -279,8 +275,8 @@
       },
       initCommunity() {
         if (this.communityList.length === 0) {
-          getCommunityList().then((response) => {
-            this.communityList = response.data;
+          this.$api.community.getCommunityList().then((data) => {
+            this.communityList = data;
           });
         }
       },
@@ -293,8 +289,8 @@
       },
       initTagList() {
         if (this.tagList.length === 0) {
-          getTagList().then((response) => {
-            this.tagList = response.data;
+          this.$api.tag.getTagList().then((data) => {
+            this.tagList = data;
           })
         }
       },

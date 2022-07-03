@@ -14,6 +14,12 @@ export default $axios => ({
       '/talk/praise',
       {params:{userId:userId,pageNo:pageNo,pageSize:pageSize}}
     )
+  },
+  talk(data) {
+    return $axios.$post(
+      '/talk/create',
+      data
+    )
   }
 })
 

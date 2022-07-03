@@ -1,4 +1,10 @@
-import request from '@/utils/request'
+export default $axios => ({
+  getTagList() {
+    return $axios.$get(
+      '/tag/tagList',
+    )
+  }
+})
 
 export function getTopicsByTag(paramMap) {
   return request({
