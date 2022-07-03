@@ -1,4 +1,3 @@
-import {praiseList} from '@/api/praise';
 
 const state = {
   loginFlag: false,
@@ -36,12 +35,14 @@ const mutations = {
 const actions = {
   getPraiseList({commit, state}) {
     return new Promise((resolve, reject) => {
+      console.log(state.praiseGotten);
       if (!state.praiseGotten) {
         commit("setPraiseList", []);
-        praiseList().then(response => {
-          commit("setPraiseList", response.data);
+        this.$api.praise.praiseList().then(data => {
+          console.log(data)
+          commit("setPraiseList", data);
           commit("setPraiseGotten", true);
-          resolve(response.data);
+          resolve(data);
         }).catch((error) => {
           commit("setPraiseGotten", false);
           reject(error);

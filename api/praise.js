@@ -2,7 +2,13 @@ export default $axios => ({
   praiseItem (data) {
     return $axios.$post(
       '/praise/item',
-      { params: data})
+      data
+    )
+  },
+  praiseList() {
+    return $axios.$get(
+      '/praise/list'
+    )
   },
 })
 
