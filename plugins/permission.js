@@ -12,6 +12,8 @@ export default ({app, $cookies, store}) => {
         if (to.path === '/login') {
           next({path: '/'})
         } else {
+          // 获取用户信息
+          store.dispatch('user/getInfo');
           next()
         }
       } else {

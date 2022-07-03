@@ -55,7 +55,7 @@
       }
     },
     created(){
-      if (process.browser) {
+      if (process.client) {
         this.screenWidth = document.body.clientWidth;
       }
     },
@@ -89,14 +89,14 @@
           return false;
         }
         this.isEditorActive = true;
-        if (process.browser) {
+        if (process.client) {
           let element = document.getElementById('weibo-input');
           element.focus();
         }
       }
     },
     activated() {
-      if (process.browser) {
+      if (process.client) {
         let element = document.getElementById('weibo-input');
         element.focus();
       }

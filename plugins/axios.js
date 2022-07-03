@@ -12,7 +12,7 @@ export default function ({store, redirect, app: {$axios, $cookies}}) {
   $axios.onRequest(config => {
     //请求超时时间 $cookies.get("token")
     config.timeout = 5000;
-    if (store.getters.token) {
+    if (getToken()) {
       //如果有toekn才携带请求头中的token到后端
       config.headers['Authorization'] = 'Bearer ' + getToken()
     }
