@@ -5,6 +5,8 @@ import postModule from '../api/post'
 import promoteModule from '../api/promote'
 import youtuberModule from '../api/youtuber'
 import talkModule from '../api/talk'
+import praiseModule from '../api/praise'
+import authModule from '../api/auth/auth'
 export default function ({ $axios }, inject) {
   const apiModules = {}
   $axios.onRequest((config) => {
@@ -17,6 +19,8 @@ export default function ({ $axios }, inject) {
   apiModules.promote = promoteModule($axios);
   apiModules.youtuber = youtuberModule($axios);
   apiModules.talk = talkModule($axios);
+  apiModules.praise = praiseModule($axios);
+  apiModules.auth = authModule($axios);
   // Inject to context as $api
   inject('api', apiModules)
 }

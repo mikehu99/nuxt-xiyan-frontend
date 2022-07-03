@@ -1,5 +1,27 @@
-import request from '@/utils/request'
-
+export default $axios => ({
+  login(data){
+    return $axios.$post(
+      '/ums/user/login',
+      data
+      )
+  },
+  logout(){
+    return $axios.$get(
+      '/ums/user/logout'
+    )
+  },
+  getUserInfo(){
+    return $axios.$get(
+      '/ums/user/info'
+    )
+  },
+  userRegister(data){
+    return $axios.$post(
+      '/ums/user/register',
+      data
+    )
+  }
+})
 // 注册
 export function userRegister(userDTO) {
   return request({

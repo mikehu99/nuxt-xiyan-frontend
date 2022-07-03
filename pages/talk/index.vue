@@ -69,7 +69,6 @@
           pageSize:this.page.size,
           tab:this.tab
         });
-
         if (data.records.length) {
           this.page.current += 1;
           this.talkList.push(...data.records);
@@ -77,20 +76,6 @@
         } else {
           $state.complete();
         }
-
-        // getList({
-        //   pageNo:this.page.current,
-        //   pageSize:this.page.size,
-        //   tab:this.tab
-        // }).then(({data}) => {
-        //   if (data.records.length) {
-        //     this.page.current += 1;
-        //     this.talkList.push(...data.records);
-        //     $state.loaded();
-        //   } else {
-        //     $state.complete();
-        //   }
-        // });
       },
       changeType() {
         this.page.current = 1;

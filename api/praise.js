@@ -1,4 +1,10 @@
-import request from '@/utils/request'
+export default $axios => ({
+  praiseItem (data) {
+    return $axios.$post(
+      '/praise/item',
+      { params: data})
+  },
+})
 
 
 // 点赞

@@ -1,5 +1,3 @@
-<template></template>
-<!--
 <template>
   <div>
     <div class="editor-dialog">
@@ -77,7 +75,7 @@
             <el-button size="small" type="primary" @click.native="createWeibo">发布</el-button>
           </div>
         </div>
-        &lt;!&ndash;图片&ndash;&gt;
+        <!--图片-->
         <el-upload
           action="http://192.168.31.72:8000/upload/uploadFile"
           list-type="picture-card"
@@ -91,7 +89,7 @@
         <el-dialog :visible.sync="dialogVisible">
           <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
-        &lt;!&ndash;链接&ndash;&gt;
+        <!--链接-->
         <b-field v-if="showUrl" style="width:100%">
           <b-input v-model="weibo.link" placeholder="URL" type="url"></b-input>
         </b-field>
@@ -158,11 +156,14 @@
         RangeUtil.insertContent(`<span class="tag-node" contenteditable="false" id="${tagAdd[0].id}" style="color: #1E80FF;">#${tagAdd[0].name}#</span> `);
       },
       imgNum(newVal, oldVal) {
-        if (newVal === 0) {
-          document.querySelectorAll('div.el-upload&#45;&#45;picture-card')[0].style.display = "none";
-        } else {
-          document.querySelectorAll('div.el-upload&#45;&#45;picture-card')[0].style.display = "inline-block";
+        if (process.browser) {
+          if (newVal === 0) {
+            document.querySelectorAll('div.el-upload--picture-card')[0].style.display = "none";
+          } else {
+            document.querySelectorAll('div.el-upload--picture-card')[0].style.display = "inline-block";
+          }
         }
+
       },
       communityId(newVal, oldVal) {
         this.communityIdTemp = newVal;
@@ -286,7 +287,9 @@
       selectCommunity(community) {
         this.communityIdTemp = community.id;
         this.communityNameTemp = community.communityName;
-        document.getElementsByClassName('new_topic')[0].click();
+        if (process.browser) {
+          document.getElementsByClassName('new_topic')[0].click();
+        }
       },
       initTagList() {
         if (this.tagList.length === 0) {
@@ -297,7 +300,9 @@
       },
       selectTag(id) {
         this.tag = id;
-        document.getElementsByClassName('topicpicker')[0].click();
+        if (process.browser) {
+          document.getElementsByClassName('topicpicker')[0].click();
+        }
       },
       clearWeibo() {
         this.weibo = {};
@@ -305,8 +310,8 @@
         this.fileList = [];
       },
       setLocation() {
-        location().then((response) => {
-          this.weibo.location = response.data;
+        this.$api.talk.location().then((data) => {
+          this.weibo.location = data;
         })
       },
       deleteLocation() {
@@ -314,7 +319,7 @@
       }
     },
     mounted() {
-      document.querySelectorAll('div.el-upload&#45;&#45;picture-card')[0].style.display = "none";
+      document.querySelectorAll('div.el-upload--picture-card')[0].style.display = "none";
 
       this.uploadImgClik = function () {
         document.getElementsByClassName("el-upload")[0].click();
@@ -521,4 +526,3 @@
     border-radius: 2em;
   }
 </style>
--->

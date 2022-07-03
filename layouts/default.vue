@@ -5,13 +5,27 @@
     <div class="context">
     <router-view v-if="isRouterALive"> <Nuxt /></router-view>
     </div>
+    <!--登入框-->
+    <div>
+      <Login></Login>
+    </div>
+    <!--注册框-->
+    <div>
+      <Register></Register>
+    </div>
+    <div>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 <script>
   import Header from "@/components/Layout/Header";
+  import Footer from "@/components/Layout/Footer";
+  import Login from "@/components/User/Login";
+  import Register from "@/components/User/Register";
 
 export default {
-  components: { Header},
+  components: { Header, Footer ,Login,Register},
   name: "app",
   data() {
     return { isRouterALive: true };

@@ -1,5 +1,7 @@
 import store from '@/store'
 import {getToken} from '@/utils/auth'
+import { Message } from 'element-ui';
+
 
 export default function ({store, redirect, app: {$axios, $cookies}}) {
 
@@ -15,27 +17,12 @@ export default function ({store, redirect, app: {$axios, $cookies}}) {
       config.headers['Authorization'] = 'Bearer ' + getToken()
     }
   });
-  $axios.onError(error => {
-    console.log(error.response);
-    //如果客户端密钥已经失效或者token失效提示用户重新登录
-    if (error.response.status === 678) {
-      $cookies.remove("token")
-      $cookies.remove("user")
-      store.commit('removeUserInfo');
-      return Promise.reject(error);
-    }
-    if (error.response.status === 401) {
-      redirect("/login")
-      return Promise.reject(error);
-    }
-    return Promise.reject(error.response)
-  })
   // response拦截器，数据返回后，你可以先在这里进行一个简单的判断
   $axios.interceptors.response.use(response => {
     /**
      * code为非200是抛错 可结合自己业务进行修改
      */
-    const res = response.data
+    const res = response.data;
     // 如果自定义代码不是200，则将其判断为错误。
     if (res.code !== 200) {
       // 50008: 非法Token; 50012: 异地登录; 50014: Token失效;
@@ -50,6 +37,7 @@ export default function ({store, redirect, app: {$axios, $cookies}}) {
           window.location.href = '/login'
         })
       } else { // 其他异常直接提示
+        console.log(res.message);
         Message({
           showClose: true,
           message: '⚠' + res.message || 'Error',

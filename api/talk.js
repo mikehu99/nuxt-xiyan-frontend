@@ -4,6 +4,17 @@ export default $axios => ({
       '/talk/list',
       { params: data})
   },
+  location(){
+    return $axios.$get(
+      '/talk/location'
+    )
+  },
+  praiseTalkList(userId,pageNo,pageSize){
+    return $axios.$get(
+      '/talk/praise',
+      {params:{userId:userId,pageNo:pageNo,pageSize:pageSize}}
+    )
+  }
 })
 
 

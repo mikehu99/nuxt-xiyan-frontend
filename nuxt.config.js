@@ -76,6 +76,10 @@ export default {
       src: "@/plugins/day",
       ssr: true
     },
+    {
+      src: "@/plugins/utils",
+      ssr: true
+    },
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

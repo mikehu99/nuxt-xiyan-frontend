@@ -20,11 +20,12 @@ const actions = {
   login({ commit }, userInfo) {
     const { name, pass, rememberMe } = userInfo;
     return new Promise((resolve, reject) => {
-      login({ username: name.trim(), password: pass, rememberMe: rememberMe })
-        .then((response) => {
-          const { data } = response;
-          commit("SET_TOKEN_STATE", data.token);
-          setToken(data.token);
+      this.$api.auth.login({ username: name.trim(), password: pass, rememberMe: rememberMe })
+        .then(data => {
+          console.log(data)
+          commit("SET_TOKEN_STATE", data.user.token);
+          commit("SET_USER_STATE", data.user);
+          setToken(data.user.token);
           resolve();
         })
         .catch((error) => {
@@ -35,9 +36,8 @@ const actions = {
   // 获取用户信息
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getUserInfo()
-        .then((response) => {
-          const { data } = response;
+      this.$api.auth.getUserInfo()
+        .then((data) => {
           if (!data) {
             commit("SET_TOKEN_STATE", "");
             commit("SET_USER_STATE", "");
@@ -56,7 +56,7 @@ const actions = {
   // 注销
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token)
+      this.$api.auth.logout(state.token)
         .then((response) => {
           commit("SET_TOKEN_STATE", "");
           commit("SET_USER_STATE", "");

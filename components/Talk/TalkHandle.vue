@@ -29,7 +29,6 @@
   </div>
 </template>
 <script>
-  import {praiseItem} from '@/api/praise';
   import { mapGetters } from 'vuex'
 
 
@@ -60,16 +59,20 @@
         this.$router.push({name: 'talk-detail', params: {id: this.talk.id}})
       },
       praiseFuc() {
+        if(this.token == null || this.token === ''){
+          this.$message.success('该功能需要登录');
+          return false;
+        }
         this.praise.itemId = this.talk.id;
         this.praise.itemType = 1;
         this.praise.itemOwnerId = this.talk.userId;
-        praiseItem(this.praise).then(respose => {
-          if (respose.data.status === 1) {
+        this.$api.praise.praiseItem(this.praise).then(data => {
+          if (data.status === 1) {
             this.$message.success('点赞成功')
             this.talk.praiseNum++;
             this.$store.commit('common/praise',this.talk.id)
           }
-          if (respose.data.status === 0) {
+          if (data.status === 0) {
             this.$message.success('取消点赞成功')
             this.talk.praiseNum--;
             this.$store.commit('common/praise',this.talk.id)
