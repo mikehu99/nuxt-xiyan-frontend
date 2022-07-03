@@ -20,7 +20,13 @@ export default $axios => ({
       '/talk/create',
       data
     )
-  }
+  },
+  selectOne(id) {
+    return $axios.$get(
+       '/talk',
+      {params: {id:id}}
+    )
+  },
 })
 
 

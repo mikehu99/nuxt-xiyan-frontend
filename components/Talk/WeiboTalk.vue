@@ -109,14 +109,16 @@
           return str;
         });
         //标签绑定点击时间
-        window.tagTalkPage = function (id) {
-          console.log(id);
-          if (this) {
-            this.stopPropagation();
-            this.preventDefault();
-          } else {
-            window.event.returnValue = false;
-            window.event.cancelBubble = true;
+        if (process.client) {
+          window.tagTalkPage = function (id) {
+            console.log(id);
+            if (this) {
+              this.stopPropagation();
+              this.preventDefault();
+            } else {
+              window.event.returnValue = false;
+              window.event.cancelBubble = true;
+            }
           }
         }
 
@@ -131,7 +133,7 @@
         });
 
         //换行符
-        weiboContent = weiboContent.replaceAll('\n', '<br>');
+        weiboContent = weiboContent.replace(/[\n]/g, '<br>');
 
         //链接
         if (this.talk.link) {
@@ -155,7 +157,8 @@
         }
       },
       locationText() {
-        return this.talk.location.replaceAll(',', ' ')
+        console.log(this.talk.location);
+        return this.talk.location.replace(/[,]/g, ' ')
       },
     },
   }

@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="comment-action action">
-        <div class="action-title-box" @click="detailPage">
+        <div class="action-title-box" @click="detailPage(talk.id)">
           <span class="iconfont icon-pinglun3 bottom-icon"></span>
           <span class="action-title">{{talk.commentNum}}</span>
         </div>
@@ -55,8 +55,8 @@
       }
     },
     methods: {
-      detailPage() {
-        this.$router.push({name: 'talk-detail', params: {id: this.talk.id}})
+      detailPage(id) {
+        this.$router.push({path: `/talk/${id}`,params:{id:id}})
       },
       praiseFuc() {
         if(this.token == null || this.token === ''){

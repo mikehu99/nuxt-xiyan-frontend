@@ -1,39 +1,31 @@
-import request from '@/utils/request'
+export default $axios => ({
+  fetchCommentsByTopicId (topicId,pageNo,size) {
+    return $axios.$get(
+      '/comment/get_comments',
+      { params: { topicid: topicId, pageNo: pageNo, size: size}})
+  },
+  fetchCommentsByUserId(userId,pageNo,size) {
+    return $axios.$get(
+      '/comment/user_comments',
+      {
+        params: {userId: userId, pageNo: pageNo, size: size}
+      }
+    )
+  },
+  pushComment(data) {
+    return $axios.$post(
+      '/comment/add_comment',
+      data
+    )
+  },
+  praiseCommentList(userId,pageNo,pageSize) {
+    return $axios.$get(
+      '/comment/praise',
+      {params:{userId:userId,pageNo:pageNo,pageSize:pageSize}}
+    )
+  }
 
-export function fetchCommentsByTopicId(topicId,pageNo,size) {
-  return request({
-    url: '/comment/get_comments',
-    method: 'get',
-    params: {
-      topicid: topicId, pageNo: pageNo, size: size
-    }
-  })
-}
+})
 
-export function fetchCommentsByUserId(userId,pageNo,size) {
-  return request({
-    url: '/comment/user_comments',
-    method: 'get',
-    params: {
-      userId: userId, pageNo: pageNo, size: size
-    }
-  })
-}
 
-export function pushComment(data) {
-  return request({
-    url: '/comment/add_comment',
-    method: 'post',
-    data: data
-  })
-}
-
-//查询点赞talk
-export function praiseCommentList(userId,pageNo,pageSize) {
-  return request({
-    url: '/comment/praise',
-    method: 'get',
-    params:{userId:userId,pageNo:pageNo,pageSize:pageSize}
-  })
-}
 
