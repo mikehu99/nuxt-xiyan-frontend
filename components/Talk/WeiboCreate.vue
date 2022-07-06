@@ -48,7 +48,7 @@
               trigger="click">
               <Emoji @addEmoji="addEmoji"/>
               <div slot="reference" class="picker emojipicker" style="position: relative">
-                <i class="fa fa-smile-o"/><span>表情</span>
+                <i class="iconfont icon-biaoqing"/><span>表情</span>
               </div>
             </el-popover>
             <div class="picker filepicker" @click="uploadImgClik()">

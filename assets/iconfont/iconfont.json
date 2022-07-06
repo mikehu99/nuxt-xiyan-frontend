@@ -6,39 +6,11 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "8604973",
-      "name": "有赞 copy",
-      "font_class": "youzancopy",
-      "unicode": "e623",
-      "unicode_decimal": 58915
-    },
-    {
-      "icon_id": "11008642",
-      "name": "点赞",
-      "font_class": "dianzan7",
-      "unicode": "e625",
-      "unicode_decimal": 58917
-    },
-    {
-      "icon_id": "14472518",
-      "name": "评论点赞",
-      "font_class": "pinglundianzan",
-      "unicode": "e647",
-      "unicode_decimal": 58951
-    },
-    {
-      "icon_id": "4690372",
-      "name": "点赞",
-      "font_class": "dianzan5",
-      "unicode": "e621",
-      "unicode_decimal": 58913
-    },
-    {
-      "icon_id": "14329732",
-      "name": "点赞",
-      "font_class": "dianzan6",
-      "unicode": "e688",
-      "unicode_decimal": 59016
+      "icon_id": "1479642",
+      "name": "表情",
+      "font_class": "biaoqing",
+      "unicode": "e681",
+      "unicode_decimal": 59009
     },
     {
       "icon_id": "24267426",

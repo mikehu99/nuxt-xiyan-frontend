@@ -24,7 +24,7 @@
                 trigger="click">
                 <Emoji @addEmoji="addEmoji"/>
                 <div slot="reference" class="emoji-box">
-                  <i class="fa fa-smile-o" style="font-size: 22px"/>
+                  <i class="iconfont icon-biaoqing" style="font-size: 22px"/>
                 </div>
               </el-popover>
               <el-button style="margin-left:auto" size="small" type="primary" @click="insertComment" v-preventReClick="1500">提交</el-button>
@@ -245,7 +245,7 @@
         //解析表情
 
         //发送请求
-        await pushComment(this.comment);
+        await this.$api.comment.pushComment(this.comment);
         this.changeType();
         this.$message.success("评论成功");
         this.cancleReply();
@@ -308,6 +308,8 @@
           return false;
         }
         this.showEmojiContainer=true;
+        console.log("focus")
+        console.log(this.showEmojiContainer)
       }
     },
     watch: {

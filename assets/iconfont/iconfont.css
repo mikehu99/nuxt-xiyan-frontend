@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2939036 */
-  src: url('iconfont.woff2?t=1652705106989') format('woff2'),
-       url('iconfont.woff?t=1652705106989') format('woff'),
-       url('iconfont.ttf?t=1652705106989') format('truetype');
+  src: url('iconfont.woff2?t=1656844110202') format('woff2'),
+       url('iconfont.woff?t=1656844110202') format('woff'),
+       url('iconfont.ttf?t=1656844110202') format('truetype');
 }
 
 .iconfont {
@@ -13,24 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-youzancopy:before {
-  content: "\e623";
-}
-
-.icon-dianzan7:before {
-  content: "\e625";
-}
-
-.icon-pinglundianzan:before {
-  content: "\e647";
-}
-
-.icon-dianzan5:before {
-  content: "\e621";
-}
-
-.icon-dianzan6:before {
-  content: "\e688";
+.icon-biaoqing:before {
+  content: "\e681";
 }
 
 .icon-dianzan1-mianxing:before {

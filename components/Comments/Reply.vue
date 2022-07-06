@@ -15,7 +15,7 @@
         trigger="click">
         <Emoji @addEmoji="addEmoji"/>
         <div slot="reference" class="emoji-box">
-          <i class="fa fa-smile-o" style="font-size: 22px"/>
+          <i class="iconfont icon-biaoqing" style="font-size: 22px"/>
         </div>
       </el-popover>
       <div style="margin-left:auto">
@@ -32,7 +32,6 @@
 
 <script>
   import Emoji from "@/components/Emoji";
-  import { pushComment } from '@/api/comment'
 
   export default {
     components: {
@@ -79,7 +78,7 @@
         //解析表情
 
         //发送请求
-        await pushComment(this.comment);
+        await this.$api.comment.pushComment(this.comment);
         this.$message.success("评论成功");
         this.comment.content='';
         this.$emit("cancleReply");
