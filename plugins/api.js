@@ -10,6 +10,8 @@ import authModule from '../api/auth/auth'
 import tagModule from '../api/tag'
 import communityModule from '../api/community'
 import commentModule from '../api/comment'
+import userModule from '../api/user'
+import followModule from '../api/follow'
 export default function ({ $axios }, inject) {
   const apiModules = {}
   $axios.onRequest((config) => {
@@ -27,6 +29,8 @@ export default function ({ $axios }, inject) {
   apiModules.tag = tagModule($axios);
   apiModules.community = communityModule($axios);
   apiModules.comment = commentModule($axios);
+  apiModules.user = userModule($axios);
+  apiModules.follow = followModule($axios);
   // Inject to context as $api
   inject('api', apiModules)
 }

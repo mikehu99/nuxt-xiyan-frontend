@@ -5,14 +5,14 @@
         <div class="XpwFHo">
           <span class="MNowkr">
             <span class="muncfL">
-              <router-link :to="{path:`/member/${talk.userId}/home`}">
+              <router-link :to="{path:`/member/${talk.userId}`}">
                 <img class="avatar-img" :src="talk.avatar"/>
               </router-link>
             </span>
           </span>
           <div class="sFPAmX">
             <span>
-              <router-link :to="{path:`/member/${talk.userId}/home`}" class="oTXgEq">
+              <router-link :to="{path:`/member/${talk.userId}`}" class="oTXgEq">
               {{talk.username}}
               </router-link>
             </span>

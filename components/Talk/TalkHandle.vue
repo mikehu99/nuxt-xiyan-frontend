@@ -56,7 +56,7 @@
     },
     methods: {
       detailPage(id) {
-        this.$router.push({path: `/talk/${id}`,params:{id:id}})
+        this.$router.push({path: `/talk/${id}`})
       },
       praiseFuc() {
         if(this.token == null || this.token === ''){

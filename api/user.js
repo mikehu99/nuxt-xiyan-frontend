@@ -1,54 +1,32 @@
-import request from '@/utils/request'
+export default $axios => ({
+  getInfoByName(username, pageNo, size) {
+    return $axios.$get(
+      '/ums/user/' + username,
+      {params: {pageNo: pageNo, size: size}})
+  },
+  getInfo() {
+    return $axios.$get(
+      '/ums/user/info',
+    )
+  },
+  update(user) {
+    return $axios.$post(
+      '/ums/user/update',
+      user
+    )
+  },
+  getUserInfo(userId) {
+    return $axios.$get(
+      '/ums/user/userInfo',
+      {params: {userId: userId}}
+    )
+  },
+  getUserProfile(userId) {
+    return $axios.$get(
+      '/ums/user/profile',
+      {params: {userId: userId}}
+    )
+  }
+})
 
-// 用户主页
-export function getInfoByName(username, page, size) {
-  return request({
-    url: '/ums/user/' + username,
-    method: 'get',
-    params: {
-      pageNo: page,
-      size: size
-    }
-  })
-}
-
-// 用户主页
-export function getInfo() {
-  return request({
-    url: '/ums/user/info',
-    method: 'get'
-  })
-}
-
-// 更新
-export function update(user) {
-  return request({
-    url: '/ums/user/update',
-    method: 'post',
-    data: user
-  })
-}
-
-//用户信息
-export function getUserInfo(userId) {
-  return request({
-    url: '/ums/user/userInfo',
-    method: 'get',
-    params: {
-      userId: userId
-    }
-  })
-}
-
-
-//用户主页
-export function getUserProfile(userId) {
-  return request({
-    url: '/ums/user/profile',
-    method: 'get',
-    params: {
-      userId: userId
-    }
-  })
-}
 

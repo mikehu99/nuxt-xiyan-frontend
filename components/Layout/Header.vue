@@ -99,7 +99,7 @@
         >
           <b-navbar-item
             tag="router-link"
-            :to="{ path: `/member/${user.id}/home` }"
+            :to="{ path: `/member/${user.id}`}"
           >
             🧘 个人中心
           </b-navbar-item>
