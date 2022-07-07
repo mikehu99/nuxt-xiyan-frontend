@@ -3,7 +3,7 @@ import {getToken} from '@/utils/auth'
 // 不重定向白名单 [路由守卫]
 const whiteList = ['/login', '/', '/regist', "/youtuber/list","/talk"]
 export default ({app, $cookies, store}) => {
-  app.router.beforeEach((to, from, next) => {
+  app.router.beforeEach(async(to, from, next) => {
     //服务端直接放行，只做客户端处理
     let isClient = process.client
     if (isClient) {
@@ -13,7 +13,7 @@ export default ({app, $cookies, store}) => {
           next({path: '/'})
         } else {
           // 获取用户信息
-          store.dispatch('user/getInfo');
+          await store.dispatch('user/getInfo');
           next()
         }
       } else {

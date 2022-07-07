@@ -1,4 +1,3 @@
-<!--
 <template>
   <div>
     <div>
@@ -11,17 +10,17 @@
     </span>
       <div class="fn5v03">
         <div class="wJxZzl" style="max-width:984px">
-          &lt;!&ndash;头像 名字&ndash;&gt;
+          <!--头像 名字-->
           <div class="awL6gi">
             <img
               :src="community.avatar"
               class="avatar-img u0UgpXN5r-VO6PP9OAViq"/>
             <div class="mayH8s">
-              <div class="bQhFI7"><h1 class="name">{{community.youtuberName||community.communityName}}</h1>
+              <div class="bQhFI7"><h1 class="name">{{community.communityName}}</h1>
               </div>
             </div>
           </div>
-          &lt;!&ndash;选项&ndash;&gt;
+          <!--选项-->
           <div class="_1gVVmSnHZpkUgVShsn7-ua _15Pk_bZ2XZNa9zBvnxq6HX" style="position: static; background: inherit;">
             <div class="_1_TJAX-8zAT3vVN1Iz7cys" style="max-width: 1200px;">
               <div>
@@ -46,7 +45,7 @@
             <WeiboCreate :communityId="community.id" :communityName="community.communityName" @changeType="changeType"></WeiboCreate>
           </el-dialog>
           <TalkList :talkList="talkList"></TalkList>
-          &lt;!&ndash;分页&ndash;&gt;
+          <!--分页-->
           <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler">
             <div slot="spinner">
               <el-skeleton :rows="6" animated />
@@ -104,18 +103,17 @@
           this.changeType()
         }
       );
-      if (this.$route.params.community == null) {
-        this.fetchCommunityInfo()
-      } else {
-        this.community = JSON.parse(this.$route.params.community);
-      }
+    },
+    async fetch(){
+      let data =await this.$api.community.getOneCommunity(this.$route.params.id);
+      this.community = data;
     },
     methods:{
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
       infiniteHandler($state) {
-        getList(this.queryVo).then(({data}) => {
+        this.$api.talk.getList(this.queryVo).then(data => {
           if (data.records.length) {
             this.queryVo.pageNo += 1;
             this.talkList.push(...data.records);
@@ -132,10 +130,9 @@
         this.infiniteId += 1;
       },
       fetchCommunityInfo(){
-        getOneCommunity(this.$route.params.id).then(response => {
-          const {data} = response;
+        this.$api.community.getOneCommunity(this.$route.params.id).then(data=>{
           this.community = data;
-        })
+        });
       },
       showEditor(){
         if (this.token == null || this.token === '') {
@@ -349,4 +346,3 @@
 
 
 </style>
--->

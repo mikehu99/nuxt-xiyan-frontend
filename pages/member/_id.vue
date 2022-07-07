@@ -133,13 +133,14 @@
     computed: {
       ...mapGetters(['token', 'user','praiseList']),
       activeIndex() {
-        if(this.$route.name === 'profile-comment'){
+        console.log(this.$route.index)
+        if(this.$route.fullPath.includes('/comment')){
           return '2';
         }
-        if(this.$route.name === 'profile-praise-talk'){
+        if(this.$route.fullPath.includes('/ptalk')){
           return '3-1';
         }
-        if(this.$route.name === 'profile-praise-comment'){
+        if(this.$route.fullPath.includes('/pcomment')){
           return '3-2';
         }
         return '1';
@@ -203,7 +204,6 @@
       },
       async fetchUserInfo() {
         this.$api.user.getUserProfile(this.$route.params.id).then((data) => {
-          console.log(data);
           this.topicUser = data;
           this.flag = true;
         })
