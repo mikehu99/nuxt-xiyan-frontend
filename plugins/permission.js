@@ -17,11 +17,11 @@ export default ({app, $cookies, store}) => {
           next()
         }
       } else {
-        if (whiteList.indexOf(to.path) !== -1) {
+     /*   if (whiteList.indexOf(to.path) !== -1) {
           next()
         } else {
           next('/login')
-        }
+        }*/
       }
     }
     next()

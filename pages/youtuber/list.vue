@@ -63,7 +63,7 @@
         this.loading = false;
       },
       youtuberDetail(youtuber) {
-        // this.$router.push({name: 'community-detail', params: {community: JSON.stringify(youtuber), id: youtuber.id}})
+        this.$router.push({path: `/community/${youtuber.id}`})
       }
     }
   }
