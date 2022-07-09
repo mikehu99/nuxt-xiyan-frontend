@@ -40,6 +40,8 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
+
   export default {
     name: 'Setting',
     data() {
@@ -57,14 +59,23 @@
         }
       }
     },
-    created() {
+    computed: {
+      ...mapGetters(['token', 'user'])
+    },
+    mounted() {
       this.fetchInfo()
     },
     methods: {
       fetchInfo() {
-        this.$api.user.getInfo().then(data => {
-          this.user = data
-        })
+        if (this.token == null || this.token === '') {
+          this.$message({message:'该功能需要登录',type:'error',showClose: true});
+          this.$router.push({path:"/"});
+        }else {
+          this.$api.user.getInfo().then(data => {
+            this.user = data
+          })
+        }
+
       },
       handleClick(tab, event) {
         console.log(tab, event)

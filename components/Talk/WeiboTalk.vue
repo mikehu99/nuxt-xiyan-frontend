@@ -17,11 +17,13 @@
               </router-link>
             </span>
             <div class="meta-row">
-              <div v-if="talk.location" class="location"><i class="iconfont icon-dingwei2"/> {{locationText}}</div>
-              <div v-if="talk.location" class="dot">·</div>
+
               <a :href="'/talk/'+talk.id" target="_blank">
-                <time>{{time}}</time>
+                <time>{{talk.createTime | timeFormat}}</time>
               </a>
+              <div v-if="talk.location" class="dot">·</div>
+              <div v-if="talk.location" class="location">{{locationText}}</div>
+
             </div>
           </div>
         </div>
@@ -89,6 +91,11 @@
         fit: 'contain'
       }
     },
+    filters:{
+      timeFormat(value) {
+        return showtime(value)
+      },
+    },
     computed: {
       ...mapGetters(['token', 'user','praiseList']),
       imgList() {
@@ -141,9 +148,6 @@
         }
 
         return weiboContent;
-      },
-      time() {
-        return showtime(this.talk.createTime)
       },
       shortLink() {
         if (this.talk.link) {
