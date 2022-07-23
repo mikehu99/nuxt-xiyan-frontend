@@ -1,6 +1,7 @@
 <template>
   <div class="reply-input-wrapper" ref="reply">
     <textarea
+      id="reply-input"
       v-focus
       class="comment-textarea"
       :placeholder="'回复 @' + toComment.username + '：'"
@@ -84,9 +85,21 @@
         this.$emit("cancleReply");
         this.$emit("reloadReply");
       },
-      addEmoji(text) {
-        this.comment.content += text;
-      }
+      addEmoji(icon) {
+        if (process.client) {
+          // 获取文本输入框元素节点
+          let ele = document.getElementById('reply-input');
+          // 获取光标
+          let cursor = ele.selectionStart
+          // 设置文本内容
+          ele.setRangeText(icon)
+          // 移动光标并聚焦
+          ele.selectionStart = cursor + 2
+          ele.focus()
+          // 使文本输入框的内容等于当前的值
+          this.comment.content = ele.value
+        }
+      },
     },
     directives: {
       focus: {

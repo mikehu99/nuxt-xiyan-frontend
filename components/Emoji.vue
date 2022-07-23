@@ -1,18 +1,15 @@
 <template>
   <div class="emoji-wrapper">
-    <span
+    <div class="emoji">
+    <button
       class="emoji-item"
-      v-for="(value, key, index) of emojiList"
+      v-for="(value, index) of emojiList"
       :key="index"
-      @click="addEmoji(key)"
+      @click="addEmoji(value.icon)"
     >
-      <el-image
-        :src="value"
-        :title="key"
-        class="emoji"
-        style="width:24px;height:24px"
-      />
-    </span>
+    {{value.icon}}
+    </button>
+    </div>
   </div>
 </template>
 
@@ -34,14 +31,21 @@ export default {
 
 <style scoped>
 .emoji {
-  user-select: none;
-  margin: 0.25rem;
-  display: inline-block;
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  z-index: 3;
+  flex-flow: wrap;
 }
 .emoji-item {
   cursor: pointer;
-  display: inline-block;
+  width: 14.2857%;
+  height: 33px;
+  background: #F5F6F7;
+  border: 1px solid #fff;
+  font-size: 19px;
+  line-height: 33px;
+  padding: 0;
 }
 .emoji-item:hover {
   transition: all 0.2s;

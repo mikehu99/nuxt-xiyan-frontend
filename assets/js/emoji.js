@@ -1,115 +1,427 @@
-export default {
-  "[微笑]": "https://static.talkxj.com/emoji/smile.jpg",
+export default [
+  {
+    className: 'bg-1f4b0',
+    icon: '💰'
 
-  "[笑]": " https://static.talkxj.com/emoji/dx.jpg",
+  },
+  {
+    className: 'bg-1f604',
+    icon:
+      '😄'
 
-  "[呲牙]": "https://static.talkxj.com/emoji/cy.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f60d',
+    icon:
+      '😍'
 
-  "[OK]": "https://static.talkxj.com/emoji/ok.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f631',
+    icon:
+      '😱'
 
-  "[星星眼]": "https://static.talkxj.com/emoji/xxy.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f602',
+    icon:
+      '😂'
 
-  "[哦呼]": "https://static.talkxj.com/emoji/oh.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f353',
+    icon:
+      '🍓'
 
-  "[嫌弃]": "https://static.talkxj.com/emoji/xq.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f37a',
+    icon:
+      '🍺'
 
-  "[喜欢]": "https://static.talkxj.com/emoji/xh.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2615',
+    icon:
+      '☕'
 
-  "[酸了]": "https://static.talkxj.com/emoji/sl.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f340',
+    icon:
+      '🍀'
 
-  "[大哭]": "https://static.talkxj.com/emoji/dq.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f331',
+    icon:
+      '🌱'
 
-  "[害羞]": "https://static.talkxj.com/emoji/hx.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2728',
+    icon:
+      '✨'
 
-  "[无语]": "https://static.talkxj.com/emoji/wy.jpg",
+  }
+  ,
+  {
+    className: 'bg-f26a1',
+    icon:
+      '⚡'
 
-  "[疑惑]": "https://static.talkxj.com/emoji/yh.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f4ab',
+    icon:
+      '💫'
 
-  "[调皮]": "https://static.talkxj.com/emoji/tiaopi.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f4a5',
+    icon:
+      '💥'
 
-  "[笑哭]": "https://static.talkxj.com/emoji/xiaoku.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f3b5',
+    icon:
+      '🎵'
 
-  "[奸笑]": "https://static.talkxj.com/emoji/jianxiao.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f44f',
+    icon:
+      '👏'
 
-  "[偷笑]": "https://static.talkxj.com/emoji/touxiao.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f4aa',
+    icon:
+      '💪'
 
-  "[大笑]": "https://static.talkxj.com/emoji/daxiao.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f44d',
+    icon:
+      '👍'
 
-  "[阴险]": "https://static.talkxj.com/emoji/yinxian.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f449',
+    icon:
+      '👉'
 
-  "[捂脸]": "https://static.talkxj.com/emoji/wulian.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f448',
+    icon:
+      '👈'
 
-  "[呆]": "https://static.talkxj.com/emoji/dai.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f447',
+    icon:
+      '👇'
 
-  "[抠鼻]": "https://static.talkxj.com/emoji/koubi.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f446',
+    icon:
+      '👆'
 
-  "[惊喜]": "https://static.talkxj.com/emoji/jingxi.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f44a',
+    icon:
+      '👊'
 
-  "[惊讶]": "https://static.talkxj.com/emoji/jingya.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f48b',
+    icon:
+      '💋'
 
-  "[捂脸哭]": "https://static.talkxj.com/emoji/wulianku.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f48d',
+    icon:
+      '💍'
 
-  "[妙啊]": "https://static.talkxj.com/emoji/miaoa.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f451',
+    icon:
+      '👑'
 
-  "[狗头]": "https://static.talkxj.com/emoji/goutou.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f4a5',
+    icon:
+      '💥'
 
-  "[滑稽]": "https://static.talkxj.com/emoji/huaji.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f495',
+    icon:
+      '💕'
 
-  "[吃瓜]": "https://static.talkxj.com/emoji/chigua.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f496',
+    icon:
+      '💖'
 
-  "[打call]": "https://static.talkxj.com/emoji/dacall.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f389',
+    icon:
+      '🎉'
 
-  "[点赞]": "https://static.talkxj.com/emoji/dianzan.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f47b',
+    icon:
+      '👻'
 
-  "[鼓掌]": "https://static.talkxj.com/emoji/guzhang.jpg",
+  }
+  ,
+  {
+    className: 'bg-f3299',
+    icon:
+      '㊙'
 
-  "[尴尬]": "https://static.talkxj.com/emoji/ganga.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f51e',
+    icon:
+      '🔞'
 
-  "[冷]": "https://static.talkxj.com/emoji/leng.jpg",
+  }
+  ,
 
-  "[灵魂出窍]": "https://static.talkxj.com/emoji/linghunchuqiao.jpg",
+  {
+    className: 'bg-f2705',
+    icon:
+      '✅'
 
-  "[委屈]": "https://static.talkxj.com/emoji/weiqu.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2b07',
+    icon:
+      '⬇'
 
-  "[傲娇]": "https://static.talkxj.com/emoji/aojiao.jpg",
+  }
+  ,
+  {
+    className: 'bg-f27a1',
+    icon:
+      '➡'
 
-  "[疼]": "https://static.talkxj.com/emoji/teng.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f4af',
+    icon:
+      '💯'
 
-  "[吓]": "https://static.talkxj.com/emoji/xia.jpg?",
+  }
+  ,
+  {
+    className: 'bg-f2714',
+    icon:
+      '✔'
 
-  "[生病]": "https://static.talkxj.com/emoji/shengbing.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2611',
+    icon:
+      '☑'
 
-  "[吐]": "https://static.talkxj.com/emoji/tu.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2757',
+    icon:
+      '❗'
 
-  "[嘘声]": "https://static.talkxj.com/emoji/xusheng.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2753',
+    icon:
+      '❓'
 
-  "[捂眼]": "https://static.talkxj.com/emoji/wuyan.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2b55',
+    icon:
+      '⭕'
 
-  "[思考]": "https://static.talkxj.com/emoji/sikao.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f680',
+    icon:
+      '🚀'
 
-  "[再见]": "https://static.talkxj.com/emoji/zaijian.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2708',
+    icon:
+      '✈'
 
-  "[翻白眼]": "https://static.talkxj.com/emoji/fanbaiyan.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f697',
+    icon:
+      '🚗'
 
-  "[哈欠]": "https://static.talkxj.com/emoji/haqian.jpg",
+  }
+  ,
+  {
+    className: 'bg-f26a0',
+    icon:
+      '⚠'
 
-  "[奋斗]": "https://static.talkxj.com/emoji/fengdou.jpg",
+  }
+  ,
+  {
+    className: 'bg-f2693',
+    icon:
+      '⚓'
 
-  "[墨镜]": "https://static.talkxj.com/emoji/mojing.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f4e2',
+    icon:
+      '📢'
 
-  "[撇嘴]": "https://static.talkxj.com/emoji/piezui.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f514',
+    icon:
+      '🔔'
 
-  "[难过]": "https://static.talkxj.com/emoji/nanguo.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f381',
+    icon:
+      '🎁'
 
-  "[抓狂]": "https://static.talkxj.com/emoji/zhuakuang.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f384',
+    icon:
+      '🎄'
 
-  "[生气]": "https://static.talkxj.com/emoji/shengqi.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f49b',
+    icon:
+      '💛'
 
-  "[爱心]": "https://static.talkxj.com/emoji/aixin.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f525',
+    icon:
+      '🔥'
 
-  "[胜利]": "https://static.talkxj.com/emoji/shengli.jpg",
+  }
+  ,
+  {
+    className: 'bg-1f485',
+    icon:
+      '💅'
 
-  "[保佑]": "https://static.talkxj.com/emoji/baoyou.jpg",
+  }
+  ,
 
-  "[支持]": "https://static.talkxj.com/emoji/zhichi.jpg"
-};
+  {
+    className: 'bg-1f64b',
+    icon:
+      '🙋'
+
+  }
+  ,
+  {
+    className: 'bg-1f004',
+    icon:
+      '🀄'
+
+  }
+  ,
+  {
+    className: 'bg-1f33b',
+    icon:
+      '🌻'
+
+  }
+  ,
+  {
+    className: 'bg-1f37b',
+    icon:
+      '🍻'
+
+  }
+  ,
+  {
+    className: 'bg-1f648',
+    icon:
+      '🙈'
+
+  }
+  ,
+  {
+    className: 'bg-1f618',
+    icon:
+      '😘'
+
+  }
+  ,
+  {
+    className: 'bg-f3030',
+    icon:
+      '〰'
+  }
+]

@@ -5,14 +5,13 @@
         <div class="content">
           <div class="editor">
             <div class="auth-card">
-              <div
+              <textarea
                 id="weibo-input"
                 ref="myeditor"
-                contenteditable="true"
                 class="rich-editor"
-                @blur="changeWeiboContent"
+                v-model="weibo.title"
                 placeholder="快来一起分享新鲜事！">
-              </div>
+              </textarea>
             </div>
           </div>
           <div class="topicwrapper">
@@ -101,8 +100,6 @@
 <script>
   import Emoji from "@/components/Emoji";
   import CommunitySelect from "@/components//Talk/CommunitySelect";
-  import EmojiList from "@/assets/js/emoji";
-  import RangeUtil from "@/utils/rangeUtil";
 
   import {mapGetters} from 'vuex';
 
@@ -149,10 +146,22 @@
         let tagAdd = this.tagList.filter(item => {
           return val === item.id;
         });
-        RangeUtil.insertContent(`<span class="tag-node" contenteditable="false" id="${tagAdd[0].id}" style="color: #1E80FF;">#${tagAdd[0].name}#</span> `);
+        if (process.client) {
+          // 获取文本输入框元素节点
+          let ele = document.getElementById('weibo-input');
+          // 获取光标
+          let cursor = ele.selectionStart
+          // 设置文本内容
+          ele.setRangeText(`#${tagAdd[0].name}#`);
+          // 移动光标并聚焦
+          ele.selectionStart = cursor + `#${tagAdd[0].name}#`.length;
+          ele.focus();
+          // 使文本输入框的内容等于当前的值
+          this.weibo.title = ele.value
+        }
       },
       imgNum(newVal, oldVal) {
-        if (process.browser) {
+        if (process.client) {
           if (newVal === 0) {
             document.querySelectorAll('div.el-upload--picture-card')[0].style.display = "none";
           } else {
@@ -175,10 +184,19 @@
       }
     },
     methods: {
-      addEmoji(key) {
-        RangeUtil.insertContent(`<img src="${EmojiList[key]}" class="emoji-img">`);
-        if (this.emojis.indexOf(key) === -1) {
-          this.emojis.push(key);
+      addEmoji(icon) {
+        if (process.client) {
+          // 获取文本输入框元素节点
+          let ele = document.getElementById('weibo-input');
+          // 获取光标
+          let cursor = ele.selectionStart
+          // 设置文本内容
+          ele.setRangeText(icon)
+          // 移动光标并聚焦
+          ele.selectionStart = cursor + 2
+          ele.focus();
+          // 使文本输入框的内容等于当前的值
+          this.weibo.title = ele.value
         }
       },// 文件上传
       handleRemove(file, fileList) {
@@ -212,40 +230,22 @@
         if (!this.showUrl) {
           this.weibo.link = '';
         }
-        //解析表情
-        this.weibo.title = this.$refs.myeditor.innerHTML;
-        this.emojis.forEach(emoji => {
-          let reg = new RegExp(`<img src="${EmojiList[emoji]}" class="emoji-img">`, 'g')//g代表全部
-          this.weibo.title = this.weibo.title.replace(reg, emoji);
-        });
-
-
-        //过滤复制文本加入的\n
-        this.weibo.title = this.weibo.title.replace(/\n/g, '');
-
-        //过滤div
-        this.weibo.title = this.weibo.title.replaceAll('<div><br></div>', '\n');
-        this.weibo.title = this.weibo.title.replaceAll('<div>', '\n');
-        this.weibo.title = this.weibo.title.replaceAll('<br></div>', '');
-        this.weibo.title = this.weibo.title.replaceAll('</div>', '');
-        this.weibo.title = this.weibo.title.replaceAll('<br>', '\n');
-
-        //过滤掉开头和结尾处的\n
-        this.weibo.title = this.weibo.title.replace(/^(\s|\n)+|(\s|\n)+$/g, '');
-
         //设置tag
         this.weibo.tags = [];
-        for (var tag of document.getElementsByClassName('tag-node')) {
+        //标签
+        var reg = /#.+?#/g;
+        this.weibo.title.replace(reg,  str=> {
+          let tagName = str.substring(1,str.length-1);
           let tagAdd = this.tagList.filter(item => {
-            return tag.getAttribute("id") === item.id;
+            return tagName === item.name;
           });
-          var tagNodeStr = `<span class="tag-node" contenteditable="false" id="${tagAdd[0].id}" style="color: #1E80FF;">#${tagAdd[0].name}#</span>`;
-          this.weibo.title = this.weibo.title.replace(tagNodeStr, "[*" + tag.getAttribute("id") + "*" + tagAdd[0].name + "*]");
-          if (this.weibo.tags.indexOf(tag.getAttribute("id")) === -1) {
-            this.weibo.tags.push(tag.getAttribute("id"));
+          console.log("添加标签");
+          if (tagAdd.length>0) {
+            console.log(tagAdd[0].id);
+            this.weibo.tags.push(tagAdd[0].id);
           }
-        }
-        console.log(this.weibo.title);
+          return str;
+        });
         //解析图片
         let arr = [];
         for (let item of this.fileList) {
@@ -304,6 +304,7 @@
         this.weibo = {};
         this.$refs.myeditor.innerHTML = '';
         this.fileList = [];
+        this.tag = '';
       },
       setLocation() {
         this.$api.talk.location().then((data) => {
@@ -323,7 +324,6 @@
       //复制监听
       let element = document.getElementById('weibo-input');
       //focus获取光标
-      element.focus();
       element.addEventListener("paste", function (e) {
         e.stopPropagation();
         e.preventDefault();
@@ -383,7 +383,7 @@
 
   }
 
-  .rich-editor {
+  .rich-editor_abandon {
     position: relative;
     font-size: 14px;
     line-height: 24px;
@@ -393,6 +393,30 @@
     padding: 5px 12px;
     box-sizing: border-box;
     white-space: pre-wrap;
+  }
+  .rich-editor {
+    white-space: pre-wrap;
+    font-size: 0.875rem;
+    color: #333 !important;
+    outline: none;
+    padding: 10px 5px;
+    resize: none;
+    width: 100%;
+    border-radius: 4px;
+    min-height: 64px;
+    background-color: #f6f6f6;
+    border: none;
+  }
+  .content:focus-within {
+    border: 1px solid #1e80ff;
+    background-color: #fff;
+  }
+  .rich-editor:focus{
+    background-color: #fff;
+  }
+
+  .content:focus-within .new_topic{
+    background-color: #f6f6f6;
   }
 
   .topicwrapper {

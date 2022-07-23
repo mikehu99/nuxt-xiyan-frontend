@@ -107,12 +107,19 @@
       },
       title() {
         //标签
-        var reg = /\[\*.+?\*\]/g;
-        let weiboContent = this.talk.title.replace(reg, function (str) {
-          console.log(str);
-          var arry = str.replace(/(^\s*)|(\s*$)/g, "").substring(2, str.length - 2).split('*');//截取第二个之后所有的字符 cdef 即从第三位开始
-          console.log(arry);
-          str = '<span onclick="tagTalkPage(' + arry[0] + ')" contenteditable="false" id="' + arry[0] + '" style="color: #1E80FF;">#' + arry[1] + '#</span> ';
+        var reg = /#.+?#/g;
+        let weiboContent = this.talk.title.replace(reg, str => {
+          let tagName = str.substring(1,str.length-1);
+          console.log("tags");
+          console.log(this.talk.tags);
+          if (this.talk.tags!=null){
+            let tag = this.talk.tags.filter(item => {
+              return tagName === item.name;
+            });
+            if (tag.length>0){
+              str = '<span onclick="tagTalkPage(' + tag[0].id + ')" contenteditable="false" id="' + tag[0].id + '" style="color: #1E80FF;">#' + tag[0].name + '#</span> ';
+            }
+          }
           return str;
         });
         //标签绑定点击时间
@@ -128,16 +135,6 @@
             }
           }
         }
-
-        //表情
-        var reg = /\[.+?\]/g;
-        weiboContent = weiboContent.replace(reg, function (str) {
-          if (EmojiList[str]) {
-            return ('<img src="' + EmojiList[str] + '" class="emoji-img">');
-          } else {
-            return str;
-          }
-        });
 
         //换行符
         weiboContent = weiboContent.replace(/[\n]/g, '<br>');
