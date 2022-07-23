@@ -128,15 +128,15 @@
         this.praise.itemId = comment.id;
         this.praise.itemType = 2;
         this.praise.itemOwnerId = comment.userId;
-        this.$api.praise.praiseItem(this.praise).then(respose => {
-          if (respose.data.status === 1) {
+        this.$api.praise.praiseItem(this.praise).then(data => {
+          if (data.status === 1) {
             this.$message.success('点赞成功');
             e.target.classList.add("like-active");
             e.target.classList.remove("like");
             comment.praiseCount++;
             this.$store.commit('common/praise',comment.id)
           }
-          if (respose.data.status === 0) {
+          if (data.status === 0) {
             this.$message.success('取消点赞成功');
             e.target.classList.remove("like-active");
             e.target.classList.add("like");

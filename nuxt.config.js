@@ -80,6 +80,10 @@ export default {
       src: "@/plugins/utils",
       ssr: true
     },
+    {
+      src: "@/plugins/waterfall",
+      ssr: false
+    },
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
