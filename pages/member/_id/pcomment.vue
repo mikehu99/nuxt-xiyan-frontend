@@ -17,7 +17,7 @@
             <!-- 发表时间 -->
             <span class="comment-info">{{item.createTime | timeFormat}}</span>
           </div>
-          <p v-html="emoComment(item.content)" class="comment-content"></p>
+          <p v-html="item.content" class="comment-content"></p>
           <div style="display: flex;justify-content: space-between">
             <router-link :to="{path:`/talk/${item.topicId}`}">
               <span class="talk-title"><i class="iconfont icon-fenxiang22"/> {{ item.talkTitle | ellipsis }}</span>
@@ -101,6 +101,10 @@
         });
       },
       like(comment, e) {
+        if (this.token==null || this.token === ''){
+          this.$store.commit('common/setLoginFlag',true);
+          return false;
+        }
         this.praise.itemId = comment.id;
         this.praise.itemType = 2;
         this.praise.itemOwnerId = comment.userId;
@@ -119,16 +123,6 @@
             comment.praiseCount--;
             this.$store.commit('common/praise',comment.id)
           }
-        });
-      },
-      emoComment(contentStr) {
-        var reg = /\[.+?\]/g;
-        return contentStr.replace(reg, function (str) {
-          return (
-            "<img src= '" +
-            EmojiList[str] +
-            "' width='16'height='16' style='margin: 0 1px;vertical-align: text-bottom'/>"
-          );
         });
       }
     }

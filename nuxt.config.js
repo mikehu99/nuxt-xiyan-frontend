@@ -36,6 +36,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    "element-ui/lib/theme-chalk/index.css",
     "buefy/dist/buefy.css",
     "@/assets/css/index.css",
     "@/assets/iconfont/iconfont.css",

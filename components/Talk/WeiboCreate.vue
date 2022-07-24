@@ -16,7 +16,7 @@
           </div>
           <div class="topicwrapper">
           <span style="display: flex;">
-            <el-popover
+     <!--       <el-popover
               placement="bottom-start"
               width="360"
               trigger="click">
@@ -24,7 +24,7 @@
             <div slot="reference" class="new_topic" @click="initCommunity">
               <i style="margin-right: 4px;" class="iconfont icon-quanzi2"/>{{communityNameTemp}}
             </div>
-            </el-popover>
+            </el-popover>-->
             <el-popconfirm
               v-if="weibo.location"
               title="您确定要隐藏定位吗？"
@@ -242,7 +242,9 @@
           console.log("添加标签");
           if (tagAdd.length>0) {
             console.log(tagAdd[0].id);
-            this.weibo.tags.push(tagAdd[0].id);
+            if (this.weibo.tags.indexOf(tagAdd[0].id)===-1){
+              this.weibo.tags.push(tagAdd[0].id);
+            }
           }
           return str;
         });
@@ -399,7 +401,7 @@
     font-size: 0.875rem;
     color: #333 !important;
     outline: none;
-    padding: 10px 5px;
+    padding: 10px 12px;
     resize: none;
     width: 100%;
     border-radius: 4px;
@@ -416,7 +418,10 @@
   }
 
   .content:focus-within .new_topic{
-    background-color: #f6f6f6;
+     background-color: #f6f6f6;
+   }
+  .content:focus-within .rich-editor{
+    background-color: #fff;
   }
 
   .topicwrapper {

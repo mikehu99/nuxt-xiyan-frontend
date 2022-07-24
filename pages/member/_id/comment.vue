@@ -125,6 +125,10 @@
         });
       },
       like(comment, e) {
+        if (this.token==null || this.token === ''){
+          this.$store.commit('common/setLoginFlag',true);
+          return false;
+        }
         this.praise.itemId = comment.id;
         this.praise.itemType = 2;
         this.praise.itemOwnerId = comment.userId;

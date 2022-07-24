@@ -3,8 +3,13 @@
     <div class="action-box">
       <div class="tip">
         <div class="tip-box">
-          <span class="iconfont icon-gengduo1 tip-icon"></span>
-          <!--<span class="el-icon-more tip-icon"></span>-->
+          <el-dropdown placement="bottom" @command="handleCommand">
+            <span class="iconfont icon-gengduo1 tip-icon"></span>
+            <!--<span class="el-icon-more tip-icon"></span>-->
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item :command="talk.id">复制链接</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </div>
       <div class="comment-action action">
@@ -29,7 +34,7 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex'
+  import {mapGetters} from 'vuex'
 
 
   export default {
@@ -46,8 +51,8 @@
       }
     },
     computed: {
-      ...mapGetters(['token', 'user','praiseList']),
-      praiseFlag(){
+      ...mapGetters(['token', 'user', 'praiseList']),
+      praiseFlag() {
         return this.praiseList.indexOf(this.talk.id) >= 0
       },
       thumb() {
@@ -59,7 +64,7 @@
         this.$router.push({path: `/talk/${id}`})
       },
       praiseFuc() {
-        if(this.token == null || this.token === ''){
+        if (this.token == null || this.token === '') {
           this.$message.success('该功能需要登录');
           return false;
         }
@@ -70,15 +75,36 @@
           if (data.status === 1) {
             this.$message.success('点赞成功')
             this.talk.praiseNum++;
-            this.$store.commit('common/praise',this.talk.id)
+            this.$store.commit('common/praise', this.talk.id)
           }
           if (data.status === 0) {
             this.$message.success('取消点赞成功')
             this.talk.praiseNum--;
-            this.$store.commit('common/praise',this.talk.id)
+            this.$store.commit('common/praise', this.talk.id)
           }
           //后续样式变化
-        }).catch(err => {  });
+        }).catch(err => {
+        });
+      },
+      handleCommand(command) {
+        if (process.client) {
+          //使用textarea的原因是能进行换行，input不支持换行
+          var copyTextArea = document.createElement("textarea");
+          //自定义复制内容拼接
+          copyTextArea.value = "http://localhost:8090/talk/"+command;
+          document.body.appendChild(copyTextArea);
+          copyTextArea.select();
+          try {
+            var copyed = document.execCommand("copy");
+            if (copyed) {
+              document.body.removeChild(copyTextArea);
+              //这里是封装的提示框，可以换成自己使用的提示框
+              this.$message.success('复制成功')
+            }
+          } catch {
+            this.$message.error('复制失败');
+          }
+        }
       }
     }
   }
@@ -90,7 +116,6 @@
     margin: 12px 0 0 60px;
   }
 
-
   .action-box {
     display: flex;
     position: relative;
@@ -98,22 +123,24 @@
     justify-content: space-between;
   }
 
-  .tip{
+  .tip {
     flex: 1 1 55%;
     justify-content: left;
   }
 
-  .tip-icon{
+  .tip-icon {
     font-size: 20px;
     cursor: pointer;
-    color: rgba(0,0,0,.3);
-    padding:2px 5px;
+    color: rgba(0, 0, 0, .3);
+    padding: 2px 5px;
     margin-left: -5px;
   }
-  .tip-icon:hover{
+
+  .tip-icon:hover {
     color: #000;
-    background: rgba(148,108,230,.05);
+    background: rgba(148, 108, 230, .05);
   }
+
   .action {
     margin-left: 20px;
     display: flex;
@@ -143,9 +170,11 @@
   .bottom-icon {
     font-size: 20px;
   }
-  .bottom-icon:hover{
-    color:#1E80FF;
+
+  .bottom-icon:hover {
+    color: #1E80FF;
   }
+
   @media (max-width: 600px) {
     .action-row {
       margin-left: 0rem;

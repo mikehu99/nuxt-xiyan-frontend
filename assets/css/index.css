@@ -553,7 +553,16 @@ ul {
 .blue{
     color: #1e80ff;
 }
-
+.el-dropdown-menu__item{
+  color: rgba(0, 0, 0, .3);
+  line-height: 33px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
+  color: #000;
+  background: rgba(148, 108, 230, .05);
+}
 @media (max-width: 768px) {
     .side-area {
         display: none;
