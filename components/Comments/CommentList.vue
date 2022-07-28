@@ -56,7 +56,7 @@
           </div>
 
           <!-- 评论内容 -->
-          <p v-html="emoComment(item.content)" class="comment-content"></p>
+          <p v-html="item.content" class="comment-content"></p>
           <!-- 信息 -->
           <div class="comment-info">
             <!-- 点赞 -->
@@ -104,7 +104,7 @@
                   </span>
                   ，
                 </template>
-                <span v-html="emoComment(reply.content)"/>
+                <span v-html="reply.content"/>
                 <!-- 信息 -->
               </p>
               <div class="comment-info">
@@ -292,16 +292,6 @@
         this.replyCommentId = 0;
         this.comment.content='';
       },
-      emoComment(contentStr) {
-        var reg = /\[.+?\]/g;
-        return contentStr.replace(reg, function (str) {
-          return (
-            "<img src= '" +
-            EmojiList[str] +
-            "' width='16'height='16' style='margin: 0 1px;vertical-align: text-bottom'/>"
-          );
-        });
-      },
       //点击编辑框外部区域关闭编辑框
       handlerClick(event) {
         if (event.target.classList.contains('reply-btn')){
@@ -410,9 +400,9 @@
 
   .comment-content {
     font-size: 14px;
-    line-height: 0.75;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    line-height: 1.5;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     white-space: pre-line;
     word-wrap: break-word;
     word-break: break-all;

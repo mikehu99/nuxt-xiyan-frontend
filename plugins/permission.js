@@ -1,7 +1,7 @@
 import store from '@/store'
 import {getToken} from '@/utils/auth'
 // 不重定向白名单 [路由守卫]
-const whiteList = ['/login', '/', '/regist', "/youtuber/list","/talk"]
+const whiteList = ['/login', '/', '/regist', "/youtuber","/talk"]
 export default ({app, $cookies, store}) => {
   app.router.beforeEach(async(to, from, next) => {
     //服务端直接放行，只做客户端处理

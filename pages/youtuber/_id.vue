@@ -40,7 +40,7 @@
           <div class="ytb-breif">
             {{youtuber.description}}.
             <ul class="tag-list">
-              <li v-for="category in youtuber.categories">
+              <li v-for="category in youtuber.categories" @click="changeCategory(category.id)">
                 <i class="iconfont icon-biaoqian biaoqian"/>{{category.categoryName}}
               </li>
             </ul>
@@ -79,6 +79,10 @@ export default {
   methods:{
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    changeCategory(id){
+      this.$router.push({path: `/youtuber`,query:{category: id}})
+
     },
   }
 }
@@ -283,8 +287,12 @@ div._15Pk_bZ2XZNa9zBvnxq6HX {
   font-size: 12px;
 }
 .tag-list{
+  margin-top: 10px;
   font-size: 12px;
   color: #1c1c1c;
+}
+.tag-list li {
+  cursor: pointer;
 }
 @media (min-width: 640px) {
   ._1_TJAX-8zAT3vVN1Iz7cys {

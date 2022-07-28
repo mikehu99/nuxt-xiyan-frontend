@@ -26,18 +26,18 @@
           </div>
           <ul>
             <li v-for="category in youtuber.categories"
-                :class="[$route.params.id == category.id?'chosen tag':'ytb-tag tag']"
+                :class="[$route.query.category == category.id?'chosen tag':'ytb-tag tag']"
                 @click="changeCategory(category.id)">
               # {{ category.categoryName }}
             </li>
           </ul>
           <div class="bottom-info">
             <span>
-              <span style="color: #0079d3">post by </span>
-              <nuxt-link :to="`/member/${youtuber.adderId}`">
-                @{{ youtuber.adderName }}
-              </nuxt-link>
-              <time :datetime="youtuber.createTime">{{ youtuber.createTime | timeFormat }}</time>
+               <span style="color: #0079d3">post by </span>
+                <nuxt-link :to="`/member/${youtuber.adderId}`">
+                  @{{ youtuber.adderName }}
+                </nuxt-link>
+                <time :datetime="youtuber.createTime">{{ youtuber.createTime | timeFormat }}</time>
             </span>
             <template v-if="youtuber.ymsPraise != null && youtuber.ymsPraise.status == 1">
               <el-tooltip class="item" effect="dark" content="取消点赞" placement="top">
@@ -68,8 +68,8 @@
   </div>
 </template>
 <script>
-import Pagination from '~/components/Pagination';
-import {showtime} from "assets/js/date"
+import Pagination from '@/components/Pagination';
+import {showtime} from "@/assets/js/date"
 import {mapGetters} from "vuex";
 
 export default {
@@ -86,20 +86,9 @@ export default {
         size: 10,
         total: 0,
         tab: 'latest',
-        categoryId: this.$route.params.id
+        categoryId: this.$route.query.category || -1
       }
     }
-  },
-  created() {
-    this.$watch(
-      () => this.$route.params,
-      (toParams, previousParams) => {
-        // 对路由变化做出响应...
-        this.page.categoryId = toParams.id;
-        this.page.current = 0;
-        this.init('latest')
-      }
-    );
   },
   filters: {
     timeFormat(value) {
@@ -128,8 +117,18 @@ export default {
         }
       }
     }
-  }
-  ,
+  },
+  created() {
+    this.$watch(
+      () => this.$route.query,
+      (toQuery, previousQuery) => {
+        // 对路由变化做出响应...
+        this.page.categoryId = toQuery.category;
+        this.page.current = 0;
+        this.init('latest')
+      }
+    );
+  },
   mounted() {
     this.init('latest')
   }
@@ -145,8 +144,11 @@ export default {
       this.youtuberList = data.records;
       this.loading = false;
     },
+    youtuberDetail(youtuber) {
+      this.$router.push({path: `/youtuber/${youtuber.id}`})
+    },
     changeCategory(id) {
-      this.$router.push({path: `/youtuber/category/${id}`})
+      this.$router.push({path: `/youtuber`,query:{category: id}})
     },
     praise(youtuber) {
       if (this.token == null || this.token === '') {
@@ -204,18 +206,16 @@ export default {
   min-height: 500px;
 }
 
+.description {
+  font-size: 14px;
+  margin-top: 8px;
+}
 .chosen {
   margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
   color: #0079d3;
 }
-
-.description {
-  font-size: 14px;
-  margin-top: 8px;
-}
-
 .ytb-tag {
   cursor: pointer;
   margin-right: 10px;
@@ -236,7 +236,6 @@ export default {
   margin-top: 10px;
   font-size: 14px;
 }
-
 
 @media (min-width: 768px) {
   .youtuber-box {

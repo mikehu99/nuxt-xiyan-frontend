@@ -32,16 +32,16 @@
                 <!-- 回复内容 -->
                 <p class="comment-content">
                   <!-- 回复用户名 -->
-                  <span v-html="emoComment(item.toComment.content)"/>
+                  <span v-html="item.toComment.content"/>
                   <!-- 信息 -->
                 </p>
               </div>
             </div>
           </div>
-          <p v-html="emoComment(item.content)" class="comment-content"></p>
+          <p v-html="item.content" class="comment-content"></p>
           <div style="display: flex;justify-content: space-between">
             <router-link :to="{path:`/talk/${item.topicId}`}">
-              <span class="talk-title"><i class="iconfont icon-fenxiang22"/> {{ item.talkTitle | ellipsis }}</span>
+              <span class="talk-title"><i class="iconfont icon-fenxiang22" style="font-size: 14px"/> {{ item.talkTitle | ellipsis }}</span>
             </router-link>
             <!-- 点赞 -->
             <span :class="isLike(item.id)" @click="like(item,$event)">
@@ -149,16 +149,6 @@
           }
         });
       },
-      emoComment(contentStr) {
-        var reg = /\[.+?\]/g;
-        return contentStr.replace(reg, function (str) {
-          return (
-            "<img src= '" +
-            EmojiList[str] +
-            "' width='16'height='16' style='margin: 0 1px;vertical-align: text-bottom'/>"
-          );
-        });
-      }
     },
   };
 </script>
@@ -207,9 +197,9 @@
 
   .comment-content {
     font-size: 14px;
-    line-height: 0.75;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    line-height: 1.5;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     white-space: pre-line;
     word-wrap: break-word;
     word-break: break-all;

@@ -1,6 +1,32 @@
 <template>
   <header class="header has-background-white has-text-black">
-    <b-navbar
+    <div class="head-box container">
+      <nuxt-link to="/" class="logo">logo</nuxt-link>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="main-nav-list">
+            <ul class="phone-hide">
+              <li class="nav-item link-item">
+                <nuxt-link to="/" :class="{'active':$route.path === '/'}">首页</nuxt-link>
+              </li>
+              <li class="nav-item link-item">
+                <nuxt-link :to="{ path: '/youtuber' ,query:{category:0}}" :class="{'active':$route.path === '/youtuber'}">油管</nuxt-link>
+              </li>
+            </ul>
+          </li>
+          <ul class="right-side-nav">
+            <li v-if="token == null || token === ''" class="nav-item menu">
+
+            </li>
+            <li v-else class="nav-item menu">
+                <img :src="user.avatar" class="avatar">
+            </li>
+          </ul>
+
+        </ul>
+      </nav>
+    </div>
+<!--    <b-navbar
       class="container is-white"
       :fixed-top="true"
     >
@@ -26,7 +52,7 @@
         </b-navbar-item>
         <b-navbar-item
           tag="router-link"
-          :to="{ path: '/youtuber/list' }"
+          :to="{ path: '/youtuber' ,query:{category:0}}"
         >
           youtuber
         </b-navbar-item>
@@ -118,83 +144,171 @@
           </b-navbar-item>
         </b-navbar-dropdown>
       </template>
-    </b-navbar>
+    </b-navbar>-->
   </header>
 </template>
 
 <script>
-  import {getDarkMode, setDarkMode} from '@/utils/auth'
-  import {mapGetters} from 'vuex'
+import {getDarkMode, setDarkMode} from '@/utils/auth'
+import {mapGetters} from 'vuex'
 
-  export default {
-    name: 'Header',
-    data() {
-      return {
-        logoUrl: require('@/assets/logo.png'),
-        doubaoImg: require('@/assets/image/doubao.png'),
-        searchKey: '',
-        darkMode: false
-      }
-    },
-    computed: {
-      ...mapGetters(['token', 'user'])
-    },
-    watch: {
-      // 监听Theme模式
-      darkMode(val) {
-        if (val) {
-          this.enableDarkMode({})
-        } else {
-          this.disableDarkMode()
-        }
-        setDarkMode(this.darkMode)
-      }
-    },
-    mounted() {
-      // 获取cookie中的夜间还是白天模式
-      this.darkMode = getDarkMode()
-      if (this.darkMode) {
+export default {
+  name: 'Header',
+  data() {
+    return {
+      logoUrl: require('@/assets/logo.png'),
+      doubaoImg: require('@/assets/image/doubao.png'),
+      searchKey: '',
+      darkMode: false
+    }
+  },
+  computed: {
+    ...mapGetters(['token', 'user'])
+  },
+  watch: {
+    // 监听Theme模式
+    darkMode(val) {
+      if (val) {
         this.enableDarkMode({})
       } else {
         this.disableDarkMode()
       }
+      setDarkMode(this.darkMode)
+    }
+  },
+  mounted() {
+    // 获取cookie中的夜间还是白天模式
+    this.darkMode = getDarkMode()
+    if (this.darkMode) {
+      this.enableDarkMode({})
+    } else {
+      this.disableDarkMode()
+    }
+  },
+  methods: {
+    async logout() {
+      this.$store.dispatch('user/logout').then(() => {
+        this.$message.info('退出登录成功')
+        setTimeout(() => {
+          this.$router.push({path: this.redirect || '/'})
+        }, 500)
+      })
     },
-    methods: {
-      async logout() {
-        this.$store.dispatch('user/logout').then(() => {
-          this.$message.info('退出登录成功')
-          setTimeout(() => {
-            this.$router.push({path: this.redirect || '/'})
-          }, 500)
+    search() {
+      console.log(this.token)
+      if (this.searchKey.trim() === null || this.searchKey.trim() === '') {
+        this.$message.info({
+          showClose: true,
+          message: '请输入关键字搜索！',
+          type: 'warning'
         })
-      },
-      search() {
-        console.log(this.token)
-        if (this.searchKey.trim() === null || this.searchKey.trim() === '') {
-          this.$message.info({
-            showClose: true,
-            message: '请输入关键字搜索！',
-            type: 'warning'
-          })
-          return false
-        }
-        this.$router.push({path: '/search?key=' + this.searchKey})
-      },
-      showLoginModel() {
-        this.$store.commit('common/setRegisterFlag', false);
-        this.$store.commit('common/setLoginFlag', true);
-      },
-      showRegisterModel() {
-        this.$store.commit('common/setLoginFlag', false);
-        this.$store.commit('common/setRegisterFlag', true);
+        return false
       }
+      this.$router.push({path: '/search?key=' + this.searchKey})
+    },
+    showLoginModel() {
+      this.$store.commit('common/setRegisterFlag', false);
+      this.$store.commit('common/setLoginFlag', true);
+    },
+    showRegisterModel() {
+      this.$store.commit('common/setLoginFlag', false);
+      this.$store.commit('common/setRegisterFlag', true);
     }
   }
+}
 </script>
 
 <style scoped>
-  input {
-    width: 80%;
-    height: 86%;
-  }
+input {
+  width: 80%;
+  height: 86%;
+}
+.head-box{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: auto;
+}
+.logo {
+  margin-right: 1rem;
+  display: inline-block;
+  height: 22px;
+  width: auto;
+}
+
+.main-nav {
+  height: 100%;
+  flex: 1 0 auto;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  flex-direction: row-reverse;
+  height: 100%;
+  margin: 0;
+}
+
+.main-nav-list {
+  display: flex;
+  order: 99;
+}
+
+.phone-hide {
+  display: flex;
+}
+.nav-item.link-item{
+  padding: 0;
+  height: 5rem;
+}
+.nav-item {
+  color: #86909c;
+  font-size: 1.167rem;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.phone-hide .nav-item.link-item :not(.no-hover) {
+  display: inline-block;
+  height: 5rem;
+  margin: 0 1rem;
+  line-height: 5rem;
+}
+.nav-item a:hover{
+  border-bottom: 2px solid #007fff;
+}
+.active{
+  color: #007fff;
+  border-bottom: 2px solid #007fff;
+}
+.right-side-nav{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  height: 100%;
+  margin: 0;
+  order: 0;
+}
+.nav-item.menu {
+  position: relative;
+  padding-left: 0;
+  background-color: #fff;
+}
+.avatar{
+  position: relative;
+  -o-object-fit: cover;
+  object-fit: cover;
+  display: inline-block;
+  background-size: cover;
+  background-color: #eee;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
 </style>

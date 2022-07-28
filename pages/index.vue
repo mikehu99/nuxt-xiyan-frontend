@@ -1,60 +1,144 @@
 <template>
-  <div>
-    <div class="box">🔔 {{ billboard.content }}</div>
-    <div class="columns">
-      <div class="column is-three-quarters">
-        <TopicList></TopicList>
+  <div class="main-container">
+    <div class="user-view">
+      <div class="content-area">
+        <div v-if="screenWidth>=640">
+          <WeiboCreate @changeType="changeType"></WeiboCreate>
+        </div>
+        <div v-if="screenWidth<640">
+          <div class="input-box">
+            <img :src="user.avatar" class="user-avatar" loading="lazy"/>
+            <div class="input-div" @click="showEditor" >分享新鲜事！</div>
+          </div>
+          <el-dialog :visible.sync="isEditorActive">
+            <WeiboCreate @changeType="changeType"></WeiboCreate>
+          </el-dialog>
+        </div>
+
+        <TalkList :talkList="talkList"></TalkList>
+        <!--分页-->
+        <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler">
+          <div slot="spinner">
+            <el-skeleton :rows="6" animated />
+          </div>
+          <div slot="no-more"></div>
+        </infinite-loading>
       </div>
-      <div class="column">
-        <CardBar></CardBar>
+      <div class="side-area">
       </div>
     </div>
   </div>
+
 </template>
-
 <script>
-  import CardBar from "@/components/card/CardBar"
-  import PostList from '@/components/post/Index'
+import TalkList from '@/components/Talk/TalkList';
+import WeiboCreate from "@/components/Talk/WeiboCreate"
+import InfiniteLoading from 'vue-infinite-loading';
+import { mapGetters } from 'vuex'
 
-  export default {
-    components: {CardBar, TopicList: PostList},
-    head() {
-      return {
-        title: "夕颜源码 - 专注于技术|源码分享的IT技术平台",
-        meta: [
-          {
-            hid: "keywords",
-            name: "keywords",
-            content:
-              "夕颜博客,夕颜源码,夕颜社区,夕颜技术社区,,夕颜IT社区,IT社区,技术社区,Java技术分享,Spring教程,开发者社区,Java毕设,Java博客,Java项目,Java源码,Vue博客,代码,教程,web编程,前端开发,后端开发",
-          },
-          {
-            hid: "description",
-            name: "description",
-            content:
-              "一个专注于技术|源码分享的IT技术平台，大家以共同学习，乐于分享，拥抱开源的价值观进行学习交流",
-          },
-        ],
-      };
+
+export default {
+  name: 'TalkIndex',
+  components: { TalkList, InfiniteLoading, WeiboCreate},
+  data() {
+    return {
+      screenWidth:768,
+      isEditorActive:false,
+      infiniteId: +new Date(),
+      talkList: [],
+      page: {
+        current: 1,
+        size: 10,
+        total: 0,
+        tab: 'latest'
+      },
+    }
+  },
+  created(){
+    if (process.client) {
+      this.screenWidth = document.body.clientWidth;
+    }
+  },
+  computed:{
+    ...mapGetters(['token','user'])
+  },
+  methods: {
+    async infiniteHandler($state) {
+      let data = await this.$api.talk.getList({
+        pageNo:this.page.current,
+        pageSize:this.page.size,
+        tab:this.tab
+      });
+      if (data.records.length) {
+        this.page.current += 1;
+        this.talkList.push(...data.records);
+        $state.loaded();
+      } else {
+        $state.complete();
+      }
     },
-    data() {
-      return {
-        billboard: {
-          content: "",
-        },
-      };
+    changeType() {
+      this.page.current = 1;
+      this.talkList = [];
+      this.infiniteId += 1;
     },
-    async asyncData ({ $api }) {
-      let data = await $api.billboard.getBillboard();
-      console.log(data);
-      return  {billboard:data};
-    },
-    methods:{
-      getTag(){
-        this.$api.article.getTagList().then((data) => {
-          this.tagList = data;
-        })
+    showEditor(){
+      if (this.token == null || this.token === '') {
+        this.$message({message:'该功能需要登录',type:'error',showClose: true});
+        this.$store.commit('common/setLoginFlag',true);
+        return false;
+      }
+      this.isEditorActive = true;
+      if (process.client) {
+        let element = document.getElementById('weibo-input');
+        element.focus();
       }
     }
-  };
+  },
+  activated() {
+    if (process.client) {
+      let element = document.getElementById('weibo-input');
+      element.focus();
+    }
+  }
+}
 </script>
+<style>
+.input-box{
+  background-color: #fff;
+  display: flex;
+  padding: 20px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: relative;
+  -o-object-fit: cover;
+  object-fit: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  background-size: cover;
+  background-color: #eee;
+}
+.input-div{
+  flex: auto;
+  margin-left: 20px;
+  background-color: #f2f3f5;
+  padding: 7px 12px;
+  border-radius: 2px;
+  color: #8a919f;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: .2px;
+}
+.input-div:hover{
+  background-color: #ffffff;
+  outline: 1px solid #0079d3;
+}
+</style>

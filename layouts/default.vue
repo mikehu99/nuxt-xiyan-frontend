@@ -32,5 +32,10 @@ export default {
   }
 };
 </script>
+<style>
+.context{
+  margin-top: 6rem;
+}
+</style>
 
 

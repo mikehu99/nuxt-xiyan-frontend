@@ -12,4 +12,10 @@ export default $axios => ({
       }
     )
   },
+  praise(praise) {
+    return $axios.$post(
+      `/youtuber/praise`,
+      praise
+    )
+  },
 })
