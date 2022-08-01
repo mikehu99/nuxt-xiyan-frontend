@@ -6,6 +6,104 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "110429",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "658017",
+      "name": "个人",
+      "font_class": "geren",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "666885",
+      "name": "设置",
+      "font_class": "shezhi1",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "672451",
+      "name": "个人_2",
+      "font_class": "geren2",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "1330768",
+      "name": "设置",
+      "font_class": "shezhi2",
+      "unicode": "e752",
+      "unicode_decimal": 59218
+    },
+    {
+      "icon_id": "1969464",
+      "name": "登出",
+      "font_class": "dengchu",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "2066003",
+      "name": "个人",
+      "font_class": "geren1",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "5387650",
+      "name": "个人头像",
+      "font_class": "gerentouxiang",
+      "unicode": "eb24",
+      "unicode_decimal": 60196
+    },
+    {
+      "icon_id": "5387732",
+      "name": "登出",
+      "font_class": "dengchu1",
+      "unicode": "eb45",
+      "unicode_decimal": 60229
+    },
+    {
+      "icon_id": "5899920",
+      "name": "设置",
+      "font_class": "shezhi3",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "8308097",
+      "name": "16-登出",
+      "font_class": "-dengchu",
+      "unicode": "e68e",
+      "unicode_decimal": 59022
+    },
+    {
+      "icon_id": "11372694",
+      "name": "设置",
+      "font_class": "shezhi4",
+      "unicode": "e8b7",
+      "unicode_decimal": 59575
+    },
+    {
+      "icon_id": "22517800",
+      "name": "登出",
+      "font_class": "ico_dengchu",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "15885735",
+      "name": "踩",
+      "font_class": "cai",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
       "icon_id": "1479642",
       "name": "表情",
       "font_class": "biaoqing",

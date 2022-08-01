@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2939036 */
-  src: url('iconfont.woff2?t=1656844110202') format('woff2'),
-       url('iconfont.woff?t=1656844110202') format('woff'),
-       url('iconfont.ttf?t=1656844110202') format('truetype');
+  src: url('iconfont.woff2?t=1659334612134') format('woff2'),
+       url('iconfont.woff?t=1659334612134') format('woff'),
+       url('iconfont.ttf?t=1659334612134') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,62 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shezhi:before {
+  content: "\e623";
+}
+
+.icon-geren:before {
+  content: "\e657";
+}
+
+.icon-shezhi1:before {
+  content: "\e68f";
+}
+
+.icon-geren2:before {
+  content: "\e6bc";
+}
+
+.icon-shezhi2:before {
+  content: "\e752";
+}
+
+.icon-dengchu:before {
+  content: "\e625";
+}
+
+.icon-geren1:before {
+  content: "\e682";
+}
+
+.icon-gerentouxiang:before {
+  content: "\eb24";
+}
+
+.icon-dengchu1:before {
+  content: "\eb45";
+}
+
+.icon-shezhi3:before {
+  content: "\e647";
+}
+
+.icon--dengchu:before {
+  content: "\e68e";
+}
+
+.icon-shezhi4:before {
+  content: "\e8b7";
+}
+
+.icon-ico_dengchu:before {
+  content: "\e626";
+}
+
+.icon-cai:before {
+  content: "\e621";
 }
 
 .icon-biaoqing:before {
