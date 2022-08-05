@@ -87,6 +87,7 @@ export default {
 .pagination-container {
   /* background: #fff; */
   padding: 5px 0px;
+  text-align: center;
 }
 
 .pagination-container.hidden {

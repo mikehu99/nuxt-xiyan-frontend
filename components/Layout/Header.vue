@@ -201,7 +201,10 @@ export default {
       this.disableDarkMode()
     }
     document.addEventListener('click', this.handlerClick)  // 监听 document 点击事件
-
+  },
+  beforeRouteLeave (to, from, next) {
+    window.removeEventListener('click', this.handlerClick, true)
+    next()
   },
   methods: {
     async logout() {
