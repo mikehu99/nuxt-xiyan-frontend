@@ -16,7 +16,7 @@ export default $axios => ({
     )
   },
   userRegister(data){
-    return $axios.$post(
+    return $axios.post(
       '/ums/user/register',
       data
     )

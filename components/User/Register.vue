@@ -48,8 +48,6 @@
 </template>
 
 <script>
-  import {userRegister} from '@/api/auth/auth'
-
   export default {
     name: 'Register',
     data() {
@@ -76,7 +74,7 @@
             {
               min: 2,
               max: 10,
-              message: '长度在 2 到 10 个字符',
+              message: '长度在 2 到 15 个字符',
               trigger: 'blur'
             }
           ],
@@ -119,7 +117,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true
-            userRegister(this.ruleForm)
+            this.$api.auth.userRegister(this.ruleForm)
               .then((value) => {
                 const {code, message} = value
                 if (code === 200) {
