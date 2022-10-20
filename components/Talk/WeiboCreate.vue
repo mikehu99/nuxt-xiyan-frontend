@@ -226,6 +226,10 @@
       uploadImgClik() {
       },
       createWeibo() {
+        if (this.token == null || this.token === '') {
+          this.$message.success('该功能需要登录');
+          return false;
+        }
         //链接link
         if (!this.showUrl) {
           this.weibo.link = '';

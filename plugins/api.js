@@ -12,6 +12,8 @@ import communityModule from '../api/community'
 import commentModule from '../api/comment'
 import userModule from '../api/user'
 import followModule from '../api/follow'
+import spdModule from '../api/spd'
+
 export default function ({ $axios }, inject) {
   const apiModules = {}
   $axios.onRequest((config) => {
@@ -31,6 +33,7 @@ export default function ({ $axios }, inject) {
   apiModules.comment = commentModule($axios);
   apiModules.user = userModule($axios);
   apiModules.follow = followModule($axios);
+  apiModules.spd = spdModule($axios);
   // Inject to context as $api
   inject('api', apiModules)
 }

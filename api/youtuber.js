@@ -18,4 +18,11 @@ export default $axios => ({
       praise
     )
   },
+  // 发布
+  post(youtuber) {
+    return $axios.$post(
+      '/youtuber/create',
+      youtuber
+    )
+  }
 })

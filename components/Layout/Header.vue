@@ -32,6 +32,9 @@
                 </li>
                 <li class="divider"></li>
                 <li>
+                  <nuxt-link :to="`/youtuber/create`"><i class="iconfont icon-shezhi1"/>分享youtuber</nuxt-link>
+                </li>
+                <li>
                   <a @click="logout"><i class="iconfont icon-dengchu"/>退出登录</a>
                 </li>
               </ul>

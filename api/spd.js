@@ -1,12 +1,12 @@
-import request from '@/utils/request'
+export default $axios => ({
+  getChannelInfo(videoUrl) {
+    return $axios.$get(
+      '/spd/channelInfo',
+      {
+        params: {videoUrl: videoUrl}
+      }
+    )
+  },
+  // 其它接口
+})
 
-// 浏览
-export function getChannelInfo(videoUrl) {
-    return request({
-        url: `/spd/channelInfo`,
-        method: 'get',
-        params: {
-            videoUrl: videoUrl
-        }
-    })
-}
