@@ -3,7 +3,7 @@
     <el-card class="box-card" shadow="never">
 
       <div slot="header" class="clearfix">
-        <span><i class="fa fa fa-book"> 主题 / 发布主题</i></span>
+        <span><i class="fa fa fa-book"> youtuber / 推荐</i></span>
       </div>
       <div>
         <p class="mb-1 ml-4">请直接复制该youtuber的<span style="color: red">某个视频</span>的链接,然后点击生成按钮</p>

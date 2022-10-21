@@ -76,7 +76,8 @@
         </div>
         <!--图片-->
         <el-upload
-          action="http://192.168.31.76:8000/upload/uploadFile"
+          :action="action"
+          :headers="headers"
           list-type="picture-card"
           :file-list="fileList"
           :on-preview="handlePictureCardPreview"
@@ -100,6 +101,7 @@
 <script>
   import Emoji from "@/components/Emoji";
   import CommunitySelect from "@/components//Talk/CommunitySelect";
+  import { getToken } from "@/utils/auth";
 
   import {mapGetters} from 'vuex';
 
@@ -121,6 +123,10 @@
     },
     data() {
       return {
+        action:process.env.baseUrl+"/oss/uploadImageOrVideo",
+        headers:{
+          Authorization:'Bearer ' + getToken()
+        },
         communityIdTemp: this.communityId,
         communityNameTemp: this.communityName,
         dialogImageUrl: '',
@@ -181,7 +187,8 @@
       ...mapGetters(['token', 'user']),
       imgNum() {
         return this.fileList.length;
-      }
+      },
+
     },
     methods: {
       addEmoji(icon) {
@@ -203,6 +210,11 @@
         this.fileList = fileList;
       },
       beforeUpload(file){
+     /*   if (this.token == null || this.token === '') {
+          this.$message({message:'该功能需要登录',type:'error',showClose: true});
+          this.$store.commit('common/setLoginFlag',true);
+          return false;
+        }*/
         // image/jpg,image/jpeg,image/png,image/gif
         const isJPG = file.type === 'image/jpeg' || 'image/jpg' || 'image/png' || 'image/gif';
         const isLt2M = file.size / 1024 / 1024 < 2;
@@ -227,7 +239,8 @@
       },
       createWeibo() {
         if (this.token == null || this.token === '') {
-          this.$message.success('该功能需要登录');
+          this.$message({message:'该功能需要登录',type:'error',showClose: true});
+          this.$store.commit('common/setLoginFlag',true);
           return false;
         }
         //链接link

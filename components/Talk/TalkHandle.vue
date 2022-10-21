@@ -91,7 +91,7 @@
           //使用textarea的原因是能进行换行，input不支持换行
           var copyTextArea = document.createElement("textarea");
           //自定义复制内容拼接
-          copyTextArea.value = "http://localhost:8090/talk/"+command;
+          copyTextArea.value = process.env.baseUrl+"/talk/"+command;
           document.body.appendChild(copyTextArea);
           copyTextArea.select();
           try {

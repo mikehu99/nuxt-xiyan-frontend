@@ -5,7 +5,8 @@
         <div class="banner-wrapper" @click.self="isBannerActive = true"
              :style="{backgroundImage:'url('+topicUser.banner+'?x-oss-process=image/resize,m_fill,h_264,w_1320/sharpen,120'+')'}">
           <el-upload
-            action="http://192.168.31.76:8000/upload/uploadFile"
+            :action="action"
+            :headers="headers"
             :show-file-list="false"
             :on-success="handleBannerSuccess"
             :before-upload="beforeAvatarUpload">
@@ -18,7 +19,8 @@
         </div>
         <div class="user-wrapper">
           <el-upload
-            action="http://192.168.31.76:8000/upload/uploadFile"
+            :action="action"
+            :headers="headers"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
@@ -103,6 +105,7 @@
 <script>
 import {deleteTopic} from '@/api/post'
 import {mapGetters} from 'vuex'
+import { getToken } from "@/utils/auth";
 
 import Author from '@/components/User/Author'
 
@@ -112,6 +115,10 @@ export default {
   components: {Author},
   data() {
     return {
+      action:process.env.baseUrl+"/oss/uploadImageOrVideo",
+      headers:{
+        Authorization:'Bearer ' + getToken()
+      },
       isfixTab: false,
       flag: false,
       isBannerActive: false,

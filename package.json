@@ -1,12 +1,12 @@
 {
-  "name": "nuxt-xiyan-frontend",
+  "name": "nuxt-v2fq-frontend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "cross-env BASE_URL=http://127.0.0.1:8000 BROWSER_BASE_URL=http://localhost:8000 nuxt",
-    "build": "cross-env BASE_URL=https://xiyanit.cn/xiyan nuxt build",
-    "start": "cross-env BASE_URL=https://xiyanit.cn/xiyan nuxt start",
-    "generate": "cross-env BASE_URL=https://xiyanit.cn/xiyan nuxt generate"
+    "build": "cross-env BASE_URL=https://v2fq.com nuxt build",
+    "start": "cross-env BASE_URL=https://v2fq.com nuxt start",
+    "generate": "cross-env BASE_URL=https://v2fq.com nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",

@@ -63,6 +63,21 @@ import { mapGetters } from 'vuex'
 
 
 export default {
+  head() {
+    return {
+      title: this.youtuber.youtuberName+"_翻趣",
+      meta: [
+        {
+          name: "keywords",
+          content: this.youtuber.youtuberName+",油管,youtuber,youtuber",
+        },
+        {
+          name: "description",
+          content: "在这里推荐你觉得值得推荐的youtuber吧！",
+        },
+      ],
+    };
+  },
   data() {
     return {
       youtuber: {},

@@ -24,6 +24,21 @@
     components: {
       CommentList,WeiboTalk
     },
+    head() {
+      return {
+        title: this.talk.title,
+        meta: [
+          {
+            name: "keywords",
+            content: "",
+          },
+          {
+            name: "description",
+            content: this.talk.title,
+          },
+        ],
+      };
+    },
     data() {
       return {
         flag: false,
