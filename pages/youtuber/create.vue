@@ -27,6 +27,7 @@
 <script>
   import {getChannelInfo} from "@/api/spd";
   import {post} from '@/api/youtuber'
+  import { Loading } from 'element-ui';
 
 
   export default {
@@ -83,12 +84,31 @@
           alert('数据生成失败，请重新生成')
           return false
         }
+        let loadingInstance = Loading.service({
+          lock: true,
+          text: '创建中...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(255, 255, 255, 0.7)'
+        });
+        setTimeout(() => {
+          loadingInstance.close();
+        }, 3000);
         this.$api.youtuber.post(this.ruleForm).then((response) => {
+          loadingInstance.close();
           this.$message.success('创建成功')
         })
       },
       fetchChannelInfo() {
         console.log(this.videoUrl);
+        let loadingInstance = Loading.service({
+          lock: true,
+          text: '生产中...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(255, 255, 255, 0.7)'
+        });
+        setTimeout(() => {
+          loadingInstance.close();
+        }, 3000);
         this.$api.spd.getChannelInfo(this.videoUrl).then((data) => {
           let channel = data.items[0];
           this.ruleForm.channelId = channel.id;
@@ -99,6 +119,7 @@
           this.ruleForm.country = channel.snippet.country;
           this.ruleForm.categories = channel.topicDetails.topicCategories;
           this.spdSuccess = true;
+          loadingInstance.close();
           console.log(this.ruleForm);
         });
       }
@@ -107,4 +128,5 @@
 </script>
 
 <style>
+
 </style>
