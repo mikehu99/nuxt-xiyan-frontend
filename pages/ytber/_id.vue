@@ -96,7 +96,7 @@ export default {
       console.log(key, keyPath);
     },
     changeCategory(id){
-      this.$router.push({path: `/youtuber`,query:{category: id}})
+      this.$router.push({path: `/ytber`,query:{category: id}})
 
     },
   }

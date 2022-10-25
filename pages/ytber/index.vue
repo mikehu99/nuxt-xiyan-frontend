@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="main-container">
     <waterfall
       :col="col"
       :data="youtuberList"
@@ -9,7 +9,7 @@
 
       <div v-for="(youtuber, index) in youtuberList" class="card youtuber-box">
         <div class="card-content">
-          <nuxt-link :to="`/youtuber/${youtuber.id}`">
+          <nuxt-link :to="`/ytber/${youtuber.id}`">
             <div class="media" style="cursor: pointer">
               <div class="media-left">
                 <figure class="image is-48x48">
@@ -26,18 +26,18 @@
           </div>
           <ul>
             <li v-for="category in youtuber.categories"
-                :class="[$route.params.id == category.id?'chosen tag':'ytb-tag tag']"
+                :class="[$route.query.category == category.id?'chosen tag':'ytb-tag tag']"
                 @click="changeCategory(category.id)">
               # {{ category.categoryName }}
             </li>
           </ul>
           <div class="bottom-info">
             <span>
-              <span style="color: #0079d3">post by </span>
-              <nuxt-link :to="`/member/${youtuber.adderId}`">
-                @{{ youtuber.adderName }}
-              </nuxt-link>
-              <time :datetime="youtuber.createTime">{{ youtuber.createTime | timeFormat }}</time>
+               <span style="color: #0079d3">post by </span>
+                <nuxt-link :to="`/member/${youtuber.adderId}`">
+                  @{{ youtuber.adderName }}
+                </nuxt-link>
+                <time :datetime="youtuber.createTime">{{ youtuber.createTime | timeFormat }}</time>
             </span>
             <template v-if="youtuber.ymsPraise != null && youtuber.ymsPraise.status == 1">
               <el-tooltip class="item" effect="dark" content="取消点赞" placement="top">
@@ -68,13 +68,28 @@
   </div>
 </template>
 <script>
-import Pagination from '~/components/Pagination';
-import {showtime} from "assets/js/date"
+import Pagination from '@/components/Pagination';
+import {showtime} from "@/assets/js/date"
 import {mapGetters} from "vuex";
 
 export default {
   name: 'YoutuberList',
   components: {Pagination},
+  head() {
+    return {
+      title: "油管"+"-翻趣",
+      meta: [
+        {
+          name: "keywords",
+          content: "油管,youtuber,youtuber",
+        },
+        {
+          name: "description",
+          content: "在这里推荐你觉得值得推荐的youtuber吧！",
+        },
+      ],
+    };
+  },
   data() {
     return {
       loading: true,
@@ -86,20 +101,9 @@ export default {
         size: 10,
         total: 0,
         tab: 'latest',
-        categoryId: this.$route.params.id
+        categoryId: this.$route.query.category || -1
       }
     }
-  },
-  created() {
-    this.$watch(
-      () => this.$route.params,
-      (toParams, previousParams) => {
-        // 对路由变化做出响应...
-        this.page.categoryId = toParams.id;
-        this.page.current = 0;
-        this.init('latest')
-      }
-    );
   },
   filters: {
     timeFormat(value) {
@@ -110,26 +114,36 @@ export default {
     ...mapGetters(['token', 'user']),
     itemWidth() {
       if (process.client) {
-        let mediaWidth = document.getElementsByClassName('container')[0].clientWidth;
+        let mediaWidth = document.getElementsByClassName('main-container')[0].clientWidth;
         if (mediaWidth < 759) {
-          return document.getElementsByClassName('container')[0].clientWidth;
+          return document.getElementsByClassName('main-container')[0].clientWidth;
         } else {
-          return 244 * 0.5 * (document.getElementsByClassName('container')[0].clientWidth / 375);
+          return 244 * 0.5 * (document.getElementsByClassName('main-container')[0].clientWidth / 375);
         }
       }
     },
     gutterWidth() {
       if (process.client) {
-        let mediaWidth = document.getElementsByClassName('container')[0].clientWidth;
+        let mediaWidth = document.getElementsByClassName('main-container')[0].clientWidth;
         if (mediaWidth < 759) {
           return 0;
         } else {
-          return (9 * 0.5 * (document.getElementsByClassName('container')[0].clientWidth / 375))	//#rem布局 计算x轴方向margin(y轴方向的margin自定义在css中即可)
+          return (9 * 0.5 * (document.getElementsByClassName('main-container')[0].clientWidth / 375))	//#rem布局 计算x轴方向margin(y轴方向的margin自定义在css中即可)
         }
       }
     }
-  }
-  ,
+  },
+  created() {
+    this.$watch(
+      () => this.$route.query,
+      (toQuery, previousQuery) => {
+        // 对路由变化做出响应...
+        this.page.categoryId = toQuery.category;
+        this.page.current = 0;
+        this.init('latest')
+      }
+    );
+  },
   mounted() {
     this.init('latest')
   }
@@ -145,8 +159,11 @@ export default {
       this.youtuberList = data.records;
       this.loading = false;
     },
+    youtuberDetail(youtuber) {
+      this.$router.push({path: `/ytber/${youtuber.id}`})
+    },
     changeCategory(id) {
-      this.$router.push({path: `/youtuber/category/${id}`})
+      this.$router.push({path: `/ytber`,query:{category: id}})
     },
     praise(youtuber) {
       if (this.token == null || this.token === '') {
@@ -204,18 +221,16 @@ export default {
   min-height: 500px;
 }
 
+.description {
+  font-size: 14px;
+  margin-top: 8px;
+}
 .chosen {
   margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
   color: #0079d3;
 }
-
-.description {
-  font-size: 14px;
-  margin-top: 8px;
-}
-
 .ytb-tag {
   cursor: pointer;
   margin-right: 10px;
@@ -236,7 +251,6 @@ export default {
   margin-top: 10px;
   font-size: 14px;
 }
-
 
 @media (min-width: 768px) {
   .youtuber-box {

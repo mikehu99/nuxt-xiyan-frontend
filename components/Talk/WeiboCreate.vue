@@ -56,7 +56,7 @@
             <div class="picker linkpicker" @click="showUrl=!showUrl">
               <i class="el-icon-link"/><span>链接</span>
             </div>
-            <el-popover
+      <!--      <el-popover
               placement="bottom-start"
               width="200"
               heigh="200"
@@ -67,7 +67,7 @@
               <div slot="reference" class="topicpicker picker" @click="initTagList">
                 <i class="el-icon-collection-tag"/><span>话题</span>
               </div>
-            </el-popover>
+            </el-popover>-->
 
           </div>
           <div class="submit">
@@ -210,11 +210,11 @@
         this.fileList = fileList;
       },
       beforeUpload(file){
-     /*   if (this.token == null || this.token === '') {
+        if (this.token == null || this.token === '') {
           this.$message({message:'该功能需要登录',type:'error',showClose: true});
           this.$store.commit('common/setLoginFlag',true);
           return false;
-        }*/
+        }
         // image/jpg,image/jpeg,image/png,image/gif
         const isJPG = file.type === 'image/jpeg' || 'image/jpg' || 'image/png' || 'image/gif';
         const isLt2M = file.size / 1024 / 1024 < 2;

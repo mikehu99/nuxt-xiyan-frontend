@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="user-view">
-      <div class="content-area">
+      <div class="content-area"  style="min-height: 900px;">
         <div v-if="screenWidth>=640">
           <WeiboCreate @changeType="changeType"></WeiboCreate>
         </div>
@@ -40,6 +40,21 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'TalkIndex',
   components: { TalkList, InfiniteLoading, WeiboCreate},
+  head() {
+    return {
+      title: "翻趣",
+      meta: [
+        {
+          name: "keywords",
+          content: "翻趣,油管,脸书,外网",
+        },
+        {
+          name: "description",
+          content: "翻趣社区",
+        },
+      ],
+    };
+  },
   data() {
     return {
       screenWidth:768,

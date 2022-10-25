@@ -1,7 +1,7 @@
 <template>
   <header class="header has-background-white has-text-black">
     <div class="head-box main-container">
-      <nuxt-link to="/" class="logo">logo</nuxt-link>
+      <nuxt-link to="/" class="logo">翻趣</nuxt-link>
       <nav class="main-nav">
         <ul class="nav-list">
           <li class="main-nav-list">
@@ -10,8 +10,8 @@
                 <nuxt-link to="/" :class="{'active':$route.path === '/'}">首页</nuxt-link>
               </li>
               <li class="nav-item link-item">
-                <nuxt-link :to="{ path: '/youtuber' ,query:{category:0}}"
-                           :class="{'active':$route.path === '/youtuber'}">油管
+                <nuxt-link :to="{ path: '/ytber' ,query:{category:0}}"
+                           :class="{'active':$route.path === '/ytber'}">油管
                 </nuxt-link>
               </li>
             </ul>
@@ -32,7 +32,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <nuxt-link :to="`/youtuber/create`"><i class="iconfont icon-shezhi1"/>分享youtuber</nuxt-link>
+                  <nuxt-link :to="`/ytber/create`"><i class="iconfont icon-fenxiang2"/>分享</nuxt-link>
                 </li>
                 <li>
                   <a @click="logout"><i class="iconfont icon-dengchu"/>退出登录</a>
@@ -166,96 +166,96 @@
 </template>
 
 <script>
-import {getDarkMode, setDarkMode} from '@/utils/auth'
-import {mapGetters} from 'vuex'
+  import {getDarkMode, setDarkMode} from '@/utils/auth'
+  import {mapGetters} from 'vuex'
 
-export default {
-  name: 'Header',
-  data() {
-    return {
-      logoUrl: require('@/assets/logo.png'),
-      doubaoImg: require('@/assets/image/doubao.png'),
-      searchKey: '',
-      darkMode: false,
-      showDropDownMenu:false
-    }
-  },
-  computed: {
-    ...mapGetters(['token', 'user'])
-  },
-  watch: {
-    // 监听Theme模式
-    darkMode(val) {
-      if (val) {
+  export default {
+    name: 'Header',
+    data() {
+      return {
+        logoUrl: require('@/assets/logo.png'),
+        doubaoImg: require('@/assets/image/doubao.png'),
+        searchKey: '',
+        darkMode: false,
+        showDropDownMenu: false
+      }
+    },
+    computed: {
+      ...mapGetters(['token', 'user'])
+    },
+    watch: {
+      // 监听Theme模式
+      darkMode(val) {
+        if (val) {
+          this.enableDarkMode({})
+        } else {
+          this.disableDarkMode()
+        }
+        setDarkMode(this.darkMode)
+      }
+    },
+    mounted() {
+      // 获取cookie中的夜间还是白天模式
+      this.darkMode = getDarkMode()
+      if (this.darkMode) {
         this.enableDarkMode({})
       } else {
         this.disableDarkMode()
       }
-      setDarkMode(this.darkMode)
-    }
-  },
-  mounted() {
-    // 获取cookie中的夜间还是白天模式
-    this.darkMode = getDarkMode()
-    if (this.darkMode) {
-      this.enableDarkMode({})
-    } else {
-      this.disableDarkMode()
-    }
-    document.addEventListener('click', this.handlerClick)  // 监听 document 点击事件
-  },
-  beforeRouteLeave (to, from, next) {
-    window.removeEventListener('click', this.handlerClick, true)
-    next()
-  },
-  methods: {
-    async logout() {
-      this.$store.dispatch('user/logout').then(() => {
-        this.$message.info('退出登录成功')
-        setTimeout(() => {
-          this.$router.push({path: this.redirect || '/'})
-        }, 500)
-      })
+      document.addEventListener('click', this.handlerClick)  // 监听 document 点击事件
     },
-    search() {
-      console.log(this.token)
-      if (this.searchKey.trim() === null || this.searchKey.trim() === '') {
-        this.$message.info({
-          showClose: true,
-          message: '请输入关键字搜索！',
-          type: 'warning'
+    beforeRouteLeave(to, from, next) {
+      window.removeEventListener('click', this.handlerClick, true)
+      next()
+    },
+    methods: {
+      async logout() {
+        this.$store.dispatch('user/logout').then(() => {
+          this.$message.info('退出登录成功')
+          setTimeout(() => {
+            this.$router.push({path: this.redirect || '/'})
+          }, 500)
         })
-        return false
-      }
-      this.$router.push({path: '/search?key=' + this.searchKey})
-    },
-    showLoginModel() {
-      this.$store.commit('common/setRegisterFlag', false);
-      this.$store.commit('common/setLoginFlag', true);
-    },
-    showRegisterModel() {
-      this.$store.commit('common/setLoginFlag', false);
-      this.$store.commit('common/setRegisterFlag', true);
-    },
-    showDropDown(){
-      console.log(this.showDropDownMenu);
-      this.showDropDownMenu = !this.showDropDownMenu;
-    },
-    //点击编辑框外部区域关闭编辑框
-    handlerClick(event) {
-      if (event.target.classList.contains('menu')){
-        return;
-      }
-      var menu = document.getElementsByClassName('menu')[0];
-      if (menu){
-        let isSelf = menu.contains(event.target);  // 这个是自己的区域
-        if(!isSelf) {
-          this.showDropDownMenu =false;
+      },
+      search() {
+        console.log(this.token)
+        if (this.searchKey.trim() === null || this.searchKey.trim() === '') {
+          this.$message.info({
+            showClose: true,
+            message: '请输入关键字搜索！',
+            type: 'warning'
+          })
+          return false
         }
-      }
-    },
+        this.$router.push({path: '/search?key=' + this.searchKey})
+      },
+      showLoginModel() {
+        this.$store.commit('common/setRegisterFlag', false);
+        this.$store.commit('common/setLoginFlag', true);
+      },
+      showRegisterModel() {
+        this.$store.commit('common/setLoginFlag', false);
+        this.$store.commit('common/setRegisterFlag', true);
+      },
+      showDropDown() {
+        console.log(this.showDropDownMenu);
+        this.showDropDownMenu = !this.showDropDownMenu;
+      },
+      //点击编辑框外部区域关闭编辑框
+      handlerClick(event) {
+        if (event.target.classList.contains('menu')) {
+          return;
+        }
+        var menu = document.getElementsByClassName('menu')[0];
+        if (menu) {
+          let isSelf = menu.contains(event.target);  // 这个是自己的区域
+          if (!isSelf) {
+            this.showDropDownMenu = false;
+          }
+        }
+      },
+    }
   }
-}
 </script>
 
 <style scoped>
@@ -264,156 +264,166 @@ input {
   height: 86%;
 }
 
-.head-box {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  margin: auto;
-}
+  .head-box {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: auto;
+  }
 
-.logo {
-  margin-right: 1rem;
-  display: inline-block;
-  height: 22px;
-  width: auto;
-}
+  .logo {
+    margin-right: 1rem;
+    display: inline-block;
+    width: auto;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: #333;
+  }
 
-.main-nav {
-  height: 100%;
-  flex: 1 0 auto;
-}
+  .main-nav {
+    height: 100%;
+    flex: 1 0 auto;
+  }
 
-.nav-list {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  flex-direction: row-reverse;
-  height: 100%;
-  margin: 0;
-}
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    flex-direction: row-reverse;
+    height: 100%;
+    margin: 0;
+  }
 
-.main-nav-list {
-  display: flex;
-  order: 99;
-}
+  .main-nav-list {
+    display: flex;
+    order: 99;
+  }
 
-.phone-hide {
-  display: flex;
-}
+  .phone-hide {
+    display: flex;
+  }
 
-.nav-item.link-item {
-  padding: 0;
-  height: 5rem;
-}
+  .nav-item.link-item {
+    padding: 0;
+    height: 5rem;
+  }
 
-.nav-item {
-  color: #86909c;
-  font-size: 1.167rem;
-  margin: 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
+  .nav-item {
+    color: #86909c;
+    font-size: 1.167rem;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 
-.phone-hide .nav-item.link-item :not(.no-hover) {
-  display: inline-block;
-  height: 5rem;
-  margin: 0 1rem;
-  line-height: 5rem;
-}
+  .phone-hide .nav-item.link-item :not(.no-hover) {
+    display: inline-block;
+    height: 5rem;
+    margin: 0 1rem;
+    line-height: 5rem;
+  }
 
-.nav-item>a:hover {
-  border-bottom: 2px solid #007fff;
-}
+  .nav-item > a:hover {
+    border-bottom: 2px solid #007fff;
+  }
 
-.active {
-  color: #007fff;
-  border-bottom: 2px solid #007fff;
-}
+  .active {
+    color: #007fff;
+    border-bottom: 2px solid #007fff;
+  }
 
-.right-side-nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  position: relative;
-  height: 100%;
-  margin: 0;
-  order: 0;
-}
+  .right-side-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    height: 100%;
+    margin: 0;
+    order: 0;
+  }
 
-.nav-item.menu {
-  position: relative;
-  padding-left: 0;
-  background-color: #fff;
-}
+  .nav-item.menu {
+    position: relative;
+    padding-left: 0;
+    background-color: #fff;
+  }
 
-.avatar {
-  position: relative;
-  -o-object-fit: cover;
-  object-fit: cover;
-  display: inline-block;
-  background-size: cover;
-  background-color: #eee;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-}
-.dropdown-ul{
-  min-width: 115px;
-  padding: 5px 0;
-  position: absolute;
-  background-color: #FFFFFF;
-  top: 4rem;
-  left: 0;
-  z-index: 1000;
-  float: left;
-  margin: 2px 0 0;
-  font-size: 13px;
-  list-style: none;
-  border: 1px solid rgba(0,0,0,.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgb(0 0 0 / 12%), 0 1px 3px rgb(0 0 0 / 10%);
-  box-shadow: 0 6px 12px rgb(0 0 0 / 12%), 0 1px 3px rgb(0 0 0 / 10%);
-}
-.dropdown-ul.pull-right {
-  right: 0;
-  left: auto;
-}
-.dropdown-ul>li>a {
-  padding: 2px 10px;
-  margin: 5px 0;
-  border-radius: 3px;
-  display: block;
-  clear: both;
-  font-weight: 400;
-  line-height: 1.42857143;
-  color: #3c4353;
-  white-space: nowrap;
-}
-.dropdown-ul>li>a:hover {
-  color: #fff;
-  background-color: #0c64eb;
-}
-.dropdown-ul i{
-  width: 1.33rem;
-  height: 1.33rem;
-  margin-right: .8rem;
-  font-size: 1.2em;
-  vertical-align: middle;
-}
-.dropdown-ul>li.divider {
-  margin: 10px;
-}
-.dropdown-ul .divider {
-  height: 1px;
-  margin: 9px 0;
-  overflow: hidden;
-  background-color: #eee;
-}
-.divider {
-  border-left: 1px solid #e5e5e5;
-}
+  .avatar {
+    position: relative;
+    -o-object-fit: cover;
+    object-fit: cover;
+    display: inline-block;
+    background-size: cover;
+    background-color: #eee;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .dropdown-ul {
+    min-width: 115px;
+    padding: 5px 0;
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 4rem;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    margin: 2px 0 0;
+    font-size: 13px;
+    list-style: none;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgb(0 0 0 / 12%), 0 1px 3px rgb(0 0 0 / 10%);
+    box-shadow: 0 6px 12px rgb(0 0 0 / 12%), 0 1px 3px rgb(0 0 0 / 10%);
+  }
+
+  .dropdown-ul.pull-right {
+    right: 0;
+    left: auto;
+  }
+
+  .dropdown-ul > li > a {
+    padding: 2px 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+    display: block;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #3c4353;
+    white-space: nowrap;
+  }
+
+  .dropdown-ul > li > a:hover {
+    color: #fff;
+    background-color: #0c64eb;
+  }
+
+  .dropdown-ul i {
+    width: 1.33rem;
+    height: 1.33rem;
+    margin-right: .8rem;
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
+
+  .dropdown-ul > li.divider {
+    margin: 10px;
+  }
+
+  .dropdown-ul .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #eee;
+  }
+
+  .divider {
+    border-left: 1px solid #e5e5e5;
+  }
 </style>

@@ -5,7 +5,7 @@
     </div>
     <div v-if="token != null && token !== ''" class="has-text-centered">
       <b-button type="is-danger" tag="router-link" :to="{path:'/post/create'}" outlined>✍ 发表想法</b-button>
-      <b-button type="is-danger" tag="router-link" :to="{path:'/youtuber/create'}" outlined>✍ 推荐youtuber</b-button>
+      <b-button type="is-danger" tag="router-link" :to="{path:'/ytber/create'}" outlined>✍ 推荐youtuber</b-button>
       <b-button type="is-danger" tag="router-link" :to="{path:'/talk/create'}" outlined>✍ 发表talk</b-button>
     </div>
 
