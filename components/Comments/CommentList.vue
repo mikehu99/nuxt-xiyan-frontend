@@ -149,7 +149,6 @@
   import Reply from "./Reply";
   import Emoji from "@/components/Emoji";
   import EmojiList from "@/assets/js/emoji";
-  import InfiniteLoading from 'vue-infinite-loading';
 
   import {mapGetters} from 'vuex'
 
@@ -157,7 +156,7 @@
   export default {
     name: "CommentList",
     components: {
-      Reply, Emoji,InfiniteLoading
+      Reply, Emoji
     },
     props: {
       topicId: {

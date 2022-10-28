@@ -64,7 +64,6 @@
 </template>
 
 <script>
-  import InfiniteLoading from 'vue-infinite-loading';
   import EmojiList from "@/assets/js/emoji";
 
   import {mapGetters} from 'vuex'
@@ -74,7 +73,7 @@
   export default {
     name: "ProfileCommentList",
     components: {
-      InfiniteLoading,EmojiList
+      EmojiList
     },
     data: function () {
       return {

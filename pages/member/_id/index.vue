@@ -14,13 +14,12 @@
   </div>
 </template>
 <script>
-  import InfiniteLoading from 'vue-infinite-loading';
   import TalkList from '@/components/Talk/TalkList.vue';
 
 
   export default {
     name: 'ProfileTalkList',
-    components: {InfiniteLoading, TalkList},
+    components: {TalkList},
     data(){
       return{
         talkList: [],

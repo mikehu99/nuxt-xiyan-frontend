@@ -63,7 +63,6 @@
 <script>
   import WeiboCreate from "@/components/Talk/WeiboCreate"
   import TalkList from '@/components/Talk/TalkList';
-  import InfiniteLoading from 'vue-infinite-loading';
 
   import {getList} from '@/api/talk';
   import {getOneCommunity} from '@/api/community'
@@ -74,7 +73,7 @@
 
 
   export default {
-    components: {WeiboCreate,TalkList,InfiniteLoading},
+    components: {WeiboCreate,TalkList},
     data() {
       return {
         infiniteId: +new Date(),

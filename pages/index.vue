@@ -33,13 +33,12 @@
 <script>
 import TalkList from '@/components/Talk/TalkList';
 import WeiboCreate from "@/components/Talk/WeiboCreate"
-import InfiniteLoading from 'vue-infinite-loading';
 import { mapGetters } from 'vuex'
 
 
 export default {
   name: 'TalkIndex',
-  components: { TalkList, InfiniteLoading, WeiboCreate},
+  components: { TalkList, WeiboCreate},
   head() {
     return {
       title: "翻趣",

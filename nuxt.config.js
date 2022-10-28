@@ -85,6 +85,10 @@ export default {
       src: "@/plugins/waterfall",
       ssr: false
     },
+    {
+      src: "@/plugins/infinite-loading",
+      ssr: false
+    },
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
