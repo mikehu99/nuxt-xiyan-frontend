@@ -13,7 +13,7 @@
           <div class="sFPAmX">
             <span>
               <router-link :to="{path:`/member/${talk.userId}`}" class="oTXgEq">
-              {{talk.alias|talk.username}}
+              {{talk.alias||talk.username}}
               </router-link>
             </span>
             <div class="meta-row">

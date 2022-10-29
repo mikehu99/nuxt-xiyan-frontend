@@ -56,7 +56,6 @@ export default {
   },
   data() {
     return {
-      screenWidth:768,
       isEditorActive:false,
       infiniteId: +new Date(),
       talkList: [],
@@ -69,12 +68,15 @@ export default {
     }
   },
   created(){
-    if (process.client) {
-      this.screenWidth = document.body.clientWidth;
-    }
+
   },
   computed:{
-    ...mapGetters(['token','user'])
+    ...mapGetters(['token','user']),
+    screenWidth(){
+      if (process.client) {
+       return document.body.clientWidth;
+      }
+    }
   },
   methods: {
     async infiniteHandler($state) {

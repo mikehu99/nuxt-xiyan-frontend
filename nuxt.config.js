@@ -89,6 +89,10 @@ export default {
       src: "@/plugins/infinite-loading",
       ssr: false
     },
+    {
+      src: "@/plugins/social-share",
+      ssr: false
+    },
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -108,7 +112,8 @@ export default {
   },
   //设置接口地址环境变量
   env: {
-    baseUrl: process.env.BASE_URL
+    baseUrl: process.env.BASE_URL,
+    browserBaseUrl:process.env.BROWSER_BASE_URL
   },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
