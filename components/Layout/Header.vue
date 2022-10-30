@@ -171,13 +171,6 @@
 
   export default {
     name: 'Header',
-    async fetch () {
-      var token = this.$cookies.get('u_token');
-      if (token){
-        this.$store.commit('user/SET_TOKEN_STATE', token);
-        await this.$store.dispatch('user/getInfo');
-      }
-    },
     data() {
       return {
         logoUrl: require('@/assets/logo.png'),

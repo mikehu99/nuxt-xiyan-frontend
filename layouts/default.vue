@@ -27,6 +27,13 @@
 export default {
   components: { Header, Footer ,Login,Register},
   name: "app",
+  async fetch () {
+    var token = this.$cookies.get('u_token');
+    if (token){
+      this.$store.commit('user/SET_TOKEN_STATE', token);
+      await this.$store.dispatch('user/getInfo');
+    }
+  },
   data() {
     return { isRouterALive: true };
   }

@@ -3,7 +3,7 @@ import store from '@/store'
 const whiteList = ['/login', '/', '/regist', "/youtuber","/talk"]
 export default ({app, $cookies, store}) => {
   app.router.beforeEach(async(to, from, next) => {
-/*    //服务端直接放行，只做客户端处理
+    //服务端直接放行，只做客户端处理
     let isClient = process.client
     if (isClient) {
       const hasToken = $cookies.get('u_token');
@@ -17,13 +17,13 @@ export default ({app, $cookies, store}) => {
           next()
         }
       } else {
-     /!*   if (whiteList.indexOf(to.path) !== -1) {
+     /*   if (whiteList.indexOf(to.path) !== -1) {
           next()
         } else {
           next('/login')
-        }*!/
+        }*/
       }
     }
-    next()*/
+    next()
   })
 }

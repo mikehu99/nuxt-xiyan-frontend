@@ -116,7 +116,7 @@ export default {
     return {
       action:process.env.baseUrl+"/oss/uploadImageOrVideo",
       headers:{
-        Authorization:'Bearer ' + this.token
+        Authorization:'Bearer ' + this.$cookies.get("u_token")
       },
       isfixTab: false,
       flag: false,
