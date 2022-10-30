@@ -1,5 +1,4 @@
 import store from '@/store'
-import {getToken} from '@/utils/auth'
 import { Message } from 'element-ui';
 
 
@@ -12,9 +11,9 @@ export default function ({store, redirect, app: {$axios, $cookies}}) {
   $axios.onRequest(config => {
     //请求超时时间 $cookies.get("token")
     config.timeout = 5000;
-    if (getToken()) {
+    if ($cookies.get('u_token')) {
       //如果有toekn才携带请求头中的token到后端
-      config.headers['Authorization'] = 'Bearer ' + getToken()
+      config.headers['Authorization'] = 'Bearer ' + $cookies.get('u_token')
     }
   });
   // response拦截器，数据返回后，你可以先在这里进行一个简单的判断

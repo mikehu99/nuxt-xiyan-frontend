@@ -51,10 +51,10 @@
               </div>
             </el-popover>
             <div class="picker filepicker" @click="uploadImgClik()">
-              <i class="el-icon-picture-outline"/><span>图片</span>
+              <i class="iconfont icon-biaoqing"/><span>图片</span>
             </div>
             <div class="picker linkpicker" @click="showUrl=!showUrl">
-              <i class="el-icon-link"/><span>链接</span>
+              <i class="iconfont icon-biaoqing"/><span>链接</span>
             </div>
       <!--      <el-popover
               placement="bottom-start"
@@ -101,8 +101,6 @@
 <script>
   import Emoji from "@/components/Emoji";
   import CommunitySelect from "@/components//Talk/CommunitySelect";
-  import { getToken } from "@/utils/auth";
-
   import {mapGetters} from 'vuex';
 
 
@@ -125,7 +123,7 @@
       return {
         action:process.env.baseUrl+"/oss/uploadImageOrVideo",
         headers:{
-          Authorization:'Bearer ' + getToken()
+          Authorization:'Bearer ' + this.token
         },
         communityIdTemp: this.communityId,
         communityNameTemp: this.communityName,

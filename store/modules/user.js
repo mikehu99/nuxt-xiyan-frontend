@@ -1,8 +1,7 @@
 import { getUserInfo, login, logout } from "@/api/auth/auth";
-import { getToken, setToken, removeToken } from "@/utils/auth";
 
 const state = {
-  token: getToken(), // token
+  token: "", // token
   user: "", // 用户对象
 };
 
@@ -25,7 +24,7 @@ const actions = {
           console.log(data)
           commit("SET_TOKEN_STATE", data.user.token);
           commit("SET_USER_STATE", data.user);
-          setToken(data.user.token);
+          this.$cookies.set('u_token', data.user.token, { maxAge: 60 * 60 * 24 * 7 })
           resolve();
         })
         .catch((error) => {
@@ -41,7 +40,8 @@ const actions = {
           if (!data) {
             commit("SET_TOKEN_STATE", "");
             commit("SET_USER_STATE", "");
-            removeToken();
+            // removeToken();
+            this.$cookies.remove('u_token');
             resolve();
             reject("Verification failed, please Login again.");
           }
@@ -60,7 +60,8 @@ const actions = {
         .then((response) => {
           commit("SET_TOKEN_STATE", "");
           commit("SET_USER_STATE", "");
-          removeToken();
+          // removeToken();
+          this.$cookies.remove('u_token');
           resolve();
         })
         .catch((error) => {

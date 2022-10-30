@@ -105,7 +105,6 @@
 <script>
 import {deleteTopic} from '@/api/post'
 import {mapGetters} from 'vuex'
-import { getToken } from "@/utils/auth";
 
 import Author from '@/components/User/Author'
 
@@ -117,7 +116,7 @@ export default {
     return {
       action:process.env.baseUrl+"/oss/uploadImageOrVideo",
       headers:{
-        Authorization:'Bearer ' + getToken()
+        Authorization:'Bearer ' + this.token
       },
       isfixTab: false,
       flag: false,

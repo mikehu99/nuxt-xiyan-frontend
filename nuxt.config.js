@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 export default {
+  mode: 'universal',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     htmlAttrs: {
@@ -48,7 +49,7 @@ export default {
     {
       //axios
       src: "@/plugins/element-ui",
-      ssr: true
+      ssr: false
     },
     {
       //axios
@@ -56,7 +57,7 @@ export default {
       ssr: true
     },
     //配置路由守卫
-    {src: '@/plugins/permission', ssr: true},
+    // {src: '@/plugins/permission', ssr: true},
     {
       src: "@/plugins/api",
       ssr: true
@@ -137,6 +138,16 @@ export default {
     //使用jquery
     plugins: [
     ],
+    babel: {
+      plugins: [
+        ['component',
+          {
+            libraryName: 'element-ui',
+            styleLibraryName: 'theme-chalk'
+          }
+        ]
+      ]
+    }
   },
   router: {
     scrollBehavior (to, from, savedPosition) {
