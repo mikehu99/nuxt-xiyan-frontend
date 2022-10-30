@@ -28,13 +28,11 @@ export default function ({store, redirect, app: {$axios, $cookies}}) {
       // 50008: 非法Token; 50012: 异地登录; 50014: Token失效;
       if (res.code === 401 || res.code === 50012 || res.code === 50014) {
         // 重新登录
-        MessageBox.confirm('会话失效，您可以留在当前页面，或重新登录', '权限不足', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        Message({
+          showClose: true,
+          message: '会话失效，您可以留在当前页面，或重新登录',
           type: 'warning',
-          center: true
-        }).then(() => {
-          window.location.href = '/login'
+          duration: 3 * 1000
         })
       } else { // 其他异常直接提示
         console.log(res.message);
