@@ -113,28 +113,22 @@ export default {
     ...mapGetters(['token', 'user']),
     itemWidth() {
       if (process.client) {
-        let mediaWidth = document.getElementsByClassName('main-container')[0].clientWidth;
+        let mediaWidth = document.getElementsByClassName('head-container')[0].clientWidth;
         if (mediaWidth < 759) {
-          return document.getElementsByClassName('main-container')[0].clientWidth;
+          return document.getElementsByClassName('head-container')[0].clientWidth;
         } else {
-          return 244 * 0.5 * (document.getElementsByClassName('main-container')[0].clientWidth / 375);
+          return 244 * 0.5 * (document.getElementsByClassName('head-container')[0].clientWidth / 375);
         }
       }
     },
     gutterWidth() {
       if (process.client) {
-        let mediaWidth = document.getElementsByClassName('main-container')[0].clientWidth;
+        let mediaWidth = document.getElementsByClassName('head-container')[0].clientWidth;
         if (mediaWidth < 759) {
           return 0;
         } else {
-          return (9 * 0.5 * (document.getElementsByClassName('main-container')[0].clientWidth / 375))	//#rem布局 计算x轴方向margin(y轴方向的margin自定义在css中即可)
+          return (9 * 0.5 * (document.getElementsByClassName('head-container')[0].clientWidth / 375))	//#rem布局 计算x轴方向margin(y轴方向的margin自定义在css中即可)
         }
-      }
-    },
-    mainContainerHeight(){
-      if (process.client) {
-        let heigh = window.screen.height-90-20-72;
-        return heigh+"px";
       }
     },
   },

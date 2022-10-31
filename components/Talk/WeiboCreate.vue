@@ -51,10 +51,10 @@
               </div>
             </el-popover>
             <div class="picker filepicker" @click="uploadImgClik()">
-              <i class="iconfont icon-biaoqing"/><span>图片</span>
+              <i class="iconfont icon-tupian2"/><span>图片</span>
             </div>
             <div class="picker linkpicker" @click="showUrl=!showUrl">
-              <i class="iconfont icon-biaoqing"/><span>链接</span>
+              <i class="iconfont icon-lianjie1"/><span>链接</span>
             </div>
       <!--      <el-popover
               placement="bottom-start"

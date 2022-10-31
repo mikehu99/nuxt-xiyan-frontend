@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2939036 */
-  src: url('iconfont.woff2?t=1659334612134') format('woff2'),
-       url('iconfont.woff?t=1659334612134') format('woff'),
-       url('iconfont.ttf?t=1659334612134') format('truetype');
+  src: url('iconfont.woff2?t=1667185456031') format('woff2'),
+       url('iconfont.woff?t=1667185456031') format('woff'),
+       url('iconfont.ttf?t=1667185456031') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tupian:before {
+  content: "\e683";
+}
+
+.icon-tupian1:before {
+  content: "\e889";
+}
+
+.icon-tupian2:before {
+  content: "\e8ba";
 }
 
 .icon-shezhi:before {
