@@ -10,7 +10,7 @@
       </div> <!----> <!---->
 
       <div class="max" :style="{display:display}">
-        <div @click="ZoomOut" v-for="(img,index) in imgs" :key='img' :class="[index===ShowIndex?'active':'None']"><img
+        <div @click="ZoomOut($event)" v-for="(img,index) in imgs" :key='img' :class="[index===ShowIndex?'active':'None']"><img
           :src="img" width="100%"></div>
         <div class="small">
           <img :class="{'smallActive':index===ShowIndex}" v-for="(img,index) in imgs" :key='img' @click="select(index)"
@@ -62,9 +62,17 @@
         this.ShowIndex = i;
       }
       ,
-      ZoomOut() {
+      ZoomOut(event) {
         this.display = 'none';
         this.MinDisplay = 'flex';
+        if (process.client) {
+         let item = event.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+         let picDistance = event.currentTarget.getBoundingClientRect().top;
+         let top = item.getBoundingClientRect().top;
+         if (picDistance<60){
+           window.scrollBy(0,-(60 - top));
+         }
+        }
       }
       ,
       select(i) {

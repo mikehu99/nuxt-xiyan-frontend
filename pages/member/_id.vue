@@ -125,7 +125,7 @@ export default {
       topicUser: {},
       topics: {},
       bioIndex: 0,
-      bioTips: ['你爱看哪位up主', '你的爱好是什么', '说说你离不开的三件事情', '来介绍一下自己吧！']
+      bioTips: ['你爱看哪位up主', '除了家，你最想去的地方是哪里呢', '说说你离不开的三样东西', '来介绍一下自己吧！']
     }
   },
   created() {

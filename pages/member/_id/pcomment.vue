@@ -172,9 +172,9 @@
 
   .comment-content {
     font-size: 14px;
-    line-height: 0.75;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    line-height: 1.5;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     white-space: pre-line;
     word-wrap: break-word;
     word-break: break-all;
