@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="registerFlag" width="336px">
+  <el-dialog :visible.sync="registerFlag" v-show="registerFlag" width="336px">
     <el-card shadow="never">
           <div slot="header" class="has-text-centered has-text-weight-bold">
             新用户入驻

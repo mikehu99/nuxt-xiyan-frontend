@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="loginFlag" width="336px">
+  <el-dialog :visible.sync="loginFlag" v-show="loginFlag" width="336px">
       <el-card shadow="never">
         <div slot="header" class="has-text-centered has-text-weight-bold">
           用户登录
