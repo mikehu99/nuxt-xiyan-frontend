@@ -1,6 +1,6 @@
 <template>
   <header class="header has-background-white has-text-black">
-    <div class="head-box main-container">
+    <div class="head-box head-container">
       <nuxt-link to="/" class="logo">翻趣</nuxt-link>
       <nav class="main-nav">
         <ul class="nav-list">
@@ -425,5 +425,11 @@ input {
 
   .divider {
     border-left: 1px solid #e5e5e5;
+  }
+  .head-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 960px;
   }
 </style>

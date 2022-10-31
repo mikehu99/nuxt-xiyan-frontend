@@ -5,7 +5,7 @@
       <div slot="header" class="clearfix">
         <span><i class="fa fa fa-book"> youtuber / 推荐</i></span>
       </div>
-      <div style="min-height: 800px">
+      <div>
         <p class="mb-1 ml-4">请直接复制该youtuber的<span style="color: red">某个视频</span>的链接,然后点击生成按钮</p>
         <el-input placeholder="请输入视频网址" v-model="videoUrl">
           <el-button slot="append" @click="fetchChannelInfo()">生成</el-button>

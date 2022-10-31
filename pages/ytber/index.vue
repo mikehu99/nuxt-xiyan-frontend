@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="main-container" style="display: flex;flex-direction: column;">
     <waterfall
       :col="col"
       :data="youtuberList"
@@ -92,7 +92,6 @@ export default {
   },
   data() {
     return {
-      loading: true,
       col: 3,
       media: 9,
       youtuberList: [],
@@ -131,7 +130,13 @@ export default {
           return (9 * 0.5 * (document.getElementsByClassName('main-container')[0].clientWidth / 375))	//#rem布局 计算x轴方向margin(y轴方向的margin自定义在css中即可)
         }
       }
-    }
+    },
+    mainContainerHeight(){
+      if (process.client) {
+        let heigh = window.screen.height-90-20-72;
+        return heigh+"px";
+      }
+    },
   },
   created() {
     this.$watch(
@@ -146,18 +151,15 @@ export default {
   },
   mounted() {
     this.init('latest')
-  }
-  ,
+  },
   methods: {
     async init(tab) {
-      this.loading = true;
       let data = await
         this.$api.youtuber.getList(this.page.current, this.page.size, tab, this.page.categoryId);
       this.page.current = data.current;
       this.page.total = data.total;
       this.page.size = data.size;
       this.youtuberList = data.records;
-      this.loading = false;
     },
     youtuberDetail(youtuber) {
       this.$router.push({path: `/ytber/${youtuber.id}`})
@@ -218,9 +220,8 @@ export default {
 }
 
 .vue-waterfall {
-  min-height: 500px;
+  flex-grow: 1;
 }
-
 .description {
   font-size: 14px;
   margin-top: 8px;

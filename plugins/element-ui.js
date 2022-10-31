@@ -1,7 +1,7 @@
 import Vue from 'vue'
 // ElementUI
 import {Message,Button,Dialog,Card,Input,Popover,Popconfirm,Tooltip,Divider,Form,FormItem,Menu,MenuItem,Breadcrumb,BreadcrumbItem,Dropdown,DropdownItem,DropdownMenu,Skeleton,SkeletonItem,Empty,Upload} from 'element-ui';
-import {Submenu,Switch} from 'element-ui';
+import {Submenu,Switch,Pagination} from 'element-ui';
 // ,MessageBox,Button,Dialog,Card,Input,Popover,Popconfirm,Tooltip,
 // Divider,Form,FormItem,Menu,MenuItem,Breadcrumb,BreadcrumbItem,Dropdown,
 // DropdownItem,DropdownMenu,Skeleton,SkeletonItem,Empty,Upload);
@@ -28,4 +28,5 @@ Vue.use(Empty);
 Vue.use(Upload);
 Vue.use(Submenu);
 Vue.use(Switch);
+Vue.use(Pagination);
 Vue.prototype.$message = Message;

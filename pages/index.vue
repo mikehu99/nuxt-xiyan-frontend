@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="user-view">
-      <div class="content-area"  style="min-height: 900px;">
+      <div class="content-area">
         <div v-if="screenWidth>=640">
           <WeiboCreate @changeType="changeType"></WeiboCreate>
         </div>
