@@ -139,7 +139,7 @@ export default {
         // 对路由变化做出响应...
         this.page.categoryId = toQuery.category;
         this.page.current = 0;
-        this.init('latest')
+        this.init()
       }
     );
   },

@@ -81,7 +81,7 @@
         let data = await this.$api.talk.getList({
           pageNo:this.page.current,
           pageSize:this.page.size,
-          tab:this.tab
+          tab:this.page.tab
         });
         if (data.records.length) {
           this.page.current += 1;

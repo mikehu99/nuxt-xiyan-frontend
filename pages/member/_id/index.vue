@@ -36,7 +36,7 @@
         this.$api.talk.getList({
           pageNo: this.page.current,
           pageSize: this.page.size,
-          tab: this.tab,
+          tab: this.page.tab,
           userId: this.$route.params.id
         }).then((data) => {
           if (data.records.length) {
