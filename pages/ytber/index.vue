@@ -144,12 +144,12 @@ export default {
     );
   },
   mounted() {
-    this.init('latest')
+    this.init()
   },
   methods: {
-    async init(tab) {
+    async init() {
       let data = await
-        this.$api.youtuber.getList(this.page.current, this.page.size, tab, this.page.categoryId);
+        this.$api.youtuber.getList(this.page.current, this.page.size,  this.page.tab, this.page.categoryId);
       this.page.current = data.current;
       this.page.total = data.total;
       this.page.size = data.size;
