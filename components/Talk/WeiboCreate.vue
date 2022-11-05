@@ -241,6 +241,10 @@
           this.$store.commit('common/setLoginFlag',true);
           return false;
         }
+        if (!this.weibo.title) {
+          this.$message({message:'内容不能为空',type:'error',showClose: true});
+          return false;
+        }
         //链接link
         if (!this.showUrl) {
           this.weibo.link = '';

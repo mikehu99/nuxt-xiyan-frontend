@@ -102,7 +102,7 @@
         console.log(this.videoUrl);
         let loadingInstance = Loading.service({
           lock: true,
-          text: '生产中...',
+          text: '生成中...',
           spinner: 'el-icon-loading',
           background: 'rgba(255, 255, 255, 0.7)'
         });

@@ -17,15 +17,15 @@
               </el-breadcrumb>
           <el-divider></el-divider>
           <div class="info-form">
-            <el-form :label-position="labelPosition" label-width="60px" :model="user">
+            <el-form :label-position="labelPosition" label-width="60px" :model="userInfo">
               <el-form-item label="账号">
-                <el-input v-model="user.username" disabled/>
+                <el-input v-model="userInfo.username" disabled/>
               </el-form-item>
               <el-form-item label="昵称">
-                <el-input v-model.trim="user.alias"/>
+                <el-input v-model.trim="userInfo.alias"/>
               </el-form-item>
               <el-form-item label="简介">
-                <el-input type="textarea" v-model.trim="user.bio"></el-input>
+                <el-input type="textarea" v-model.trim="userInfo.bio"></el-input>
               </el-form-item>
               <el-divider></el-divider>
               <el-form-item>
@@ -48,7 +48,7 @@
       return {
         activeName: 'first',
         labelPosition: 'left',
-        user: {
+        userInfo: {
           id: '',
           username: '',
           alias: '',
@@ -72,7 +72,7 @@
           this.$router.push({path:"/"});
         }else {
           this.$api.user.getInfo().then(data => {
-            this.user = data
+            this.userInfo = data
           })
         }
 
@@ -81,8 +81,8 @@
         console.log(tab, event)
       },
       submitForm(formName) {
-        console.log(this.user)
-        this.$api.user.update(this.user).then(res => {
+        console.log(this.userInfo)
+        this.$api.user.update(this.userInfo).then(res => {
           this.$message.success('信息修改成功')
           this.fetchInfo()
         })
@@ -136,7 +136,7 @@
     margin: 20px auto;
   }
   @media (max-width: 768px) {
-    .nav-list {
+    .side-column{
       display: none;
     }
   }

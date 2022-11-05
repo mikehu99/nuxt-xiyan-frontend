@@ -45,11 +45,11 @@
         meta: [
           {
             name: "keywords",
-            content: "翻趣,油管,脸书,外网",
+            content: "翻趣社区,翻趣,新闻,新媒体,评论,油管,youtube,脸书,facebook,twitter,推特",
           },
           {
             name: "description",
-            content: "翻趣社区",
+            content: "翻趣社区，搜罗世界各地的有趣事情，打开视界，感受思想的碰撞。                                    ",
           },
         ],
       };

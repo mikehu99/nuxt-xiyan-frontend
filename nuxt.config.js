@@ -1,3 +1,4 @@
+import sitemap from './static/sitemap';
 const webpack = require('webpack')
 export default {
   mode: 'universal',
@@ -128,7 +129,9 @@ export default {
     'cookie-universal-nuxt',
     //axios
     '@nuxtjs/axios',
+    '@nuxtjs/sitemap',
   ],
+  sitemap:sitemap,
   //路由进度条配置
   loading: {
     color: '#19be6b',
