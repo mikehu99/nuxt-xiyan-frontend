@@ -7,7 +7,7 @@
             <span class="iconfont icon-gengduo1 tip-icon"></span>
             <!--<span class="el-icon-more tip-icon"></span>-->
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item :command="talk.id">复制链接</el-dropdown-item>
+              <el-dropdown-item disabled="">举报</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -27,15 +27,31 @@
       </div>
       <div class="share-action action">
         <div class="action-title-box">
-          <el-popover
-            placement="bottom-end"
-            width="250"
-            trigger="hover">
-            <share :config="config"></share>
-            <div slot="reference" class="picker emojipicker" style="position: relative">
-              <span class="iconfont icon-share bottom-icon"></span>
-            </div>
-          </el-popover>
+          <el-dropdown placement="bottom-end" trigger="click" @command="handleCommand">
+            <span class="iconfont icon-share bottom-icon"></span>
+            <!--<span class="el-icon-more tip-icon"></span>-->
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="weibo">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-weibo2"></use>
+                </svg>
+                微博
+              </el-dropdown-item>
+              <el-dropdown-item command="weixin" class="weixin">
+                <vue-qr class="qrCode" :text="url"></vue-qr>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-weixin2"></use>
+                </svg>
+                微信
+              </el-dropdown-item>
+              <el-dropdown-item command="copy">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-lianjie3"></use>
+                </svg>
+                链接
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </div>
     </div>
@@ -43,7 +59,7 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
-
+  import urlencode from 'urlencode';
 
   export default {
     name: 'TalkHandle',
@@ -56,29 +72,7 @@
     data() {
       return {
         praise: {},
-        config: {
-          url: process.env.browserBaseUrl + "/talk/" + this.talk.id, // 网址，默认使用 window.location.href
-          source: "", // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
-          title: "", // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
-          description: "", // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
-          image: "", // 图片, 默认取网页中第一个img标签
-          sites: [
-            "qzone",
-            "qq",
-            "weibo",
-            "wechat",
-            "douban",
-            // "tencent",
-            // "linkedin",
-            // "google",
-            "facebook",
-            "twitter",
-          ], // 启用的站点
-          // disabled: ["google", "facebook", "twitter"], // 禁用的站点
-          wechatQrcodeTitle: "微信扫一扫：分享", // 微信二维码提示文字
-          wechatQrcodeHelper:
-            "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
-        }
+        url: process.env.browserBaseUrl + '/talk/' + this.talk.id,
       }
     },
     computed: {
@@ -92,7 +86,8 @@
     },
     methods: {
       detailPage(id) {
-        this.$router.push({path: `/talk/${id}`})
+        let routeData = this.$router.resolve({path: `/talk/${id}`});
+        window.open(routeData.href, '_blank');
       },
       praiseFuc() {
         if (this.token == null || this.token === '') {
@@ -118,30 +113,60 @@
         });
       },
       handleCommand(command) {
-        if (process.client) {
-          //使用textarea的原因是能进行换行，input不支持换行
-          var copyTextArea = document.createElement("textarea");
-          //自定义复制内容拼接
-          copyTextArea.value = process.env.browserBaseUrl + "/talk/" + command;
-          document.body.appendChild(copyTextArea);
-          copyTextArea.select();
-          try {
-            var copyed = document.execCommand("copy");
-            if (copyed) {
-              document.body.removeChild(copyTextArea);
-              //这里是封装的提示框，可以换成自己使用的提示框
-              this.$message.success('复制成功')
+        if (command == "copy"){
+          if (process.client) {
+            //使用textarea的原因是能进行换行，input不支持换行
+            var copyTextArea = document.createElement("textarea");
+            //自定义复制内容拼接
+            copyTextArea.value = this.url;
+            document.body.appendChild(copyTextArea);
+            copyTextArea.select();
+            try {
+              var copyed = document.execCommand("copy");
+              if (copyed) {
+                document.body.removeChild(copyTextArea);
+                //这里是封装的提示框，可以换成自己使用的提示框
+                this.$message.success('复制成功')
+              }
+            } catch {
+              this.$message.error('复制失败');
             }
-          } catch {
-            this.$message.error('复制失败');
           }
         }
-      }
-    }
+        if (command == "weibo") {
+          let target = 'https://service.weibo.com/share/share.php' +
+            '?title='
+            +urlencode(this.talk.title+'#翻趣#')
+            +'&url='
+            +urlencode(this.url);
+          window.open(target,'_blank');
+        }
+        if (command == "qq") {
+          let target = 'https://connect.qq.com/widget/shareqq/index.html' +
+            '?url='
+            +urlencode(this.url)
+            +'&title='
+            +urlencode(this.talk.title)
+            +'&site='
+            +'掘金';
+          window.open(target,'_blank');
+        }
+      },
+    },
+
   }
 
 </script>
 <style scoped>
+  .icon {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: -0.3em;
+    fill: currentColor;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
   .action-row {
     position: relative;
     margin: 12px 0 0 60px;
@@ -204,6 +229,17 @@
 
   .bottom-icon:hover {
     color: #1E80FF;
+  }
+
+  .qrCode{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    left: -104px;
+  }
+  .weixin:hover .qrCode{
+    opacity: 1;
+    visibility: visible;
   }
 
   @media (max-width: 600px) {
