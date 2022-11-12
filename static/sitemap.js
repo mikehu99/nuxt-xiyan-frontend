@@ -13,7 +13,7 @@ const sitemap = [{
   },
   routes: async () => {
     let youtuberList = await axios.get(
-      'https://v2fq.com/youtuber/list',
+      'https://v2fq.com/api/youtuber/list',
       {params: {pageNo: 1, size: 100, tab: 'oldest', categoryId: 0}})
       .then(res => {
         console.log(res.data)

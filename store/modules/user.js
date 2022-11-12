@@ -24,7 +24,7 @@ const actions = {
           console.log(data)
           commit("SET_TOKEN_STATE", data.user.token);
           commit("SET_USER_STATE", data.user);
-          this.$cookies.set('u_token', data.user.token, { maxAge: 60 * 60 * 24 * 7 })
+          this.$cookies.set('u_token', data.user.token, { maxAge: 60 * 60 * 24 * 1 ,path:"/"})
           resolve();
         })
         .catch((error) => {
@@ -41,7 +41,7 @@ const actions = {
             commit("SET_TOKEN_STATE", "");
             commit("SET_USER_STATE", "");
             // removeToken();
-            this.$cookies.remove('u_token');
+            this.$cookies.remove('u_token',{path:"/"});
             resolve();
             reject("Verification failed, please Login again.");
           }
@@ -61,7 +61,7 @@ const actions = {
           commit("SET_TOKEN_STATE", "");
           commit("SET_USER_STATE", "");
           // removeToken();
-          this.$cookies.remove('u_token');
+          this.$cookies.remove('u_token' ,{path:"/"});
           resolve();
         })
         .catch((error) => {

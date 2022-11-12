@@ -4,5 +4,5 @@
 User-agent: *
 # Disallow:  描述不希望被访问到的一个url
 Disallow: /bin/
-Sitemap: http://192.168.31.76:8090/sitemap_1.xml
+Sitemap: http://v2fq.com/sitemap_1.xml
 
