@@ -17,13 +17,13 @@
             </ul>
           </li>
           <ul class="right-side-nav">
-            <li v-if="token == null || token === ''" class="nav-item">
+            <li v-show="token == null || token === ''" class="nav-item">
               <el-button type="primary" size="mini" @click="showLoginModel">登录</el-button>
               <el-button type="primary" plain size="mini" @click="showRegisterModel">注册</el-button>
             </li>
-            <li v-else class="nav-item menu" @click="showDropDown">
+            <li v-show="token != null && token !== ''" class="nav-item menu" @click="showDropDown">
               <img :src="user.avatar" class="avatar">
-              <ul class="dropdown-ul pull-right" v-if="showDropDownMenu">
+              <ul class="dropdown-ul pull-right" v-show="showDropDownMenu">
                 <li>
                   <nuxt-link :to="`/member/${user.id}`"><i class="iconfont icon-geren1"/>个人中心</nuxt-link>
                 </li>
@@ -195,6 +195,8 @@
       }
     },
     mounted() {
+      console.log("cookie的token:"+this.$cookies.get('u_token'))
+      console.log("token:"+this.token)
       // 获取cookie中的夜间还是白天模式
       this.darkMode = getDarkMode()
       if (this.darkMode) {
@@ -211,10 +213,7 @@
     methods: {
       async logout() {
         this.$store.dispatch('user/logout').then(() => {
-          this.$message.info('退出登录成功')
-          setTimeout(() => {
-            this.$router.push({path: this.redirect || '/'})
-          }, 500)
+          this.$message.info('退出登录成功');
         })
       },
       search() {
