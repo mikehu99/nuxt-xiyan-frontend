@@ -6,8 +6,7 @@
       :width="itemWidth"
       :gutterWidth="gutterWidth"
     >
-
-      <div v-for="(youtuber, index) in youtuberList" class="card youtuber-box">
+      <div v-for="(youtuber, index) in youtuberList" :key="youtuber.id" class="card youtuber-box">
         <div class="card-content">
           <nuxt-link :to="`/ytber/${youtuber.id}`">
             <div class="media" style="cursor: pointer">

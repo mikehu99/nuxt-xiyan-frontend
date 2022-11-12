@@ -103,7 +103,6 @@
 </template>
 
 <script>
-import {deleteTopic} from '@/api/post'
 import {mapGetters} from 'vuex'
 
 import Author from '@/components/User/Author'
@@ -140,7 +139,6 @@ export default {
   computed: {
     ...mapGetters(['token', 'user', 'praiseList']),
     activeIndex() {
-      console.log(this.$route.index)
       if (this.$route.fullPath.includes('/comment')) {
         return '2';
       }
@@ -157,18 +155,6 @@ export default {
     }
   },
   methods: {
-    handleDelete(id) {
-      deleteTopic(id).then(value => {
-        const {code, message} = value
-        alert(message)
-
-        if (code === 200) {
-          setTimeout(() => {
-            this.$router.push({path: '/'})
-          }, 500)
-        }
-      })
-    },
     handleSelect(key, keyPath) {
       console.log(key);
       if (key === '2') {
@@ -228,6 +214,7 @@ export default {
     },
   },
   mounted() {
+    console.log('添加监听滚动')
     this.fetchUserInfo();
     setInterval(() => {
       if (this.bioIndex === 3) {
@@ -236,10 +223,11 @@ export default {
         this.bioIndex++;
       }
     }, 3000);
-    window.addEventListener('scroll', this.handleTabFix, true)
+    window.addEventListener('scroll', this.handleTabFix)
   },
   beforeRouteLeave(to, from, next) {
-    window.removeEventListener('scroll', this.handleTabFix, true);
+    console.log('取消监听滚动')
+    window.removeEventListener('scroll', this.handleTabFix);
     next()
   },
 }

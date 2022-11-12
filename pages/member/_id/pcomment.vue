@@ -31,7 +31,7 @@
       </div>
     </div>
     <!--分页-->
-    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler">
+    <infinite-loading @infinite="infiniteHandler">
       <div slot="spinner">
         <el-skeleton :rows="6" animated/>
       </div>

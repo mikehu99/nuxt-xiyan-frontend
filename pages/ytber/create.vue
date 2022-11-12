@@ -48,31 +48,6 @@
       }
     },
     mounted() {
-      this.contentEditor = new Vditor('vditor', {
-        height: 500,
-        placeholder: '此处为话题内容……',
-        theme: 'classic',
-        counter: {
-          enable: true,
-          type: 'markdown'
-        },
-        preview: {
-          delay: 0,
-          hljs: {
-            style: 'monokai',
-            lineNumber: true
-          }
-        },
-        tab: '\t',
-        typewriterMode: true,
-        toolbarConfig: {
-          pin: true
-        },
-        cache: {
-          enable: false
-        },
-        mode: 'sv'
-      })
     },
     methods: {
       submit() {
