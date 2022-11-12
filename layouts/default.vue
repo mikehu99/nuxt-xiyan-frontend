@@ -3,7 +3,7 @@
     <Header></Header>
     <!-- nuxt中使用局部刷新reload必须这样写，不然没有效果 -->
     <div class="context">
-    <router-view v-if="isRouterALive"> <Nuxt /></router-view>
+      <router-view v-if="isRouterALive"><Nuxt /></router-view>
     </div>
     <!--登入框-->
     <div>
@@ -32,6 +32,9 @@ export default {
     if (token){
       this.$store.commit('user/SET_TOKEN_STATE', token);
       await this.$store.dispatch('user/getInfo');
+    }else {
+      this.$store.commit('user/SET_TOKEN_STATE', '');
+      this.$store.commit('user/SET_USER_STATE', '');
     }
   },
   data() {
