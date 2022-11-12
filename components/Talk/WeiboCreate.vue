@@ -31,7 +31,7 @@
               @confirm="deleteLocation"
             >
             <div slot="reference" class="new_topic">
-              <i style="margin-right: 4px;" class="iconfont icon-dingwei1"/>{{weibo.location}}
+              <i style="margin-right: 4px;" class="iconfont icon-dingwei1"/>{{locationText}}
             </div>
             </el-popconfirm>
           </span>
@@ -186,7 +186,9 @@
       imgNum() {
         return this.fileList.length;
       },
-
+      locationText(){
+        return this.weibo.location.replace('中国,','');
+      }
     },
     methods: {
       addEmoji(icon) {
@@ -322,7 +324,10 @@
         }
       },
       clearWeibo() {
-        this.weibo = {};
+        this.weibo.title = '';
+        this.weibo.tags = [];
+        this.weibo.img = '';
+        this.weibo.link = '';
         this.$refs.myeditor.innerHTML = '';
         this.fileList = [];
         this.tag = '';
@@ -417,7 +422,7 @@
   }
   .rich-editor {
     white-space: pre-wrap;
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: #333 !important;
     outline: none;
     padding: 10px 12px;

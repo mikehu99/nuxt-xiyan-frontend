@@ -5,16 +5,16 @@
         <div class="XpwFHo">
           <span class="MNowkr">
             <span class="muncfL">
-              <router-link :to="{path:`/member/${talk.userId}`}">
+              <nuxt-link :to="{path:`/member/${talk.userId}`}" target="_blank">
                 <img class="avatar-img" :src="talk.avatar"/>
-              </router-link>
+              </nuxt-link>
             </span>
           </span>
           <div class="sFPAmX">
             <span>
-              <router-link :to="{path:`/member/${talk.userId}`}" class="oTXgEq">
+              <nuxt-link :to="{path:`/member/${talk.userId}`}" target="_blank" class="oTXgEq">
               {{talk.alias||talk.username}}
-              </router-link>
+              </nuxt-link>
             </span>
             <div class="meta-row">
 
@@ -34,10 +34,8 @@
               <div class="more-button el-dropdown-link">
                 <i class="el-icon-arrow-down" style="font-size: 16px"></i>
                 <el-dropdown-menu slot="dropdown">
-                  <router-link :to="{name:'talk-edit',params: {id:talk.id}}">
-                    <el-dropdown-item icon="el-icon-edit">编辑</el-dropdown-item>
-                  </router-link>
-                  <el-dropdown-item icon="el-icon-delete">删除</el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-edit" disabled>编辑</el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-delete" disabled>删除</el-dropdown-item>
                 </el-dropdown-menu>
               </div>
             </el-dropdown>
@@ -55,10 +53,10 @@
       </div>
       <div v-if="talk.community!=null" class="community-row middle-row">
         <div class="community-box">
-          <router-link :to="{path:'/community/'+talk.community.id}" class="community">
+          <nuxt-link :to="{path:'/community/'+talk.community.id}" target="_blank" class="community">
             <img class="community-avatar" :src="talk.community.avatar"/>
             <span>{{talk.community.communityName}}</span>
-          </router-link>
+          </nuxt-link>
         </div>
         <div data-v-489993b0="" style="flex: 1 1 auto;"></div>
       </div>
@@ -159,7 +157,8 @@
       },
       locationText() {
         console.log(this.talk.location);
-        return this.talk.location.replace(/[,]/g, ' ')
+        let location = this.talk.location.replace("中国,",'');
+        return location.replace(/[,]/g, ' ')
       },
     },
   }

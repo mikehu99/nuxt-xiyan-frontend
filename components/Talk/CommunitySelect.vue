@@ -14,7 +14,7 @@
     </el-tab-pane>
 
     <el-tab-pane v-for="parentCommunity in parentCommunityList" :label="parentCommunity.communityName"
-                 :name="parentCommunity.id">
+                 :name="parentCommunity.id" :key="parentCommunity.id">
       <div class="media-list">
         <div v-for="(community,index) in filterList" class="media" :key="index" @click="selectCommunity(community)">
           <div class="media-left">
