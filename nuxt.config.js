@@ -92,9 +92,17 @@ export default {
       ssr: false
     },
     {
+      src: "@/plugins/qrCode",
+      ssr: false
+    },
+    {
       src: "@/plugins/social-share",
       ssr: false
     },
+    {
+      src:"@/assets/iconfont/iconfont.js",
+      ssr:false
+    }
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
