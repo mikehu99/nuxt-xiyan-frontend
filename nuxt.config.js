@@ -96,10 +96,6 @@ export default {
       ssr: false
     },
     {
-      src: "@/plugins/social-share",
-      ssr: false
-    },
-    {
       src:"@/assets/iconfont/iconfont.js",
       ssr:false
     }
