@@ -2,19 +2,19 @@
   <div class="pin-image-row middle-row">
     <div class="image-box-wrapper image-box">
       <div :class="[colNum,'image-box']" :style="{display:MinDisplay}">
-        <div v-for="(img,index) in imgs" class="pin-img" :key='img'>
+        <div v-for="(img,index) in imgs" class="pin-img" :key='img.id'>
           <img @click="ZoomIn(index)"
-               :src="img+imageRule"
+               :src="img.url+imageRule"
                :class="['image',{'one-img':imgs.length == 1}]"/>
         </div>
       </div> <!----> <!---->
 
       <div class="max" :style="{display:display}">
-        <div @click="ZoomOut($event)" v-for="(img,index) in imgs" :key='img' :class="[index===ShowIndex?'active':'None']"><img
-          :src="img" width="100%"></div>
+        <div @click="ZoomOut($event)" v-for="(img,index) in imgs" :key='img.id' :class="[index===ShowIndex?'active':'None']"><img
+          :src="img.url" width="100%"></div>
         <div class="small">
-          <img :class="{'smallActive':index===ShowIndex}" v-for="(img,index) in imgs" :key='img' @click="select(index)"
-               :src="img+imageRule" class="thumb"/>
+          <img :class="{'smallActive':index===ShowIndex}" v-for="(img,index) in imgs" :key='img.id' @click="select(index)"
+               :src="img.url+imageRule" class="thumb"/>
         </div>
       </div>
     </div>

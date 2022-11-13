@@ -48,8 +48,8 @@
         </div>
       </div>
 
-      <div v-if="imgList.length>0">
-        <PicList :imgs="imgList"></PicList>
+      <div v-if="talk.imageList && talk.imageList.length>0">
+        <PicList :imgs="talk.imageList"></PicList>
       </div>
       <div v-if="talk.community!=null" class="community-row middle-row">
         <div class="community-box">
@@ -96,13 +96,6 @@
     },
     computed: {
       ...mapGetters(['token', 'user','praiseList']),
-      imgList() {
-        if (this.talk.img) {
-          return this.talk.img.split(',');
-        } else {
-          return [];
-        }
-      },
       title() {
         //标签
         var reg = /#.+?#/g;

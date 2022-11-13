@@ -139,7 +139,8 @@
           title: '',
           tags: [],
           talkType: 1,
-          img: '',
+          mediaType: 0,
+          imageList: [],
           link: '',
           location: ''
         }
@@ -225,6 +226,30 @@
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
+        const isSize = new Promise(function(resolve, reject) {
+          let width = 750;
+          let height = 420;
+          let _URL = window.URL || window.webkitURL;
+          let image = new Image();
+          image.onload = function() {
+            file.width = image.width;
+            file.height = image.height;
+            // let valid = image.width == width && image.height == height;
+            let valid = true;
+            valid ? resolve() : reject();
+          };
+          image.src = _URL.createObjectURL(file);
+        }).then(
+          () => {
+            return file;
+          },
+          () => {
+            this.$message.error("上传头像图片尺寸不符合,只能是750*420!");
+            return file;
+          }
+        );
+        console.log("上传之前");
+        console.log(file);
         return isJPG && isLt2M;
       },
       handlePictureCardPreview(file) {
@@ -232,6 +257,8 @@
         this.dialogVisible = true;
       },
       handleSuccess(response, file, fileList) {
+        console.log("上传成功");
+        console.log(file);
         file.url = response.data;
         this.fileList = fileList;
       },
@@ -247,6 +274,7 @@
           this.$message({message:'内容不能为空',type:'error',showClose: true});
           return false;
         }
+
         //链接link
         if (!this.showUrl) {
           this.weibo.link = '';
@@ -270,13 +298,21 @@
           return str;
         });
         //解析图片
-        let arr = [];
+        console.log(this.fileList)
         for (let item of this.fileList) {
           //name
-          arr.push(item.url)
-        }
-        this.weibo.img = arr.join();
+          let image = {};
+          image.url = item.url;
 
+          image.width = item.raw.width;
+          image.height = item.raw.height;
+          image.fileName = item.raw.name;
+          this.weibo.imageList.push(image);
+        }
+        if (this.weibo.imageList.length>0){
+          this.weibo.mediaType = 1;
+        }
+        console.log(this.weibo);
         //设置communityId
         this.weibo.communityId = this.communityIdTemp;
         this.$api.talk.talk(this.weibo).then((response) => {
@@ -326,8 +362,10 @@
       clearWeibo() {
         this.weibo.title = '';
         this.weibo.tags = [];
-        this.weibo.img = '';
+        this.weibo.imageList = [];
         this.weibo.link = '';
+        this.weibo.talkType = 1;
+        this.weibo.mediaType = 0;
         this.$refs.myeditor.innerHTML = '';
         this.fileList = [];
         this.tag = '';
