@@ -500,7 +500,7 @@ ul {
 }
 
 /*element样式修改*/
-.el-upload-list--picture-card .el-upload-list__item {
+.bottom .el-upload-list--picture-card .el-upload-list__item {
   border-radius: 2px;
   margin: 0 0.666rem 0.666rem 0;
   width: 6.68rem;
@@ -509,42 +509,42 @@ ul {
   background-size: cover;
 }
 
-.el-upload--picture-card {
+.bottom .el-upload--picture-card {
   width: 6.68rem;
   height: 6.68rem;
   line-height: 88px;
 }
 
-.el-upload-list__item-thumbnail {
+.bottom .el-upload-list__item-thumbnail {
   background-size: cover;
   background-repeat: no-repeat;
   object-fit: cover;
 }
 
 .el-menu--horizontal > .el-menu-item {
-  height: 45px;
-  line-height: 45px;
+  height: 45px!important;
+  line-height: 45px!important;
 }
 
 .el-menu--horizontal > .el-submenu .el-submenu__title {
-  height: 45px;
-  line-height: 45px;
+  height: 45px!important;
+  line-height: 45px!important;
 }
 
 .el-form-item__label {
-  line-height: 26px;
+  line-height: 26px!important;
 }
 
 .el-dialog__header {
-  padding: 0px;
+  padding: 0px!important;
 }
 
 .el-dialog__body {
-  padding: 0px;
+  padding: 0px!important;
 }
 
 .el-popconfirm__main {
-  margin: 14px 0;
+  margin: 14px 0!important;
 }
 
 .el-empty {
@@ -569,16 +569,10 @@ ul {
   color: #1e80ff;
 }
 
-.el-dropdown-menu__item {
-  color: rgba(0, 0, 0, .3);
-  line-height: 33px;
-  padding: 0 12px;
-  font-size: 12px;
-}
 
 .el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
-  color: #000;
-  background: rgba(148, 108, 230, .05);
+  color: #000!important;
+  background: rgba(148, 108, 230, .05)!important;
 }
 
 @media (max-width: 768px) {
