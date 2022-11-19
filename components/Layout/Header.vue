@@ -30,6 +30,10 @@
                 <li>
                   <nuxt-link :to="`/member/setting`"><i class="iconfont icon-shezhi1"/>设置</nuxt-link>
                 </li>
+                <li>
+                  <a v-show="!darkMode" @click="changeMode"><i class="iconfont icon-moon"/>夜间模式</a>
+                  <a v-show="darkMode" @click="changeMode"><i class="iconfont icon-taiyang-copy"/>日间模式</a>
+                </li>
                 <li class="divider"></li>
                 <li>
                   <nuxt-link :to="`/ytber/create`"><i class="iconfont icon-fenxiang2"/>分享</nuxt-link>
@@ -166,7 +170,6 @@
 </template>
 
 <script>
-  import {getDarkMode, setDarkMode} from '@/utils/auth'
   import {mapGetters} from 'vuex'
 
   export default {
@@ -181,7 +184,10 @@
       }
     },
     computed: {
-      ...mapGetters(['token', 'user'])
+      ...mapGetters(['token', 'user']),
+      getDarkMode(){
+        return !(undefined === this.$cookies.get('dark_mode') || false === this.$cookies.get('dark_mode'));
+      },
     },
     watch: {
       // 监听Theme模式
@@ -191,14 +197,14 @@
         } else {
           this.disableDarkMode()
         }
-        setDarkMode(this.darkMode)
+        this.setDarkMode(this.darkMode)
       }
     },
     mounted() {
       console.log("cookie的token:"+this.$cookies.get('u_token'))
       console.log("token:"+this.token)
       // 获取cookie中的夜间还是白天模式
-      this.darkMode = getDarkMode()
+      this.darkMode = this.getDarkMode;
       if (this.darkMode) {
         this.enableDarkMode({})
       } else {
@@ -253,7 +259,15 @@
           }
         }
       },
-    }
+      //切换日夜模式
+      changeMode(){
+        this.darkMode = !this.darkMode;
+      },
+      setDarkMode(mode){
+        this.$cookies.set('dark_mode', mode, { maxAge: 60 * 60 * 24 * 365 ,path:"/"})
+      }
+    },
+
   }
 </script>
 
@@ -348,7 +362,6 @@ input {
   .nav-item.menu {
     position: relative;
     padding-left: 0;
-    background-color: #fff;
   }
 
   .avatar {

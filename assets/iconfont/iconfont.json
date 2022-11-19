@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "444221",
+      "name": "灯泡，夜间模式",
+      "font_class": "dengpaoyejianmoshi",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "970780",
+      "name": "太阳",
+      "font_class": "taiyang-copy",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "2377197",
+      "name": "夜间模式",
+      "font_class": "yejianmoshi",
+      "unicode": "e6c1",
+      "unicode_decimal": 59073
+    },
+    {
+      "icon_id": "2412124",
+      "name": "日间模式",
+      "font_class": "rijianmoshi",
+      "unicode": "e6c7",
+      "unicode_decimal": 59079
+    },
+    {
+      "icon_id": "2593661",
+      "name": "日间模式",
+      "font_class": "rijianmoshi1",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "13693807",
+      "name": "夜间",
+      "font_class": "moon",
+      "unicode": "e8d4",
+      "unicode_decimal": 59604
+    },
+    {
+      "icon_id": "14626420",
+      "name": "链接",
+      "font_class": "lianjie6",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "20384540",
+      "name": "链接",
+      "font_class": "lianjie7",
+      "unicode": "ecb2",
+      "unicode_decimal": 60594
+    },
+    {
+      "icon_id": "23061130",
+      "name": "链接",
+      "font_class": "lianjie8",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
       "icon_id": "2570130",
       "name": "链接",
       "font_class": "lianjie3",

@@ -46,7 +46,7 @@
               </el-dropdown-item>
               <el-dropdown-item command="copy">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-lianjie3"></use>
+                  <use xlink:href="#icon-lianjie7"></use>
                 </svg>
                 链接
               </el-dropdown-item>

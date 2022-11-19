@@ -70,7 +70,7 @@ html {
   box-shadow: 0 1px 0px rgba(26, 26, 26, 0.1);
   height: 5rem;
   font-size: 16px;
-  transition: all 2.2s;
+  /*transition: all 2.2s;*/
 }
 
 a {
