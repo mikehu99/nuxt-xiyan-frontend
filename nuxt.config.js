@@ -41,6 +41,8 @@ export default {
     "element-ui/lib/theme-chalk/index.css",
     "buefy/dist/buefy.css",
     "@/assets/css/index.css",
+    "@/assets/css/global.less",
+    "@/assets/css/dark.scss",
     "@/assets/iconfont/iconfont.css",
     "@/assets/app.css"
   ],
@@ -134,8 +136,18 @@ export default {
     //axios
     '@nuxtjs/axios',
     '@nuxtjs/sitemap',
+    //less
+    '@nuxtjs/style-resources',
   ],
   sitemap:sitemap,
+  styleResources:{
+    less:[
+      './assets/css/global.less'
+    ],
+    sass:[
+      './assets/css/dark.sass'
+    ],
+  },
   //路由进度条配置
   loading: {
     color: '#19be6b',
