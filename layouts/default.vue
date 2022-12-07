@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" theme="dark">
     <Header></Header>
     <!-- nuxt中使用局部刷新reload必须这样写，不然没有效果 -->
     <div class="context">
