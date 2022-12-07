@@ -156,7 +156,7 @@
     },
   }
 </script>
-<style scoped>
+<style lang="less" scoped>
   a {
     text-decoration: none;
     color: #909090;
@@ -169,7 +169,7 @@
   }
 
   .topic {
-    background-color: #fff;
+    background-color: var(--bg-topic);
     border-radius: 4px;
     padding: 20px;
     position: relative;
