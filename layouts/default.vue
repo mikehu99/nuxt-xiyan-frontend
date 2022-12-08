@@ -1,5 +1,5 @@
 <template>
-  <div id="app" theme="dark">
+  <div id="app" :theme="theme">
     <Header></Header>
     <!-- nuxt中使用局部刷新reload必须这样写，不然没有效果 -->
     <div class="context">
@@ -28,6 +28,8 @@ export default {
   components: { Header, Footer ,Login,Register},
   name: "app",
   async fetch () {
+    var dark = !(undefined === this.$cookies.get('dark_mode') || false === this.$cookies.get('dark_mode'));
+    this.theme = dark?'dark':'light'
     var token = this.$cookies.get('u_token');
     if (token){
       this.$store.commit('user/SET_TOKEN_STATE', token);
@@ -38,13 +40,16 @@ export default {
     }
   },
   data() {
-    return { isRouterALive: true };
+    return { isRouterALive: true ,theme:''};
   }
 };
 </script>
 <style>
 .context{
   margin-top: 6rem;
+}
+div[theme='dark']{
+  background-color: #131415;
 }
 </style>
 

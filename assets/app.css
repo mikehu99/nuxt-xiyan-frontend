@@ -15,7 +15,12 @@ html {
     sans-serif, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji,
     Segoe UI Symbol, Android Emoji, EmojiSymbols;
 }
-
+div[theme='dark']{
+  background-color: #131415!important;
+}
+body[theme='dark']{
+  background-color: #131415!important;
+}
 /*背景图*/
 /*body {*/
 /*    background-image: url('https://api.mz-moe.cn/img.php');*/

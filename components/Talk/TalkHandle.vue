@@ -20,7 +20,7 @@
       </div>
       <div class="like-action action">
         <div class="action-title-box" @click="praiseFuc()" v-preventReClick="1500"
-             :style="{color:(praiseFlag?'#1e80ff':'#86909c')}">
+             :style="{color:(praiseFlag?'#1e80ff':'var(--secondary-text)')}">
           <span :class="[thumb,'bottom-icon']"></span>
           <span class="action-title">{{talk.praiseNum}}</span>
         </div>
@@ -175,7 +175,7 @@
   .action-box {
     display: flex;
     position: relative;
-    color: #86909c;
+    color: var(--secondary-text)!important;
     justify-content: space-between;
   }
 
@@ -187,7 +187,6 @@
   .tip-icon {
     font-size: 20px;
     cursor: pointer;
-    color: rgba(0, 0, 0, .3);
     padding: 2px 5px;
     margin-left: -5px;
   }
@@ -241,6 +240,7 @@
     opacity: 1;
     visibility: visible;
   }
+
 
   @media (max-width: 600px) {
     .action-row {

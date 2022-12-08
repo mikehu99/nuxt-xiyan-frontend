@@ -12,7 +12,7 @@
           </span>
           <div class="sFPAmX">
             <span>
-              <nuxt-link :to="{path:`/member/${talk.userId}`}" target="_blank" class="oTXgEq">
+              <nuxt-link :to="{path:`/member/${talk.userId}`}" target="_blank" class="topic-user-name">
               {{talk.alias||talk.username}}
               </nuxt-link>
             </span>
@@ -159,7 +159,7 @@
 <style lang="less" scoped>
   a {
     text-decoration: none;
-    color: #909090;
+    color: var(--secondary-text);
   }
 
   .item {
@@ -194,11 +194,11 @@
     margin-left: 12px;
   }
 
-  .oTXgEq {
+  .topic-user-name {
     font-weight: 500;
     font-size: 16px;
     line-height: 28px;
-    color: #333;
+    color: var(--primary-text);
   }
 
   .meta-row {
@@ -206,7 +206,7 @@
     align-items: center;
     font-size: 14px;
     line-height: 24px;
-    color: #8a919f;
+    color: var(--secondary-text);
     cursor: default;
   }
 
@@ -243,7 +243,7 @@
   .content {
     white-space: pre-line;
     font-size: 14px;
-    color: #17181a;
+    color: var(--primary-text);
     overflow: hidden;
     line-height: 1.6;
   }

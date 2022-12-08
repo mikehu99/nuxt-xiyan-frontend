@@ -265,6 +265,14 @@
       },
       setDarkMode(mode){
         this.$cookies.set('dark_mode', mode, { maxAge: 60 * 60 * 24 * 365 ,path:"/"})
+      },
+      enableDarkMode(){
+        document.querySelector('body').setAttribute('theme', 'dark')
+        document.querySelector('#app').setAttribute('theme', 'dark')
+      },
+      disableDarkMode(){
+        document.querySelector('body').setAttribute('theme', 'light')
+        document.querySelector('#app').setAttribute('theme', 'light')
       }
     },
 

@@ -570,10 +570,6 @@ ul {
 }
 
 
-.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
-  color: #000!important;
-  background: rgba(148, 108, 230, .05)!important;
-}
 
 @media (max-width: 768px) {
   .side-area {

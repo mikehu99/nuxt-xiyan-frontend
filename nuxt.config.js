@@ -38,9 +38,10 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    "@/assets/css/index.css",
+    "@/assets/css/element-ui-reset.css",
     "element-ui/lib/theme-chalk/index.css",
     "buefy/dist/buefy.css",
-    "@/assets/css/index.css",
     "@/assets/css/global.less",
     "@/assets/css/dark.scss",
     "@/assets/iconfont/iconfont.css",
@@ -68,10 +69,6 @@ export default {
     {
       src: "@/plugins/buefy",
       ssr: true
-    },
-    {
-      src: "@/plugins/darkreader",
-      ssr: false
     },
     {
       src: "@/plugins/scroll-to",
