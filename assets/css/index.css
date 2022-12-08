@@ -449,7 +449,6 @@ ul {
 }
 
 .user-view {
-  margin-top: 1.767rem;
   display: flex;
   margin-bottom: 6rem;
 }
@@ -568,8 +567,17 @@ ul {
 .blue {
   color: #1e80ff;
 }
-
-
+.card{
+  background: var(--bg-topic)!important;
+  color:var(--secondary-text)!important;
+}
+.title{
+  color: var(--primary-text)!important;
+}
+.tag:not(body){
+  background-color: var(--bg-app)!important;
+  color: var(--secondary-text)!important;
+}
 
 @media (max-width: 768px) {
   .side-area {

@@ -1,5 +1,5 @@
 <template>
-  <header class="header has-background-white has-text-black">
+  <header class="header">
     <div class="head-box head-container">
       <nuxt-link to="/" class="logo">翻趣</nuxt-link>
       <nav class="main-nav">
@@ -298,7 +298,7 @@ input {
     width: auto;
     font-size: 22px;
     letter-spacing: 3px;
-    color: #333;
+    color: var(--primary-text);
   }
 
   .main-nav {

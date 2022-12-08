@@ -412,12 +412,12 @@
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
   .editor-dialog {
     margin-bottom: 12px;
     position: relative;
-    background: #fff;
+    background: var(--bg-topic);
     border-radius: 4px;
   }
 
@@ -429,8 +429,8 @@
   .content {
     position: relative;
     border-radius: 4px;
-    border: 1px solid #f6f6f6;
-    background-color: #f6f6f6;
+    border: 1px solid var(--bg-app);
+    background-color: var(--bg-app);
     box-sizing: border-box;
     padding-right: 4px;
   }
@@ -461,14 +461,14 @@
   .rich-editor {
     white-space: pre-wrap;
     font-size: 1rem;
-    color: #333 !important;
+    color: var(--primary-text) !important;
     outline: none;
     padding: 10px 12px;
     resize: none;
     width: 100%;
     border-radius: 4px;
     min-height: 64px;
-    background-color: #f6f6f6;
+    background-color: var(--bg-app);
     border: none;
   }
   .content:focus-within {
@@ -483,7 +483,7 @@
      background-color: #f6f6f6;
    }
   .content:focus-within .rich-editor{
-    background-color: #fff;
+    background-color: var(--bg-topic);
   }
 
   .topicwrapper {
@@ -497,7 +497,7 @@
     line-height: 24px;
     border-radius: 50px;
     border-bottom-left-radius: 0;
-    background: #fff;
+    background: var(--bg-topic);
     color: #1e80ff;
     display: flex;
     align-items: center;
@@ -568,11 +568,11 @@
 
   .bottom i {
     margin-right: 4px;
-    color: #4e5969;
+    color: var(--secondary-text);
   }
 
   .picker span {
-    color: #4e5969;
+    color: var(--secondary-text);
     font-size: 14px;
     line-height: 22px;
     transition: color .3s;

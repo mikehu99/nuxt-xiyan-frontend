@@ -41,8 +41,9 @@ export default {
   cursor: pointer;
   width: 14.2857%;
   height: 33px;
-  background: #F5F6F7;
-  border: 1px solid #fff;
+  background: var(--bg-app);
+  border: 1px solid var(--bg-topic);
+  color: var(--primary-text);
   font-size: 19px;
   line-height: 33px;
   padding: 0;
@@ -50,7 +51,7 @@ export default {
 .emoji-item:hover {
   transition: all 0.2s;
   border-radius: 0.25rem;
-  background: #dddddd;
+  background: var(--color-basic-200);
 }
 .emoji-wrapper {
   max-height: 150px;

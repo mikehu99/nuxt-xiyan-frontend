@@ -192,7 +192,7 @@
   }
 
   .tip-icon:hover {
-    color: #000;
+    color: var(--primary-text);
     background: rgba(148, 108, 230, .05);
   }
 

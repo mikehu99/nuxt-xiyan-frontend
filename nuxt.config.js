@@ -39,7 +39,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@/assets/css/index.css",
-    "@/assets/css/element-ui-reset.css",
+    "@/assets/css/element-ui-reset.less",
     "element-ui/lib/theme-chalk/index.css",
     "buefy/dist/buefy.css",
     "@/assets/css/global.less",

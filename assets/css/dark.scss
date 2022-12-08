@@ -1,6 +1,17 @@
-.dark {
-  .topic {
-    background-color: #242526;
+body[theme='dark'] {
+  .content:focus-within {
+    background-color: #242526!important;
   }
+  .rich-editor:focus{
+    background-color: #242526!important;
+  }
+  .content:focus-within .new_topic{
+    background-color: #131415!important;
+  }
+  .el-upload--picture-card{
+    background-color:#242526!important;
+  }
+
+
 }
 

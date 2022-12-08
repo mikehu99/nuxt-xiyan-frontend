@@ -223,7 +223,7 @@ export default {
   margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
-  color: #0079d3;
+  color: #0079d3!important;
 }
 .ytb-tag {
   cursor: pointer;

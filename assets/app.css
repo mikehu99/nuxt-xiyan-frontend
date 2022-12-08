@@ -71,7 +71,7 @@ body[theme='dark']{
   z-index: 89;
   top: 0;
   width: 100%;
-  background: #fff;
+  background: var(--bg-topic);
   box-shadow: 0 1px 0px rgba(26, 26, 26, 0.1);
   height: 5rem;
   font-size: 16px;
@@ -79,10 +79,12 @@ body[theme='dark']{
 }
 
 a {
-  color: #1d1d1d;
+  color: var(--primary-text);
   text-decoration: none;
 }
-
+a:hover {
+  color: var(--color-basic-900);
+}
 .bottom-info a:hover {
   color: #f60;
   text-decoration: none !important;
