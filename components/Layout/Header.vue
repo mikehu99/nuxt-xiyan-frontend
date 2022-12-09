@@ -279,7 +279,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 input {
   width: 80%;
   height: 86%;
@@ -388,7 +388,7 @@ input {
     min-width: 115px;
     padding: 5px 0;
     position: absolute;
-    background-color: #FFFFFF;
+    background-color: var(--bg-topic);
     top: 4rem;
     left: 0;
     z-index: 1000;
@@ -415,7 +415,7 @@ input {
     clear: both;
     font-weight: 400;
     line-height: 1.42857143;
-    color: #3c4353;
+    color: var(--secondary-text);
     white-space: nowrap;
   }
 

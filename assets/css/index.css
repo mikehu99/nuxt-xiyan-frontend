@@ -274,7 +274,7 @@ ul {
 .comment-textarea {
   white-space: pre-wrap;
   font-size: 0.875rem;
-  color: #333 !important;
+  color: var(--primary-text) !important;
   outline: none;
   padding: 10px 5px;
   min-height: 122px;
@@ -282,13 +282,13 @@ ul {
   width: 100%;
   border-radius: 4px;
   min-height: 64px;
-  background-color: #f6f6f6;
+  background-color: var(--bg-app);
   border: none;
 }
 
 .comment-textarea:focus {
   border: 1px solid #1e80ff;
-  background-color: #fff;
+  background-color: var(--bg-topic);
 }
 
 .upload-btn {
@@ -579,6 +579,22 @@ ul {
   color: var(--secondary-text)!important;
 }
 
+::-webkit-input-placeholder {
+  /* WebKit browsers，webkit内核浏览器 */
+  color: var(--color-basic-800)!important;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: var(--color-basic-800)!important;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: var(--color-basic-800)!important;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: var(--color-basic-800)!important;
+}
 @media (max-width: 768px) {
   .side-area {
     display: none;

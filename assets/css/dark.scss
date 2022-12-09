@@ -11,7 +11,19 @@ body[theme='dark'] {
   .el-upload--picture-card{
     background-color:#242526!important;
   }
-
-
+  .el-skeleton.is-animated .el-skeleton__item {
+    background:-webkit-gradient(linear,left top,right top,color-stop(25%,#3e3e3e),color-stop(37%,#5a5a5a),color-stop(63%,#3e3e3e));
+    background:linear-gradient(90deg,#3e3e3e 25%,#5a5a5a 37%,#3e3e3e 63%)!important;
+  }
+  .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li{
+    background-color: #242526!important;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #409EFF!important;
+  }
+  .select select, .taginput .taginput-container.is-focusable, .textarea, .input{
+    background-color:#242526!important;
+    color: #fff!important;
+  }
 }
 

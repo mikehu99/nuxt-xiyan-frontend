@@ -2,7 +2,7 @@
   <div class="ytb">
     <div>
       <span
-      :style="{background: 'url(' + this.youtuber.banner + ') center center / cover no-repeat rgb(255, 255, 255)',height:'164px'}"
+      :style="{background: 'url(' + this.youtuber.banner + ') center center / cover no-repeat var(--bg-topic)',height:'164px'}"
       class="head-box">
         <div style="max-width:1200px" class="head-box-div">
           <div style="left:-8px;height:112px" class="head-box-div-div"></div>
@@ -98,9 +98,10 @@
   }
 
 </script>
-<style scoped>
+<style lang="less" scoped>
   .ytb{
     min-height: calc(100vh - 182px);
+    margin-top: -1rem;
   }
   .ytb-container {
     position: relative;
@@ -146,7 +147,7 @@
   }
 
   .fn5v03 {
-    background-color: #ffffff;
+    background-color: var(--bg-topic);
     display: block;
     width: 100%;
   }
@@ -212,7 +213,7 @@
   }
 
   .name {
-    color: #1c1c1c;
+    color: var(--primary-text);
     display: inline-block;
     -ms-flex: 1;
     flex: 1;
@@ -302,7 +303,8 @@
   }
 
   .ytb-breif {
-    background-color: #fff;
+    background-color: var(--bg-topic);
+    color:var(--primary-text);
     word-break: break-word;
     line-height: 1.6;
     font-size: 15px;
@@ -317,7 +319,7 @@
   .tag-list {
     margin-top: 10px;
     font-size: 12px;
-    color: #1c1c1c;
+    color: var(--secondary-text);
   }
 
   .tag-list li {

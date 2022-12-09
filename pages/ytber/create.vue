@@ -86,6 +86,7 @@
         }, 3000);
         this.$api.spd.getChannelInfo(this.videoUrl).then((data) => {
           let channel = data.items[0];
+          this.spdSuccess = true;
           this.ruleForm.channelId = channel.id;
           this.ruleForm.youtuberName = channel.snippet.title;
           this.ruleForm.avatar = channel.snippet.thumbnails.medium.url;
@@ -93,7 +94,6 @@
           this.ruleForm.description = channel.snippet.description;
           this.ruleForm.country = channel.snippet.country;
           this.ruleForm.categories = channel.topicDetails.topicCategories;
-          this.spdSuccess = true;
           loadingInstance.close();
           console.log(this.ruleForm);
         });

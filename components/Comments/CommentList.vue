@@ -25,7 +25,7 @@
                 trigger="click">
                 <Emoji @addEmoji="addEmoji"/>
                 <div slot="reference" class="emoji-box">
-                  <i class="iconfont icon-biaoqing" style="font-size: 22px"/>
+                  <i class="iconfont icon-biaoqing" style="font-size: 22px;color: var(--secondary-text)"/>
                 </div>
               </el-popover>
               <el-button style="margin-left:auto" size="small" type="primary" @click="insertComment" v-preventReClick="1500">提交</el-button>
@@ -78,7 +78,7 @@
           <Reply v-if="replyCommentId===item.id" :parentComment="item" :toComment="item" ref="reply"
                  @cancleReply="cancleReply" @reloadReply="reloadReply"/>
           <!-- 子评论 -->
-          <div v-if="item.childComments.length>0" style="background: rgba(247,248,250,.7);padding: 10px;">
+          <div v-if="item.childComments.length>0" style="background: var(--color-basic-100);padding: 10px;">
             <div
             style="display:flex;margin-top: 10px"
             v-for="reply of item.childComments"
@@ -131,7 +131,7 @@
       </div>
     </div>
     <!-- 没有评论提示 -->
-    <div v-else style="padding:1.25rem;text-align:center">
+    <div v-else style="padding:1.25rem;text-align:center;color: var(--secondary-text)">
       来发评论吧~
     </div>
     <!--分页-->
@@ -328,7 +328,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .comment-title {
     display: flex;
     align-items: center;
@@ -358,7 +358,7 @@
   .comment-meta {
     margin-left: 0.8rem;
     width: 100%;
-    border-bottom: 1px dashed #f5f5f5;
+    border-bottom: 1px dashed var(--color-basic-200);
   }
 
   .reply-meta {
@@ -386,7 +386,7 @@
   .comment-info {
     line-height: 1.75;
     font-size: 1rem;
-    color: #b3b3b3;
+    color: var(--secondary-text);
   }
 
   .reply-btn {
@@ -415,7 +415,7 @@
     transform: rotate(360deg);
   }
   .commnet-box{
-    background-color: #fff;
+    background-color: var(--bg-topic);
     padding: 10px 10px;
     border-radius: 5px;
     margin-top: 1rem;
@@ -454,9 +454,10 @@
     color: #fff;
   }
   .list-view{
-    background-color: #fff;
+    background-color: var(--bg-topic);
     margin-top: 1rem;
     padding: 20px;
+    color: var(--primary-text);
   }
   .comment-col{
   }

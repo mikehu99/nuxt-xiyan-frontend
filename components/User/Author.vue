@@ -93,10 +93,10 @@
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .author-box {
-    background-color: #FFF;
-    color: #303133;
+    background-color: var(--bg-topic);
+    color: var(--primary-text);
     border-radius: 3px;
     padding: 20px;
   }

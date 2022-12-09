@@ -16,7 +16,7 @@
         trigger="click">
         <Emoji @addEmoji="addEmoji"/>
         <div slot="reference" class="emoji-box">
-          <i class="iconfont icon-biaoqing" style="font-size: 22px"/>
+          <i class="iconfont icon-biaoqing" style="font-size: 22px;color: var(--secondary-text)"/>
         </div>
       </el-popover>
       <div style="margin-left:auto">

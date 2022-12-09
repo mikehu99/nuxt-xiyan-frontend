@@ -149,7 +149,7 @@
   }
 
 </script>
-<style scoped>
+<style lang="less" scoped>
   .detail-image {
     width: 20%;
     display: inline-block;
@@ -187,7 +187,7 @@
   }
 
   .fn5v03 {
-    background-color: #ffffff;
+    background-color: var(--bg-topic);
     display: block;
     width: 100%;
   }

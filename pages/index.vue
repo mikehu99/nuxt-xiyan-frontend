@@ -119,7 +119,7 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="less">
 .input-box{
   background-color: #fff;
   display: flex;

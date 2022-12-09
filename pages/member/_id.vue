@@ -66,10 +66,10 @@
         </div>
       </div>
     </template>
-    <div class="user-view">
+    <div class="user-view" style="margin-top: 1.25rem">
       <div class="content-area" id="testNavBar">
         <!--用户发布的话题-->
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  menu-trigger="click" @select="handleSelect">
           <el-menu-item index="1">
             <div class="item-title">帖子</div>
           </el-menu-item>
@@ -233,12 +233,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .profile-head {
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--bg-topic);
   box-shadow: 0px 0px 2px rgb(98 124 153 / 10%);
   position: relative;
+  color: var(--primary-text);
 }
 
 .banner-wrapper {
