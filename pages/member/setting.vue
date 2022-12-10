@@ -22,7 +22,7 @@
                 <el-input v-model="userInfo.username" disabled/>
               </el-form-item>
               <el-form-item label="昵称">
-                <el-input v-model.trim="userInfo.alias"/>
+                <el-input v-model.trim="userInfo.alias" ref="inputAlias"/>
               </el-form-item>
               <el-form-item label="简介">
                 <el-input type="textarea" v-model.trim="userInfo.bio"></el-input>
@@ -82,6 +82,10 @@
       },
       submitForm(formName) {
         console.log(this.userInfo)
+        if (this.userInfo.alias == null || this.userInfo.alias === '' ){
+          this.$refs.inputAlias.focus();
+          return;
+        }
         this.$api.user.update(this.userInfo).then(res => {
           this.$message.success('信息修改成功')
           this.fetchInfo()

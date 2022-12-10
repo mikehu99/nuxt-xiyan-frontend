@@ -4,6 +4,7 @@ import format from 'date-fns/format'
 
 // 国际化
 import 'dayjs/locale/zh-cn'
+import {showtime} from "assets/js/date";
 const dayjs = require('dayjs');
 
 // 相对时间插件
@@ -16,4 +17,7 @@ Vue.prototype.dayjs = dayjs;//可以全局使用dayjs
 
 Vue.filter('date', (date) => {
   return format(new Date(date), 'yyyy-MM-dd')
+});
+Vue.filter('timeFormat', (date) => {
+  return showtime(date)
 });

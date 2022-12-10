@@ -10,7 +10,9 @@
         :key="item.id"
       >
         <!-- 头像 -->
+        <nuxt-link :to="{path:`/member/${item.userId}`}" target="_blank">
         <img class="comment-avatar comment-avatar-img" :src="item.avatar"/>
+        </nuxt-link>
         <div class="comment-meta">
           <!-- 用户名 -->
           <div class="comment-user">
@@ -19,9 +21,9 @@
           </div>
           <p v-html="item.content" class="comment-content"></p>
           <div style="display: flex;justify-content: space-between">
-            <router-link :to="{path:`/talk/${item.topicId}`}">
+            <nuxt-link :to="{path:`/talk/${item.topicId}`}" target="_blank">
               <span class="talk-title"><i class="iconfont icon-fenxiang22"/> {{ item.talkTitle | ellipsis }}</span>
-            </router-link>
+            </nuxt-link>
             <!-- 点赞 -->
             <span :class="isLike(item.id)" @click="like(item,$event)">
              赞{{item.praiseCount>0?item.praiseCount:''}}
@@ -78,9 +80,6 @@
           return value.slice(0, 10) + '...'
         }
         return value
-      },
-      timeFormat(value) {
-        return showtime(value)
       },
     },
     methods:{
@@ -158,7 +157,7 @@
   }
 
   .comment-user a {
-    color: #1abc9c !important;
+    /*color: #1abc9c !important;*/
     font-weight: 500;
     transition: 0.3s all;
   }

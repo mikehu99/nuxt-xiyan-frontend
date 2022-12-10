@@ -10,7 +10,9 @@
         :key="item.id"
       >
         <!-- 头像 -->
+        <nuxt-link :to="{path:`/member/${item.userId}`}" target="_blank">
         <img class="comment-avatar comment-avatar-img" :src="item.avatar"/>
+        </nuxt-link>
         <div class="comment-meta">
           <!-- 用户名 -->
           <div class="comment-user">
@@ -182,7 +184,7 @@
   }
 
   .comment-user a {
-    color: #1abc9c !important;
+    /*color: #1abc9c !important;*/
     font-weight: 500;
     transition: 0.3s all;
   }
