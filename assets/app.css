@@ -15,10 +15,8 @@ html {
     sans-serif, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji,
     Segoe UI Symbol, Android Emoji, EmojiSymbols;
 }
-div[theme='dark']{
-  background-color: #131415!important;
-}
-body[theme='dark']{
+
+html[theme='dark'],body[theme='dark'],div[theme='dark']{
   background-color: #131415!important;
 }
 /*背景图*/

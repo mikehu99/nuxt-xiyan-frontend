@@ -375,6 +375,7 @@ export default {
 .reply-meta {
   margin-left: 0.8rem;
   width: 100%;
+  border-bottom: 1px dashed var(--color-basic-200);
 }
 
 .comment-user {

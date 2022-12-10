@@ -27,6 +27,15 @@
 export default {
   components: { Header, Footer ,Login,Register},
   name: "app",
+  beforeCreate() {
+    var dark = !(undefined === this.$cookies.get('dark_mode') || false === this.$cookies.get('dark_mode'));
+    var theme = dark?'dark':'light';
+    //这里不能把值赋给this.theme,不然会在渲染之后生效
+    if (process.client){
+      document.querySelector('html').setAttribute('theme', theme)
+      document.querySelector('body').setAttribute('theme', theme)
+    }
+  },
   async fetch () {
     var dark = !(undefined === this.$cookies.get('dark_mode') || false === this.$cookies.get('dark_mode'));
     this.theme = dark?'dark':'light'

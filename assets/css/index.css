@@ -292,28 +292,33 @@ ul {
 }
 
 .upload-btn {
-  color: #fff;
+  border:1px solid #409EFF;
+  color: #FFF;
   margin-left: 1rem;
-  background-color: #49b1f5;
+  background-color: #409EFF;
+  opacity: 0.9;
 }
 
 .upload-btn:hover {
-  background-color: #ff7242;
+  opacity: 1;
 }
-
+.cancle-btn:hover {
+  opacity: 0.8;
+}
 .cancle-btn {
-  background-color: #90939910;
-  border-color: #90939950;
-  color: #4c4948;
+  border: 1px solid #409EFF;
+  color: #FFF;
+  margin-left: 1rem;
+  background-color: var(--color-basic-100);
+  opacity: 1;
+  color: var(--primary-text);
 }
 
 .v-comment-btn {
-  border: 1px solid #ededed;
-  border-color: #fff;
   border-radius: 4px;
   text-align: center;
   padding: 6px 16px;
-  font-size: 14px;
+  font-size: 12px;
   transition: all 0.3s;
   outline: none;
   cursor: pointer;

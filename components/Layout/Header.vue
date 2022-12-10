@@ -31,8 +31,8 @@
                   <nuxt-link :to="`/member/setting`"><i class="iconfont icon-shezhi1"/>设置</nuxt-link>
                 </li>
                 <li>
-                  <a v-show="!darkMode" @click="changeMode"><i class="iconfont icon-moon"/>夜间模式</a>
-                  <a v-show="darkMode" @click="changeMode"><i class="iconfont icon-taiyang-copy"/>日间模式</a>
+                  <a v-show="!darkMode" @click="changeMode"><i class="iconfont icon-moon"/>深色主题</a>
+                  <a v-show="darkMode" @click="changeMode"><i class="iconfont icon-taiyang-copy"/>浅色主题</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -268,10 +268,12 @@
       },
       enableDarkMode(){
         document.querySelector('body').setAttribute('theme', 'dark')
+        document.querySelector('html').setAttribute('theme', 'dark')
         document.querySelector('#app').setAttribute('theme', 'dark')
       },
       disableDarkMode(){
         document.querySelector('body').setAttribute('theme', 'light')
+        document.querySelector('html').setAttribute('theme', 'light')
         document.querySelector('#app').setAttribute('theme', 'light')
       }
     },
