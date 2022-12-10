@@ -132,7 +132,7 @@
 
   .comment-child{
     margin-bottom: 0.5rem;
-    background: rgba(247,248,250,.7);
+    background: var(--color-basic-100);
     padding: 10px 0;
   }
   .count {
@@ -206,11 +206,12 @@
   }
 
   .comment-col {
-    background-color: #fff;
+    background-color: var(--bg-topic);
     margin-bottom: 8px;
+    color: var(--primary-text);
   }
   .talk-title{
-    color: #1d1d1d;
+    color: var(--secondary-text);
   }
   .talk-title:hover{
     color: #1e80ff;

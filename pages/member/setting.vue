@@ -107,8 +107,8 @@
   .nav-list {
     box-sizing: border-box;
     padding: 8px;
-    border: 1px solid #EBEEF5;
-    background: #fff;
+    border: 1px solid var(--color-basic-200);
+    background: var(--bg-topic);
   }
 
   .nav-item {
@@ -128,7 +128,7 @@
     margin-right: 10px;
   }
   .active {
-    background: #e8f3ff;
+    background: var(--bg-app);
     color: #1d7dfa;
   }
   .info-form{

@@ -137,7 +137,7 @@
     <!--分页-->
     <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler">
       <div slot="spinner">
-        <el-skeleton :rows="6" animated />
+<!--        <el-skeleton :rows="6" animated />-->
       </div>
       <div slot="no-more"></div>
       <div slot="no-results"></div>
