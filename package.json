@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env BASE_URL=http://192.168.31.252:8000 BROWSER_BASE_URL=http://192.168.31.252:8090 nuxt",
+    "dev": "cross-env BASE_URL=http://192.168.31.252:8081 BROWSER_BASE_URL=http://192.168.31.252:8090 nuxt",
     "build": "cross-env BASE_URL=https://v2fq.com/api BROWSER_BASE_URL=https://v2fq.com nuxt build",
     "start": "cross-env BASE_URL=https://v2fq.com nuxt start",
     "generate": "cross-env BASE_URL=https://v2fq.com nuxt generate"

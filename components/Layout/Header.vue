@@ -14,6 +14,9 @@
                            :class="{'active':$route.path === '/ytber'}">油管
                 </nuxt-link>
               </li>
+              <li class="nav-item link-item">
+                <nuxt-link to="/essay" :class="{'active':$route.path === '/essay'}">文章</nuxt-link>
+              </li>
             </ul>
           </li>
           <ul class="right-side-nav">

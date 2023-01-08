@@ -13,7 +13,10 @@ body[theme='dark'] {
   }
   .el-skeleton.is-animated .el-skeleton__item {
     background:-webkit-gradient(linear,left top,right top,color-stop(25%,#3e3e3e),color-stop(37%,#5a5a5a),color-stop(63%,#3e3e3e));
-    background:linear-gradient(90deg,#3e3e3e 25%,#5a5a5a 37%,#3e3e3e 63%)!important;
+    background:linear-gradient(90deg,#3e3e3e 25%,#5a5a5a 37%,#3e3e3e 63%);
+    animation: el-skeleton-loading 1.4s ease infinite;
+    -webkit-animation: el-skeleton-loading 1.4s ease infinite;
+    background-size: 400% 100%;
   }
   .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li{
     background-color: #242526!important;

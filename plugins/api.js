@@ -13,6 +13,7 @@ import commentModule from '../api/comment'
 import userModule from '../api/user'
 import followModule from '../api/follow'
 import spdModule from '../api/spd'
+import essayModule from '../api/essay'
 
 export default function ({ $axios }, inject) {
   const apiModules = {}
@@ -34,6 +35,7 @@ export default function ({ $axios }, inject) {
   apiModules.user = userModule($axios);
   apiModules.follow = followModule($axios);
   apiModules.spd = spdModule($axios);
+  apiModules.essay = essayModule($axios);
   // Inject to context as $api
   inject('api', apiModules)
 }
