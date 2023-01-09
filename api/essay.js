@@ -5,4 +5,9 @@ export default $axios => ({
       { params: params}
     )
   },
+  essay(id) {
+    return $axios.$get(
+      '/essay/detail/'+id,
+    )
+  },
 })

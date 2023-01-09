@@ -8,15 +8,15 @@
               <li v-for="(essay,index) in essayList" :key="index" class="color-border">
                 <article class="post-list-main color-border list post simple">
                   <div class="thumb" style="min-width: 30%; width: 30%;" v-if="essay.essay.headImg">
-                    <a href="https://www.zxbcctv.com/6695.html" class="img-effect" :title="essay.essay.titleZh">
+                    <nuxt-link target="_blank" :to="`/essay/${essay.essay.id}`" class="img-effect" :title="essay.essay.titleZh">
                       <img class="thumb lazyload" :src="essay.essay.headImg" :alt="essay.essay.titleZh"
                            width="600" height="338">
-                    </a>
+                    </nuxt-link>
                   </div>
                   <div class="list-content">
-                    <a href="https://www.zxbcctv.com/6695.html" :title="essay.essay.titleZh" class="title">
+                    <nuxt-link target="_blank" :to="`/essay/${essay.essay.id}`" :title="essay.essay.titleZh" class="title">
                       <h3 style="-webkit-line-clamp: 2;">{{essay.essay.titleZh}}</h3>
-                    </a>
+                    </nuxt-link>
                     <div class="excerpt color-text">{{essay.essay.introduceZh}}</div>
                     <div class="post-metas color-meta">
                       <span class="tooltip top author" title="文章作者">
@@ -200,6 +200,10 @@ h3 {
   vertical-align: middle;
   border-radius: 100%;
   margin: 0 3px 2px 0;
+}
+.post-metas b {
+  font-weight: 300;
+  display: inline-block;
 }
 .post-metas span:last-child {
   margin-right: 0;
