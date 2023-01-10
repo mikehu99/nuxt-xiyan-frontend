@@ -403,8 +403,8 @@ input {
     list-style: none;
     border: 1px solid rgba(0, 0, 0, .15);
     border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgb(0 0 0 / 12%), 0 1px 3px rgb(0 0 0 / 10%);
-    box-shadow: 0 6px 12px rgb(0 0 0 / 12%), 0 1px 3px rgb(0 0 0 / 10%);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 12%), 0 1px 3px rgba(0 ,0, 0,  10%);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 12%), 0 1px 3px rgba(0 ,0, 0,  10%);
   }
 
   .dropdown-ul.pull-right {

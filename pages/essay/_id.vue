@@ -27,29 +27,30 @@
             <div class="content-post">
               <div v-for="section in essay.sectionList">
                 <div v-if="section.sectionType===1">
-                  <div class="langs_en" @dblclick="handleMouseSelect($event)">{{section.content}}</div>
-                  <div class="langs_zh">{{section.transContent}}</div>
+                  <div class="langs_en" @mouseup="handleMouseSelect($event)">{{ section.content }}</div>
+                  <div class="langs_zh" @mouseup="canselMouseSelect($event)">{{ section.transContent }}</div>
                 </div>
                 <p></p>
                 <div align="center" v-if="section.sectionType===2">
                   <img :src="section.content" alt="500">
-                  <figcaption>{{section.transContent}}</figcaption>
+                  <figcaption>{{ section.transContent }}</figcaption>
                 </div>
               </div>
             </div>
           </article>
         </section>
+        <div id="tip" class="dict-picker-tips" style="position: absolute;">
+          <span class="tips-search">查词</span>
+          <span class="tips-copy">复制</span>
+        </div>
       </div>
       <div class="side-area"></div>
     </div>
   </div>
 </template>
 <script>
-import Article from "@/pages/article";
-
 export default {
   name: 'EssayDetail',
-  components: {Article},
   async fetch() {
     const data = await this.$api.essay.essay(this.$route.params.id);
     this.essay = data;
@@ -59,33 +60,44 @@ export default {
       essay: {},
     }
   },
-  methods:{
+  methods: {
     handleMouseSelect(ev) {
+      let tip=document.getElementById("tip");
+      tip.style.visibility = 'hidden';
       let text = window.getSelection().toString()
-      console.log(text)
-      var oEvent=ev||window.event;
-
-      var oDiv=document.createElement('div');
-      console.log(oEvent.clientX)
-      oDiv.style.left=oEvent.pageX+'px';  // 指定创建的DIV在文档中距离左侧的位置
-
-      oDiv.style.top=oEvent.pageY +'px';  // 指定创建的DIV在文档中距离顶部的位置
-
-      oDiv.style.border='1px solid #FF0000'; // 设置边框
-
-      oDiv.style.position='absolute'; // 为新创建的DIV指定绝对定位
-
-      oDiv.style.width='200px'; // 指定宽度
-
-      oDiv.style.height='200px'; // 指定高度
-      document.body.appendChild(oDiv);
+      if (!text){
+        return;
+      }
+      if (!text.replace(/\s/g,"")){
+        return;
+      }
+      var oEvent = ev || window.event;
+      tip.style.left = oEvent.pageX-35 + 'px';  // 指定创建的DIV在文档中距离左侧的位置
+      tip.style.top = oEvent.pageY+20 + 'px';  // 指定创建的DIV在文档中距离顶部的位置
+      tip.style.visibility = 'visible';
+    },
+    canselMouseSelect(){
+      let tip=document.getElementById("tip");
+      tip.style.visibility = 'hidden';
+    },
+    reloadTips(){
+      console.log(document);
+      let tip=document.getElementById("tip");
+      console.log(tip);
+      tip.parentNode.removeChild(tip);
+      document.body.appendChild(tip);
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.reloadTips();
+    }, 1000);
   }
 }
 </script>
 <style lang="less">
 .module-bg {
-  background-color:var(--bg-topic);
+  background-color: var(--bg-topic);
 }
 
 .entry {
@@ -165,17 +177,69 @@ h1 {
   word-spacing: 0px;
   color: #333;
 }
+
 .content-post p {
   margin-bottom: 10px;
 }
+
 .langs_zh {
   color: #006200;
 }
+
 figcaption {
   text-align: center;
   color: var(--secondary-text);
   margin-bottom: 20px;
   font-size: .875em;
   line-height: 1.875em;
+}
+.dict-picker-tips{
+  z-index: 2000;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 6px 12px;
+  background: var(--bg-app);
+  box-shadow: 0 0 5px 0 rgba(0 ,0, 0, 10%), 0 0 1px 0 rgba(0, 0, 0, 30%);
+  border-radius: 4px;
+  visibility:hidden;
+}
+.dict-picker-tips::before {
+  content: '';
+  display: block;
+  left: 30px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  background: var(--bg-app);
+  position: absolute;
+}
+.dict-picker-tips::after {
+  content: '';
+  display: block;
+  left: 25px;
+  top: 0;
+  width: 20px;
+  height: 10px;
+  background: var(--bg-app);
+  position: absolute;
+}
+.dict-picker-tips .tips-search {
+  padding-right: 10px;
+  border-right: 1px solid var(--color-basic-200);
+}
+.dict-picker-tips .tips-copy {
+  padding-left: 10px;
+  margin-left: -5px;
+}
+.dict-picker-tips .tips-search, .dict-picker-tips .tips-copy {
+  font-size: 14px;
+  color: var(--secondary-text);
+  cursor: pointer;
+  line-height: 20px;
 }
 </style>
