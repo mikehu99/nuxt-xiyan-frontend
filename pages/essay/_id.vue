@@ -27,7 +27,7 @@
             <div class="content-post">
               <div v-for="section in essay.sectionList">
                 <div v-if="section.sectionType===1">
-                  <div class="langs_en">{{section.content}}</div>
+                  <div class="langs_en" @dblclick="handleMouseSelect($event)">{{section.content}}</div>
                   <div class="langs_zh">{{section.transContent}}</div>
                 </div>
                 <p></p>
@@ -59,6 +59,28 @@ export default {
       essay: {},
     }
   },
+  methods:{
+    handleMouseSelect(ev) {
+      let text = window.getSelection().toString()
+      console.log(text)
+      var oEvent=ev||window.event;
+
+      var oDiv=document.createElement('div');
+      console.log(oEvent.clientX)
+      oDiv.style.left=oEvent.pageX+'px';  // 指定创建的DIV在文档中距离左侧的位置
+
+      oDiv.style.top=oEvent.pageY +'px';  // 指定创建的DIV在文档中距离顶部的位置
+
+      oDiv.style.border='1px solid #FF0000'; // 设置边框
+
+      oDiv.style.position='absolute'; // 为新创建的DIV指定绝对定位
+
+      oDiv.style.width='200px'; // 指定宽度
+
+      oDiv.style.height='200px'; // 指定高度
+      document.body.appendChild(oDiv);
+    }
+  }
 }
 </script>
 <style lang="less">
