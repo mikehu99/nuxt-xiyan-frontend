@@ -101,19 +101,33 @@ export default {
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
+    proxy:true,
+    prefix:'/api',
+    credentials: true,
     retry: false // 默认值，自动拦截失败的请求并在可能的情况下重试它们3次
   },
+  proxy: {
+    "/api": {
+      target: 'http://192.168.31.252:8081', // 目标服务器ip
+      ws: true,
+      changOrigin: true,
+      pathRewrite: {
+        "^/api": ""
+      }
+    }
+  },
+
   // 客户端相关
   publicRuntimeConfig: {
-    axios: {
+/*    axios: {
       browserBaseURL: process.env.BROWSER_BASE_URL // 浏览器请求
-    }
+    }*/
   },
   // 服务端
   privateRuntimeConfig: {
-    axios: {
+ /*   axios: {
       baseURL: process.env.BASE_URL // 服务器请求
-    }
+    }*/
   },
   //设置接口地址环境变量
   env: {
@@ -132,6 +146,7 @@ export default {
     'cookie-universal-nuxt',
     //axios
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/sitemap',
     //less
     '@nuxtjs/style-resources',
@@ -151,6 +166,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    vendor: ["axios"],
     //使用jquery
     plugins: [
     ],

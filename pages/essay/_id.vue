@@ -108,15 +108,33 @@ export default {
       return q.substring(0, 10) + len + q.substring(len-10, len);
     },
     translate(word){
-      this.youdaoJson.q = word;
-      this.youdaoJson.salt = (new Date).getTime();
-      this.youdaoJson.curtime = Math.round(new Date().getTime()/1000);
-      var str1 = this.youdaoJson.appKey + this.truncate(word) + this.youdaoJson.salt + this.youdaoJson.curtime + this.youdaoJson.key;
-      this.youdaoJson.sign =  CryptoJS.SHA256(str1).toString(CryptoJS.enc.Hex);
-      this.$axios.post(
-        '/transword',
-        this.youdaoJson
-      );
+      var appKey = '64d11511ff3dcb80';
+      var key = "UeSDs2NoWAVp1Eq5S9vENVGEK3F41az5";//注意：暴露appSecret，有被盗用造成损失的风险
+      var salt = (new Date).getTime();
+      var curtime = Math.round(new Date().getTime()/1000);
+      var query = 'good';
+      // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+      var to = 'zh-CHS';
+      var from = 'en';
+      var str1 = appKey + this.truncate(query) + salt + curtime + key;
+      var vocabId =  '您的用户词表ID';
+      //console.log('---',str1);
+      var sign = CryptoJS.SHA256(str1).toString(CryptoJS.enc.Hex);
+      this.$axios.jsonp(
+        'http://openapi.youdao.com/api',
+        {
+          q: query,
+          appKey: appKey,
+          salt: salt,
+          from: from,
+          to: to,
+          sign: sign,
+          signType: "v3",
+          curtime: curtime,
+          vocabId: vocabId,
+        }
+      ).then(res => console.log(res))
+        .catch(err => console.log(err));
     }
   },
   mounted() {
