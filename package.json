@@ -16,6 +16,7 @@
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^2.6.12",
     "cross-env": "^7.0.3",
+    "crypto-js": "^4.1.1",
     "darkmode-js": "^1.5.7",
     "darkreader": "^4.9.27",
     "date-fns": "^2.17.0",
@@ -29,7 +30,7 @@
     "vue": "^2.6.14",
     "vue-infinite-loading": "^2.4.5",
     "vue-qr": "^4.0.9",
-    "vue-server-renderer": "^2.6.12",
+    "vue-server-renderer": "^2.6.14",
     "vue-waterfall2": "^1.10.1",
     "vuex": "^3.0.1"
   },

@@ -48,7 +48,10 @@
     </div>
   </div>
 </template>
+<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.0.0/crypto-js.js"></script>
 <script>
+import CryptoJS from 'crypto-js'
+
 export default {
   name: 'EssayDetail',
   async fetch() {
@@ -57,7 +60,19 @@ export default {
   },
   data() {
     return {
+      key:"UeSDs2NoWAVp1Eq5S9vENVGEK3F41az5",
       essay: {},
+      youdaoJson:{
+        q: '',
+        appKey: '64d11511ff3dcb80',
+        salt: '',
+        from: 'en',
+        to: 'zh-CHS',
+        sign: '',
+        signType: "v3",
+        curtime: '',
+        vocabId: '您的用户词表ID'
+      }
     }
   },
   methods: {
@@ -86,12 +101,29 @@ export default {
       console.log(tip);
       tip.parentNode.removeChild(tip);
       document.body.appendChild(tip);
+    },
+    truncate(q){
+      var len = q.length;
+      if(len<=20) return q;
+      return q.substring(0, 10) + len + q.substring(len-10, len);
+    },
+    translate(word){
+      this.youdaoJson.q = word;
+      this.youdaoJson.salt = (new Date).getTime();
+      this.youdaoJson.curtime = Math.round(new Date().getTime()/1000);
+      var str1 = this.youdaoJson.appKey + this.truncate(word) + this.youdaoJson.salt + this.youdaoJson.curtime + this.youdaoJson.key;
+      this.youdaoJson.sign =  CryptoJS.SHA256(str1).toString(CryptoJS.enc.Hex);
+      this.$axios.post(
+        '/transword',
+        this.youdaoJson
+      );
     }
   },
   mounted() {
     setTimeout(() => {
       this.reloadTips();
     }, 1000);
+   this.translate("hello");
   }
 }
 </script>
