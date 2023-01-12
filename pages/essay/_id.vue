@@ -28,7 +28,7 @@
               <div v-for="section in essay.sectionList">
                 <div v-if="section.sectionType===1">
                   <div class="langs_en" @mouseup="handleMouseUp($event)">{{ section.content }}</div>
-                  <div class="langs_zh" @mouseup="handleMouseUp($event)">{{ section.transContent }}</div>
+                  <div class="langs_zh" @mouseup="hideTip">{{ section.transContent }}</div>
                 </div>
                 <p></p>
                 <div align="center" v-if="section.sectionType===2">
@@ -48,7 +48,7 @@
           <div class="dict-picker-header">
             <h2>小D划词释义</h2>
             <div class="dict-picker-header-control">
-              <div class="dict-picker-header-close"></div>
+              <div class="dict-picker-header-close" @click="hideTip"></div>
             </div>
           </div>
           <div class="dict-picker-content">
@@ -127,9 +127,11 @@ export default {
       meaning.style.top = oEvent.pageY+20 + 'px';  // 指定创建的DIV在文档中距离顶部的位置
       meaning.style.display = 'block';
     },
-    canselMouseSelect(){
+    hideTip(){
       let tip=document.getElementById("tip");
       tip.style.display = 'none';
+      let meaning=document.getElementById("meaning");
+      meaning.style.display = 'none';
     },
     reloadTips(){
       let tip=document.getElementById("tip");
@@ -356,7 +358,7 @@ figcaption {
 .dict-picker {
   z-index: 2000;
   width: 400px;
-  background: #fff;
+  background: var(--bg-app);
   border-radius: 5px;
   font-size: 14px;
   box-shadow: 0 2px 6px 0 rgba(0 ,0 ,0 ,20%), 0 0 1px 0 rgba(0, 0, 0, 30%);
@@ -372,7 +374,7 @@ figcaption {
   font-size: 13px;
   display: inline-block;
   margin: 0;
-  color: #999;
+  color: var(--secondary-text);
   font-weight: normal;
 }
 .dict-picker-header-control {
@@ -395,7 +397,7 @@ dict-picker-word h2 {
   margin: 0;
   line-height: 33px;
   font-size: 24px;
-  color: #1f1f1f;
+  color:var(--primary-text);
   font-weight: normal;
   display: inline-block;
 }
@@ -409,7 +411,7 @@ dict-picker-word h2 {
   display: inline-block;
 }
 .dict-picker-langs-pronounces span {
-  color: #777;
+  color: var(--secondary-text);
 }
 .dict-picker-langs-pronounces .pronounce-en {
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -431,7 +433,7 @@ dict-picker-word h2 {
   margin-bottom: 20px;
 }
 .dict-picker-langs-definitions h3 {
-  color: #777;
+  color: var(--secondary-text);
   font-size: 14px;
   margin: 0;
   font-weight: normal;
@@ -440,6 +442,7 @@ dict-picker-word h2 {
 .dict-picker-langs-definitions p {
   margin: 0;
   line-height: 24px;
+  color: var(--primary-text);
 }
 .dict-picker-header-close {
   width: 12px;
