@@ -5,37 +5,38 @@
         <section class="article-page">
           <article class="entry module-bg module-radius">
             <header class="post-header color-border">
-              <h1> {{ essay.essay.titleZh }} </h1>
+              <h1> {{ essay.titleZh }} </h1>
               <div class="post-metas color-meta">
-                <span class="author">
-                  <a href="https://westudying.com/user/74" title="东方">
+<!--                <span class="author">
+                  <a>
                     <img class="avatar lazyload"
-                         :src="essay.source.coverUrl"
-                         :alt="essay.source.nameEn"
+                         :src="source.coverUrl"
+                         :alt="source.nameEn"
                          width="18" height="18">
-                    <b class="color-meta">{{ essay.source.nameEn }}</b>
+                    <b class="color-meta">{{ source.nameEn }}</b>
                   </a>
-                </span>
+                </span>-->
                 <span class="category">
                   <a href="https://westudying.com/category/reading"
-                     class="color-meta">{{ essay.type.typeName }}</a></span>
-                <span class="date">{{ essay.essay.createTime | timeFormat }}</span>
+                     class="color-meta">{{ type.typeName }}</a></span>
+                <span class="date">{{ essay.createTime | timeFormat }}</span>
                 <span class="separate"></span>
                 <!--                <span class="view">362</span>-->
               </div>
             </header>
             <div class="content-post">
-              <div v-for="section in essay.sectionList">
+              <div v-for="section in sectionList">
                 <div v-if="section.sectionType===1">
                   <div class="langs_en" @mouseup="handleMouseUp($event)">{{ section.content }}</div>
                   <div class="langs_zh" @mouseup="hideTip">{{ section.transContent }}</div>
                 </div>
                 <p></p>
-                <div align="center" v-if="section.sectionType===2">
+                <div align="center" v-if="section.sectionType === 2">
                   <img :src="section.content" alt="500">
                   <figcaption>{{ section.transContent }}</figcaption>
                 </div>
               </div>
+              <p><em>本文译自  <a :href="source.officialWebsite" target="_blank">{{ source.nameEn }}</a></em></p>
             </div>
           </article>
         </section>
@@ -51,26 +52,39 @@
               <div class="dict-picker-header-close" @click="hideTip"></div>
             </div>
           </div>
-          <div class="dict-picker-content" v-if="word.query">
-            <div class="dict-picker-langs">
+          <div class="dict-picker-content" v-loading = "apiResultCode === -1"  element-loading-background="var(--bg-app)">
+            <div class="dict-picker-langs" v-if="apiResultCode === 0">
               <div class="dict-picker-word"><h2>{{ word.query }}</h2></div>
-              <div class="dict-picker-langs-pronounces">
-                <div v-if="word.basic['uk-phonetic']">
+              <div class="dict-picker-langs-pronounces" v-if="word.isWord">
+                <div>
                   <span>英</span>
                   <span class="pronounce-en">{{ word.basic['uk-phonetic']}}</span>
-                  <span class="dict-picker-audio" :data-src="word.basic['uk-speech']"></span>
+                  <span class="dict-picker-audio"  @click="bofangUk"></span>
+                  <audio ref="audioUk" :src="word.basic['uk-speech']" controls="controls" hidden="true"></audio>
                 </div>
-                <div v-if="word.basic['us-phonetic']">
+                <div>
                   <span>美</span>
                   <span class="pronounce-en">{{ word.basic['us-phonetic'] }}</span>
-                  <span class="dict-picker-audio" :data-src="word.basic['us-speech']"></span>
+                  <span class="dict-picker-audio"  @click="bofangUs"></span>
+                  <audio ref="audioUs" :src="word.basic['us-speech']" controls="controls" hidden="true"></audio>
                 </div>
               </div>
-              <div class="dict-picker-langs-definitions">
-                <div v-for="explain in word.basic.explains">
+              <div v-if="word.isWord" class="dict-picker-langs-definitions">
+                <div  v-for="explain in word.basic.explains">
                   <p>{{ explain }}</p>
                 </div>
               </div>
+              <div v-else class="dict-picker-langs-definitions">
+                <div  v-for="translation in word.translation">
+                  <p>{{ translation }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="dict-picker-not-include" v-if="apiResultCode === 1">
+              <p>
+                <span class="iconfont icon-biaoqing"></span>
+                <span>该词未被收录，我们会尽快完善</span>
+              </p>
             </div>
           </div>
         </div>
@@ -79,22 +93,43 @@
     </div>
   </div>
 </template>
-<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.0.0/crypto-js.js"></script>
 <script>
 import CryptoJS from 'crypto-js'
 
 export default {
   name: 'EssayDetail',
+  head() {
+    return {
+      title: this.essay.titleZh,
+      meta: [
+        {
+          name: "keywords",
+          content: "翻趣社区,翻趣,新闻,新媒体,评论,油管,youtube,脸书,facebook,twitter,推特",
+        },
+        {
+          name: "description",
+          content: this.essay.introduceZh,
+        },
+      ],
+    };
+  },
   async fetch() {
     const data = await this.$api.essay.essay(this.$route.params.id);
-    this.essay = data;
+    this.essay = data.essay;
+    this.source = data.source;
+    this.type = data.type;
+    this.sectionList = data.sectionList;
   },
   data() {
     return {
       essay: {},
+      source:{},
+      type:{},
+      sectionList:[],
       word: {
         'basic':{}
-      }
+      },
+      apiResultCode:-1
     }
   },
   methods: {
@@ -103,8 +138,7 @@ export default {
       tip.style.display = 'none';
       let meaning = document.getElementById("meaning");
       meaning.style.display = 'none';
-      this.word = {};
-
+      this.initWord();
       let text = window.getSelection().toString()
       if (!text) {
         return;
@@ -129,7 +163,7 @@ export default {
       tip.style.display = 'none';
       let meaning = document.getElementById("meaning");
       meaning.style.display = 'none';
-      this.word = {};
+      this.initWord();
     },
     reloadTips() {
       let tip = document.getElementById("tip");
@@ -187,17 +221,37 @@ export default {
       ).then(res => {
         console.log(res);
         this.word = res;
-      }).catch(err => console.log(err));
+        if (res.errorCode === "0"){
+          this.apiResultCode = 0;
+        }else {
+          this.apiResultCode = 1;
+        }
+      }).catch(err => {
+        this.apiResultCode = 1;
+        console.log(err)
+      });
     },
     encode(str) {
       var encodedWord = CryptoJS.enc.Utf8.parse(str);
       var encoded = CryptoJS.enc.Base64.stringify(encodedWord);
       return encoded;
     },
+    bofangUk(){
+      this.$refs.audioUk.play();
+    },
+    bofangUs(){
+      this.$refs.audioUs.play();
+    },
     decode(encoded) {
       var encodedWord = CryptoJS.enc.Base64.parse(encoded);
       var decoded = CryptoJS.enc.Utf8.stringify(encodedWord);
       return decoded;
+    },
+    initWord(){
+      this.word = {
+        'basic':{}
+      };
+      this.apiResultCode = -1;
     }
   },
   mounted() {
@@ -398,6 +452,7 @@ figcaption {
 .dict-picker-content {
   overflow: auto;
   max-height: 800px;
+  min-height: 100px;
   font-size: 14px;
   padding: 12px 19px 19px;
 }
@@ -406,7 +461,7 @@ figcaption {
   margin-bottom: 4px;
 }
 
-dict-picker-word h2 {
+.dict-picker-word h2 {
   margin: 0;
   line-height: 33px;
   font-size: 24px;
@@ -474,5 +529,10 @@ dict-picker-word h2 {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAkxJREFUWAm12D9PwkAUAHCLCV2IJpAQNr4AM7uamICTC3HoRNiMfgX9CrrAwNiBsLjB5Adwx9WEzcTQoZuDwfeavuZarr1/jy7HXe/e/dL70yveiXBNp9NnyPa73e7tcDj8FW6x/oR+XiBgu9VqBaPR6E8M7lEmxTyl+fWxUCnmMe1nUUQloAKGjOyoAob6yaG8EgxVZkOVYKifDFWDkj6VStLBdrt9W61WvuSedtFsNnuFyjRMsna9OI7P8UYN5wqka1mttMwJhU9mv98/VMTf+L5/OZlMIqyTzCF8AvgkID+oaGg8fIphwq4SzHg8/qF+s1XGjbLBICoDYYYLZYs5AHGgXDBSkAvKFVMKskFxYCpBJijP875gad9jm5LrYDWV1MtPalklzYkua0pl2hhskFtlFKGYOqCMMNogrGiBMsYYgUxQMKc+6/X6hbgDY3udC1+u2hce2nACqxrABP/udDqxqp7svhEIl7ZiNVEfV7anBK1Jjb1o7DOEEVPjF7IWyBJDMCOUcshUGJzA0PM79S5Jjc5TlSAVBjrf4GqCQ94N/GY55JUOmQ4GT3q0tDX3KeXwSUGmGBomDtQByBbDhcqBXDEcqAzEhXFFJSBujAsKv1zxw7/qI87qrW2Lwn2oTY0lqRMG4+ELWfUxCptrM4qi5Ou4hv8+QLvFMTAUswoFmI9Go3EdBEFyOkjm0HK5PN3tdiEEuEuDOD8ZwohpcZ8qYrButsoEVE/cgcWAHL8JhcMkPhlpbETN5/Om9CZjIaLCMDxjDHm8UP9p4LIoErrb4QAAAABJRU5ErkJggg==) 0 0/contain;
   margin: 3px 0 3px 30px;
   cursor: pointer;
+}
+.dict-picker-not-include p {
+  margin: 20px 0;
+  line-height: 40px;
+  text-align: center;
 }
 </style>

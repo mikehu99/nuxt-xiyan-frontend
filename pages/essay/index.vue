@@ -19,14 +19,14 @@
                     </nuxt-link>
                     <div class="excerpt color-text">{{essay.essay.introduceZh}}</div>
                     <div class="post-metas color-meta">
-                      <span class="tooltip top author" title="文章作者">
-                        <a href="https://www.zxbcctv.com/user/1" title="zxbcctv">
+<!--                      <span class="tooltip top author" title="文章作者">
+                        <a>
                           <img class="avatar lazyload" :src="essay.source.coverUrl" :alt="essay.source.nameEn" width="18" height="18">
                           <b class="color-meta">{{essay.source.nameEn}}</b>
                         </a>
-                      </span>
+                      </span>-->
                       <span class="tooltip top category" title="文章分类">
-                        <a href="https://www.zxbcctv.com/share" class="color-meta">{{essay.type.typeName}}</a>
+                        <a class="color-meta">{{essay.type.typeName}}</a>
                       </span>
                       <span class="tooltip top date iconfont icon-date" title="发布日期">{{ essay.essay.createTime | timeFormat }}</span>
                       <span class="separate"></span>
