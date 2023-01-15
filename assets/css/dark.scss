@@ -35,7 +35,21 @@ body[theme='dark'] {
     color:#c2c2c2;
   }
   .langs_zh{
-    color: #277927;
+    //color: #00d1b2d9;
+    color: #98c379;
+  }
+  .dict-picker {
+    box-shadow: 0 2px 6px 0 rgba(255,255,255,20%), 0 0 1px 0 rgba(255,255,255,30%);
+  }
+  .dict-picker-tips {
+    box-shadow: 0 0 5px 0 rgba(255,255,255,10%), 0 0 1px 0 rgba(255,255,255,30%);
+  }
+  .essay-container{
+    background-color: #131415;
+  }
+  .post-header .category a{
+    color: #fafafa!important;
+    background-color: rgba(232, 236, 239, 0.1);
   }
 }
 

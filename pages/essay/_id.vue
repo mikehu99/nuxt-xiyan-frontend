@@ -3,6 +3,9 @@
     <div class="user-view">
       <div class="content-area">
         <section class="article-page">
+          <div class="head-img" v-if="essay.headImg">
+            <img :src="essay.headImg">
+          </div>
           <article class="entry module-bg module-radius">
             <header class="post-header color-border">
               <h1> {{ essay.titleZh }} </h1>
@@ -17,8 +20,8 @@
                   </a>
                 </span>-->
                 <span class="category">
-                  <a href="https://westudying.com/category/reading"
-                     class="color-meta">{{ type.typeName }}</a></span>
+                  <a class="color-meta">{{ type.typeName }}</a>
+                </span>
                 <span class="date">{{ essay.createTime | timeFormat }}</span>
                 <span class="separate"></span>
                 <!--                <span class="view">362</span>-->
@@ -267,7 +270,7 @@ export default {
 }
 
 .entry {
-  padding: 40px;
+  padding: 20px;
   margin-bottom: 20px;
   position: relative;
 }
@@ -296,6 +299,7 @@ h1 {
 
 .post-header .post-metas {
   margin-top: 12px;
+  align-items: center;
 }
 
 .color-meta {
@@ -534,5 +538,24 @@ figcaption {
   margin: 20px 0;
   line-height: 40px;
   text-align: center;
+}
+.head-img img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 0;
+  vertical-align: text-top;
+}
+.post-header .category a{
+  height: 30px;
+  line-height: 30px;
+  padding: 0 16px;
+  font-weight: 500;
+  background-color: rgba(0, 132, 255, 0.1);
+  color: #0084ff!important;
+  display: block;
+  border-radius: 5px;
 }
 </style>

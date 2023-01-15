@@ -245,6 +245,11 @@ export default {
   margin-top: 10px;
   font-size: 14px;
 }
+.description{
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+  overflow: hidden;
+}
 
 @media (min-width: 768px) {
   .youtuber-box {

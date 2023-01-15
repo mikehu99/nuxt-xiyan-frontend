@@ -7,9 +7,9 @@
             <ul class="article-ul">
               <li v-for="(essay,index) in essayList" :key="index" class="color-border">
                 <article class="post-list-main color-border list post simple">
-                  <div class="thumb" style="min-width: 30%; width: 30%;" v-if="essay.essay.headImg">
+                  <div class="thumb" style="min-width: 30%; width: 30%;" v-if="getHeadImg(essay.essay)">
                     <nuxt-link target="_blank" :to="`/essay/${essay.essay.id}`" class="img-effect" :title="essay.essay.titleZh">
-                      <img class="thumb lazyload" :src="essay.essay.headImg" :alt="essay.essay.titleZh"
+                      <img class="thumb lazyload" :src="getHeadImg(essay.essay)" :alt="essay.essay.titleZh"
                            width="600" height="338">
                     </nuxt-link>
                   </div>
@@ -96,6 +96,15 @@ export default {
         $state.complete();
       }
     },
+    getHeadImg(essay){
+      if (essay.headImg){
+        return essay.headImg;
+      }
+      if (essay.imgs){
+        return essay.imgs.split(',')[0];
+      }
+      return null;
+    }
   },
 
 }
