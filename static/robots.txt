@@ -1,8 +1,0 @@
-# 该文件可以通过`你的网站域名/Robots.txt`直接访问
-
-# User-agent作用：描述搜索引擎的名字，对于该文件来说至少药有一条user-agent记录，则该项的值设为*
-User-agent: *
-# Disallow:  描述不希望被访问到的一个url
-Disallow: /bin/
-Sitemap: http://v2fq.com/sitemap_1.xml
-

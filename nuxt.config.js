@@ -1,4 +1,3 @@
-import sitemap from './static/sitemap';
 const webpack = require('webpack')
 export default {
   mode: 'universal',
@@ -147,11 +146,9 @@ export default {
     //axios
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxtjs/sitemap',
     //less
     '@nuxtjs/style-resources',
   ],
-  sitemap:sitemap,
   styleResources:{
     less:[
       './assets/css/global.less'
