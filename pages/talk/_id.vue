@@ -48,7 +48,7 @@
     async fetch() {
      let data = await this.$api.talk.selectOne(this.$route.params.id);
      this.talk = data;
-     this.flag = true
+     this.flag = true;
     },
     mounted(){
       this.fetchPraiseList();

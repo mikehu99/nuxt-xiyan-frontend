@@ -2,7 +2,7 @@
   <div>
     <div>
     <span
-      :style="{background: 'url(' + this.community.banner + ') center center / cover no-repeat rgb(255, 255, 255)',height:'164px'}"
+      :style="{background: 'url(' + this.community.banner + ') center center / cover no-repeat rgb(255, 255, 255)',height:'205px'}"
       class="head-box">
         <div style="max-width:1200px" class="head-box-div">
           <div style="left:-8px;height:112px" class="head-box-div-div"></div>

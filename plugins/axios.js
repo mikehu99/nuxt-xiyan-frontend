@@ -5,7 +5,9 @@ import { Message } from 'element-ui';
 export default function ({store, redirect, app: {$axios, $cookies}}) {
 
   // 数据访问前缀,指定配置的环境变量接口地址
-  // $axios.defaults.baseURL = process.env.baseUrl;
+  if (process.env.baseUrl === "https://v2fq.com/api"){
+    $axios.defaults.baseURL = process.env.baseUrl;
+  }
 
   // request拦截器，我这里设置了一个token，当然你可以不要
   $axios.onRequest(config => {

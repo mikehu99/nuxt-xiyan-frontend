@@ -35,18 +35,19 @@ export default {
       document.querySelector('html').setAttribute('theme', theme)
       document.querySelector('body').setAttribute('theme', theme)
     }
-  },
-  async fetch () {
-    var dark = !(undefined === this.$cookies.get('dark_mode') || false === this.$cookies.get('dark_mode'));
-    this.theme = dark?'dark':'light'
     var token = this.$cookies.get('u_token');
     if (token){
       this.$store.commit('user/SET_TOKEN_STATE', token);
-      await this.$store.dispatch('user/getInfo');
+      this.$store.dispatch('user/getInfo');
     }else {
       this.$store.commit('user/SET_TOKEN_STATE', '');
       this.$store.commit('user/SET_USER_STATE', '');
     }
+  },
+  async fetch () {
+    console.log("defaul fetch 执行")
+    var dark = !(undefined === this.$cookies.get('dark_mode') || false === this.$cookies.get('dark_mode'));
+    this.theme = dark?'dark':'light'
   },
   data() {
     return { isRouterALive: true ,theme:''};
