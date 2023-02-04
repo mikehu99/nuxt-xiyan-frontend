@@ -62,7 +62,7 @@ export default {
   name: 'EssayIndex',
   head() {
     return {
-      title: "翻趣",
+      title: "译闻 - 翻趣",
       meta: [
         {
           name: "keywords",
@@ -70,7 +70,7 @@ export default {
         },
         {
           name: "description",
-          content: "翻趣社区，搜罗世界各地的有趣事情，打开视界，感受思想的碰撞。                                    ",
+          content: "翻趣社区是一个搜罗世界各地的有趣事情，打开视界，感受思想的碰撞的社交平台。                                    ",
         },
       ],
     };

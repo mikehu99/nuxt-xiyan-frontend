@@ -76,7 +76,7 @@ export default {
   components: {Pagination},
   head() {
     return {
-      title: "油管"+"-翻趣",
+      title: "油管 - 翻趣",
       meta: [
         {
           name: "keywords",

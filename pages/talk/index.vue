@@ -41,7 +41,7 @@ export default {
   components: { TalkList, WeiboCreate},
   head() {
     return {
-      title: "翻趣",
+      title: "讨论 - 翻趣",
       meta: [
         {
           name: "keywords",
