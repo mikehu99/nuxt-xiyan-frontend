@@ -15,7 +15,7 @@
                 </nuxt-link>
               </li>
               <li class="nav-item link-item">
-                <nuxt-link to="/essay" :class="{'active':$route.path === '/essay'}">文章</nuxt-link>
+                <nuxt-link to="/talk" :class="{'active':$route.path === '/talk'}">讨论</nuxt-link>
               </li>
             </ul>
           </li>

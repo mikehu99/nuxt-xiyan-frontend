@@ -74,7 +74,7 @@ export default {
     ...mapGetters(['token','user']),
     screenWidth(){
       if (process.client) {
-        return document.body.clientWidth;
+       return document.body.clientWidth;
       }
     }
   },

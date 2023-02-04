@@ -2,20 +2,45 @@
   <div class="main-container">
     <div class="user-view">
       <div class="content-area">
-        <div v-if="screenWidth>=640">
-          <WeiboCreate @changeType="changeType"></WeiboCreate>
+        <div class="home-post-module">
+          <section class="article-list post-list-layout post">
+            <ul class="article-ul">
+              <li v-for="(essay,index) in essayList" :key="index" class="color-border">
+                <article class="post-list-main color-border list post simple">
+                  <div class="thumb" style="min-width: 30%; width: 30%;" v-if="getHeadImg(essay.essay)">
+                    <nuxt-link target="_blank" :to="`/essay/${essay.essay.id}`" class="img-effect" :title="essay.essay.titleZh">
+                      <img class="thumb lazyload" :src="getHeadImg(essay.essay)" :alt="essay.essay.titleZh"
+                           width="600" height="338">
+                    </nuxt-link>
+                  </div>
+                  <div class="list-content">
+                    <nuxt-link target="_blank" :to="`/essay/${essay.essay.id}`" :title="essay.essay.titleZh" class="title">
+                      <h3 style="-webkit-line-clamp: 2;">{{essay.essay.titleZh}}</h3>
+                    </nuxt-link>
+                    <div class="excerpt color-text">{{essay.essay.introduceZh}}</div>
+                    <div class="post-metas color-meta">
+<!--                      <span class="tooltip top author" title="文章作者">
+                        <a>
+                          <img class="avatar lazyload" :src="essay.source.coverUrl" :alt="essay.source.nameEn" width="18" height="18">
+                          <b class="color-meta">{{essay.source.nameEn}}</b>
+                        </a>
+                      </span>-->
+                      <span class="tooltip top category" title="文章分类">
+                        <a class="color-meta">{{essay.type.typeName}}</a>
+                      </span>
+                      <span class="tooltip top date iconfont icon-date" title="发布日期">{{ essay.essay.createTime | timeFormat }}</span>
+                      <span class="separate"></span>
+<!--                      <span title="喜欢数量" class="tooltip top like iconfont icon-like">0</span>-->
+<!--                      <span title="收藏数量" class="tooltip top collect iconfont icon-collect">0</span>-->
+<!--                      <span class="tooltip top view iconfont icon-view" title="浏览数量">0</span>-->
+<!--                      <span title="评分" class="tooltip top rate iconfont icon-rate">0</span>-->
+                    </div>
+                  </div>
+                </article>
+              </li>
+            </ul>
+          </section>
         </div>
-        <div v-if="screenWidth<640">
-          <div class="input-box">
-            <img :src="user.avatar" class="user-avatar" loading="lazy"/>
-            <div class="input-div" @click="showEditor" >分享新鲜事！</div>
-          </div>
-          <el-dialog :visible.sync="isEditorActive">
-            <WeiboCreate @changeType="changeType"></WeiboCreate>
-          </el-dialog>
-        </div>
-
-        <TalkList :talkList="talkList"></TalkList>
         <!--分页-->
         <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler">
           <div slot="spinner">
@@ -24,21 +49,17 @@
           <div slot="no-more"></div>
         </infinite-loading>
       </div>
-      <div class="side-area">
-      </div>
+      <div class="side-area"></div>
     </div>
   </div>
-
 </template>
+
+
+
 <script>
-import TalkList from '@/components/Talk/TalkList';
-import WeiboCreate from "@/components/Talk/WeiboCreate"
 import { mapGetters } from 'vuex'
-
-
 export default {
-  name: 'TalkIndex',
-  components: { TalkList, WeiboCreate},
+  name: 'EssayIndex',
   head() {
     return {
       title: "翻趣",
@@ -56,105 +77,144 @@ export default {
   },
   data() {
     return {
-      isEditorActive:false,
       infiniteId: +new Date(),
-      talkList: [],
-      page: {
-        current: 1,
-        size: 10,
-        total: 0,
-        tab: 'latest'
+      query: {
+        pageNo: 1,
+        pageSize: 10
       },
-    }
-  },
-  created(){
-
-  },
-  computed:{
-    ...mapGetters(['token','user']),
-    screenWidth(){
-      if (process.client) {
-       return document.body.clientWidth;
-      }
+      essayList:[],
     }
   },
   methods: {
     async infiniteHandler($state) {
-      let data = await this.$api.talk.getList({
-        pageNo:this.page.current,
-        pageSize:this.page.size,
-        tab:this.page.tab
-      });
-      if (data.records.length) {
-        this.page.current += 1;
-        this.talkList.push(...data.records);
+      let data = await this.$api.essay.essayList(this.query);
+      if (data.length) {
+        this.query.pageNo += 1;
+        this.essayList.push(...data);
         $state.loaded();
       } else {
         $state.complete();
       }
     },
-    changeType() {
-      this.page.current = 1;
-      this.talkList = [];
-      this.infiniteId += 1;
-    },
-    showEditor(){
-      if (this.token == null || this.token === '') {
-        this.$message({message:'该功能需要登录',type:'error',showClose: true});
-        this.$store.commit('common/setLoginFlag',true);
-        return false;
+    getHeadImg(essay){
+      if (essay.headImg){
+        return essay.headImg;
       }
-      this.isEditorActive = true;
-      if (process.client) {
-        let element = document.getElementById('weibo-input');
-        element.focus();
+      if (essay.imgs){
+        return essay.imgs.split(',')[0];
       }
+      return null;
     }
   },
-  activated() {
-    if (process.client) {
-      let element = document.getElementById('weibo-input');
-      element.focus();
-    }
-  }
+
 }
 </script>
 <style lang="less">
-.input-box{
-  background-color: #fff;
-  display: flex;
+.post-list-layout {
   padding: 20px;
-  border-radius: 2px;
-  margin-bottom: 8px;
 }
-.user-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+.home-post-module{
+  background:var(--bg-topic)
+}
+.post-list-layout {
+  overflow: hidden;
+}
+.article-ul {
+  display: grid;
+  grid-gap: 12px;
+  grid-template-columns: repeat(1, 1fr);
+  justify-content: stretch;
+  align-items: stretch;
+}
+.post-list-layout ul>li:not(:last-child) {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  padding-bottom: 12px;
+}
+.color-border {
+  border-color: var(--color-basic-200);
+}
+.post-list-main.simple {
+  display: flex;
+  align-items: center;
+}
+.post-list-main.list div.thumb {
+  margin-right: 12px;
   position: relative;
-  -o-object-fit: cover;
-  object-fit: cover;
-  background-position: 50%;
-  background-repeat: no-repeat;
+}
+.img-effect {
+  overflow: hidden;
+  display: block;
+}
+.sidebar-module img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+.img-effect img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.list-content {
+  flex-grow: 1;
+}
+.color-text {
+  color: var(--secondary-text);
+}
+.color-meta {
+  color: var(--color-basic-800);
+}
+.list-content .post-metas, .list-content .excerpt {
+  margin-top: 12px;
+}
+.list-content h3 {
+  overflow: hidden;
+  display: block;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  width: 100%;
+}
+h3 {
+  font-size: 16px;
+  line-height: 26px;
+}
+.post-metas {
+  font-weight: 300;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+.post-metas span {
+  margin-right: 12px;
+  font-size: inherit;
+  white-space: nowrap;
+}
+.tooltip {
+  position: relative;
+}
+.post-metas span.separate {
+  flex-grow: 1;
+  margin: 0;
+}
+.post-metas img {
+  width: 16px;
+  height: 16px;
+  display: inline-block !important;
+  vertical-align: middle;
+  border-radius: 100%;
+  margin: 0 3px 2px 0;
+}
+.post-metas b {
+  font-weight: 300;
   display: inline-block;
-  position: relative;
-  background-size: cover;
-  background-color: #eee;
 }
-.input-div{
-  flex: auto;
-  margin-left: 20px;
-  background-color: #f2f3f5;
-  padding: 7px 12px;
-  border-radius: 2px;
-  color: #8a919f;
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: .2px;
-}
-.input-div:hover{
-  background-color: #ffffff;
-  outline: 1px solid #0079d3;
+.post-metas span:last-child {
+  margin-right: 0;
 }
 </style>
