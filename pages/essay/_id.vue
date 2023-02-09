@@ -9,22 +9,23 @@
           <article class="entry module-bg module-radius">
             <header class="post-header color-border">
               <h1> {{ essay.titleZh }} </h1>
-              <div class="post-metas color-meta">
-<!--                <span class="author">
-                  <a>
-                    <img class="avatar lazyload"
-                         :src="source.coverUrl"
-                         :alt="source.nameEn"
-                         width="18" height="18">
-                    <b class="color-meta">{{ source.nameEn }}</b>
-                  </a>
-                </span>-->
-                <span class="category">
-                  <a class="color-meta">{{ type.typeName }}</a>
-                </span>
-                <span class="date">{{ essay.createTime | timeFormat }}</span>
-                <span class="separate"></span>
-                <!--                <span class="view">362</span>-->
+              <div id="post-meta">
+                <div class="post-meta-row">
+                  <ul class="post-meta color-meta">
+                    <li>
+                      <div class="post-list-cat  b2-radius">
+                        <a target="__blank" href="" class="post-list-cat-item b2-radius" style="color: rgb(96, 125, 139);">
+                        {{ type.typeName }}
+                        </a>
+                      </div>
+                    </li>
+                    <li class="single-date">
+                      <span>
+                        <time :datetime="essay.createTime" itemprop="datePublished" class="b2timeago">{{ essay.createTime | timeFormat }}</time>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </header>
             <div class="content-post">
@@ -39,7 +40,7 @@
                   <figcaption>{{ section.transContent }}</figcaption>
                 </div>
               </div>
-              <p><em>本文译自  <a :href="source.officialWebsite" target="_blank">{{ source.nameEn }}</a></em></p>
+              <p><em>本文译自 <a :href="source.officialWebsite" target="_blank">{{ source.nameEn }}</a></em></p>
             </div>
           </article>
         </section>
@@ -55,30 +56,30 @@
               <div class="dict-picker-header-close" @click="hideTip"></div>
             </div>
           </div>
-          <div class="dict-picker-content" v-loading = "apiResultCode === -1"  element-loading-background="var(--bg-app)">
+          <div class="dict-picker-content" v-loading="apiResultCode === -1" element-loading-background="var(--bg-app)">
             <div class="dict-picker-langs" v-if="apiResultCode === 0">
               <div class="dict-picker-word"><h2>{{ word.query }}</h2></div>
               <div class="dict-picker-langs-pronounces" v-if="word.isWord">
                 <div>
                   <span>英</span>
-                  <span class="pronounce-en">{{ word.basic['uk-phonetic']}}</span>
-                  <span class="dict-picker-audio"  @click="bofangUk"></span>
+                  <span class="pronounce-en">{{ word.basic['uk-phonetic'] }}</span>
+                  <span class="dict-picker-audio" @click="bofangUk"></span>
                   <audio ref="audioUk" :src="word.basic['uk-speech']" controls="controls" hidden="true"></audio>
                 </div>
                 <div>
                   <span>美</span>
                   <span class="pronounce-en">{{ word.basic['us-phonetic'] }}</span>
-                  <span class="dict-picker-audio"  @click="bofangUs"></span>
+                  <span class="dict-picker-audio" @click="bofangUs"></span>
                   <audio ref="audioUs" :src="word.basic['us-speech']" controls="controls" hidden="true"></audio>
                 </div>
               </div>
               <div v-if="word.isWord" class="dict-picker-langs-definitions">
-                <div  v-for="explain in word.basic.explains">
+                <div v-for="explain in word.basic.explains">
                   <p>{{ explain }}</p>
                 </div>
               </div>
               <div v-else class="dict-picker-langs-definitions">
-                <div  v-for="translation in word.translation">
+                <div v-for="translation in word.translation">
                   <p>{{ translation }}</p>
                 </div>
               </div>
@@ -126,13 +127,13 @@ export default {
   data() {
     return {
       essay: {},
-      source:{},
-      type:{},
-      sectionList:[],
+      source: {},
+      type: {},
+      sectionList: [],
       word: {
-        'basic':{}
+        'basic': {}
       },
-      apiResultCode:-1
+      apiResultCode: -1
     }
   },
   methods: {
@@ -209,7 +210,7 @@ export default {
       //console.log('---',str1);
       var sign = CryptoJS.SHA256(str1).toString(CryptoJS.enc.Hex);
       this.$axios.jsonp(
-        'http://openapi.youdao.com/api',
+        'https://openapi.youdao.com/api',
         {
           q: query,
           appKey: appKey,
@@ -224,9 +225,9 @@ export default {
       ).then(res => {
         console.log(res);
         this.word = res;
-        if (res.errorCode === "0"){
+        if (res.errorCode === "0") {
           this.apiResultCode = 0;
-        }else {
+        } else {
           this.apiResultCode = 1;
         }
       }).catch(err => {
@@ -239,10 +240,10 @@ export default {
       var encoded = CryptoJS.enc.Base64.stringify(encodedWord);
       return encoded;
     },
-    bofangUk(){
+    bofangUk() {
       this.$refs.audioUk.play();
     },
-    bofangUs(){
+    bofangUs() {
       this.$refs.audioUs.play();
     },
     decode(encoded) {
@@ -250,9 +251,9 @@ export default {
       var decoded = CryptoJS.enc.Utf8.stringify(encodedWord);
       return decoded;
     },
-    initWord(){
+    initWord() {
       this.word = {
-        'basic':{}
+        'basic': {}
       };
       this.apiResultCode = -1;
     }
@@ -295,44 +296,11 @@ h1 {
   font-size: 26px;
   line-height: 32px;
   color: var(--primary-text);
-}
-
-.post-header .post-metas {
-  margin-top: 12px;
-  align-items: center;
+  margin-bottom: 12px;
 }
 
 .color-meta {
   color: var(--color-basic-800);
-}
-
-.post-metas span {
-  margin-right: 12px;
-  font-size: inherit;
-  white-space: nowrap;
-}
-
-.post-metas img {
-  width: 16px;
-  height: 16px;
-  display: inline-block !important;
-  vertical-align: middle;
-  border-radius: 100%;
-  margin: 0 6px 2px 0;
-}
-
-.post-metas b {
-  font-weight: 300;
-  display: inline-block;
-}
-
-.post-metas span.separate {
-  flex-grow: 1;
-  margin: 0;
-}
-
-.post-metas span:last-child {
-  margin-right: 0;
 }
 
 .content-post {
@@ -347,7 +315,6 @@ h1 {
   word-spacing: 0px;
   color: #333;
 }
-
 .content-post p {
   margin-bottom: 10px;
 }
@@ -534,11 +501,13 @@ figcaption {
   margin: 3px 0 3px 30px;
   cursor: pointer;
 }
+
 .dict-picker-not-include p {
   margin: 20px 0;
   line-height: 40px;
   text-align: center;
 }
+
 .head-img img {
   display: block;
   width: 100%;
@@ -548,14 +517,70 @@ figcaption {
   border: 0;
   vertical-align: text-top;
 }
-.post-header .category a{
+
+.post-meta-row {
+  display: flex;
+  justify-content: space-between;
+}
+.entry-header .post-meta {
+  justify-content: initial;
+}
+.post-meta, .post-meta-left {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+}
+.post-meta li {
+  margin-right: 24px;
+  list-style: none;
+}
+.single .post-list-cat {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-flow: wrap;
+}
+.b2-radius {
+  border-radius: 5px;
+}
+.post-list-cat {
+  font-size: 12px;
+}
+.post-list-cat a:first-child {
+  display: block;
+}
+.post-list-cat a {
   height: 30px;
   line-height: 30px;
   padding: 0 16px;
   font-weight: 500;
   background-color: rgba(0, 132, 255, 0.1);
-  color: #0084ff!important;
-  display: block;
-  border-radius: 5px;
+  color: #0084ff !important;
+}
+.post-meta li {
+  margin-right: 24px;
+  list-style: none;
+}
+.post-meta li span {
+  margin: 0;
+}
+.post-meta li span {
+  color: #8590A6;
+}
+.post-meta li span {
+  margin-left: 0;
+  margin-right: 10px;
+  display: flex;
+  line-height: 1;
+}
+.b2timeago {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.post-meta li span {
+  color: #8590A6;
 }
 </style>
