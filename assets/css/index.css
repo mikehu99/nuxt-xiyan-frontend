@@ -600,6 +600,12 @@ ul {
   /* Internet Explorer 10+ */
   color: var(--color-basic-800)!important;
 }
+.display-in-mobile{
+  display: none;
+}
+.display-in-widescreen{
+  display: block;
+}
 @media (max-width: 768px) {
   .side-area {
     display: none;
@@ -609,6 +615,12 @@ ul {
 @media screen and (max-width: 768px) {
   .media-content {
     overflow-y: hidden;
+  }
+  .display-in-mobile{
+    display: block;
+  }
+  .display-in-widescreen{
+    display: none;
   }
 }
 

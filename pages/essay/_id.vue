@@ -31,7 +31,8 @@
             <div class="content-post">
               <div v-for="section in sectionList">
                 <div v-if="section.sectionType===1">
-                  <div class="langs_en" @mouseup="handleMouseUp($event)">{{ section.content }}</div>
+                  <div class="langs_en display-in-widescreen" @mouseup="handleMouseUp($event)">{{ section.content }}</div>
+                  <div class="langs_en display-in-mobile" @click="mobileTranselate($event)" v-html="wordHtml(section.content)"></div>
                   <div class="langs_zh" @mouseup="hideTip">{{ section.transContent }}</div>
                 </div>
                 <p></p>
@@ -133,7 +134,8 @@ export default {
       word: {
         'basic': {}
       },
-      apiResultCode: -1
+      apiResultCode: -1,
+      isMobile:false
     }
   },
   methods: {
@@ -161,6 +163,14 @@ export default {
       meaning.style.left = oEvent.pageX - 35 + 'px';  // 指定创建的DIV在文档中距离左侧的位置
       meaning.style.top = oEvent.pageY + 20 + 'px';  // 指定创建的DIV在文档中距离顶部的位置
       meaning.style.display = 'block';
+    },
+    showMeaningMobile() {
+      let meaning = document.getElementById("meaning");
+      meaning.style.position = 'fixed';
+      meaning.style.left = '0px';  // 指定创建的DIV在文档中距离左侧的位置
+      meaning.style.bottom = '0px';  // 指定创建的DIV在文档中距离底部的位置
+      meaning.style.display = 'block';
+      meaning.style.width = '100%';
     },
     hideTip() {
       let tip = document.getElementById("tip");
@@ -256,6 +266,29 @@ export default {
         'basic': {}
       };
       this.apiResultCode = -1;
+    },
+    wordHtml(oldHtml){
+      return oldHtml.replace(/\b(\w+?)\b/g, '<span class="word">$1</span>')
+    },
+    mobileTranselate(event){
+      var text = event.target.innerHTML;
+      if (text.length>20) {
+        return;
+      }
+      if (!text) {
+        return;
+      }
+      if (!text.replace(/\s/g, "")) {
+        return;
+      }
+      if (text.indexOf(',')>0) {
+        return;
+      }
+
+      let tip = document.getElementById("tip");
+      tip.style.display = 'none';
+      this.translate(text.trim());
+      this.showMeaningMobile();
     }
   },
   mounted() {
