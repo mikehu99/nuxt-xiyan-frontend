@@ -44,6 +44,11 @@ footer a{
 .footer {
   padding: 3rem 1.5rem 3rem;
 }
+@media screen and (max-width: 768px){
+  .footer {
+    display: none;
+  }
+}
 
 
 </style>

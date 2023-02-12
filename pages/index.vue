@@ -217,4 +217,14 @@ h3 {
 .post-metas span:last-child {
   margin-right: 0;
 }
+@media screen and (max-width: 768px) {
+  .excerpt {
+    display: none;
+  }
+  h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+}
 </style>

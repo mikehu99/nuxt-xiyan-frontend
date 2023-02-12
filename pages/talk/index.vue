@@ -10,9 +10,9 @@
             <img :src="user.avatar" class="user-avatar" loading="lazy"/>
             <div class="input-div" @click="showEditor" >分享新鲜事！</div>
           </div>
-          <el-dialog :visible.sync="isEditorActive">
+          <b-modal v-model="isEditorActive">
             <WeiboCreate @changeType="changeType"></WeiboCreate>
-          </el-dialog>
+          </b-modal>
         </div>
 
         <TalkList :talkList="talkList"></TalkList>
@@ -121,7 +121,7 @@ export default {
 </script>
 <style lang="less">
 .input-box{
-  background-color: #fff;
+  background-color: var(--bg-topic);
   display: flex;
   padding: 20px;
   border-radius: 2px;
@@ -144,10 +144,10 @@ export default {
 .input-div{
   flex: auto;
   margin-left: 20px;
-  background-color: #f2f3f5;
+  background-color: var(--bg-app);
   padding: 7px 12px;
   border-radius: 2px;
-  color: #8a919f;
+  color: var(--secondary-text);
   cursor: pointer;
   font-size: 14px;
   line-height: 22px;
@@ -156,5 +156,10 @@ export default {
 .input-div:hover{
   background-color: #ffffff;
   outline: 1px solid #0079d3;
+}
+@media screen and (max-width: 768px) {
+  .input-box {
+    margin-bottom: 1px;
+  }
 }
 </style>

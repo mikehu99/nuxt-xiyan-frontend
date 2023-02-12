@@ -628,6 +628,9 @@ ul {
   .head-container{
     padding: 0px 10px;
   }
+  .user-view{
+    margin-bottom: 0rem;
+  }
 }
 
 @media (max-width: 600px) {
