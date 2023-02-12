@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="loginFlag" v-show="loginFlag" width="336px">
+  <b-modal v-model="loginFlag" :width="336">
       <el-card shadow="never">
         <div slot="header" class="has-text-centered has-text-weight-bold">
           用户登录
@@ -42,7 +42,7 @@
           </el-form>
         </div>
       </el-card>
-    </el-dialog>
+    </b-modal>
 </template>
 
 <script>

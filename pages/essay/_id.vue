@@ -14,14 +14,16 @@
                   <ul class="post-meta color-meta">
                     <li>
                       <div class="post-list-cat  b2-radius">
-                        <a target="__blank" href="" class="post-list-cat-item b2-radius" style="color: rgb(96, 125, 139);">
-                        {{ type.typeName }}
+                        <a target="__blank" href="" class="post-list-cat-item b2-radius"
+                           style="color: rgb(96, 125, 139);">
+                          {{ type.typeName }}
                         </a>
                       </div>
                     </li>
                     <li class="single-date">
                       <span>
-                        <time :datetime="essay.createTime" itemprop="datePublished" class="b2timeago">{{ essay.createTime | timeFormat }}</time>
+                        <time :datetime="essay.createTime" itemprop="datePublished"
+                              class="b2timeago">{{ essay.createTime | timeFormat }}</time>
                       </span>
                     </li>
                   </ul>
@@ -31,8 +33,12 @@
             <div class="content-post">
               <div v-for="section in sectionList">
                 <div v-if="section.sectionType===1">
-                  <div class="langs_en display-in-widescreen" @mouseup="handleMouseUp($event)">{{ section.content }}</div>
-                  <div class="langs_en display-in-mobile" @click="mobileTranselate($event)" v-html="wordHtml(section.content)"></div>
+                  <div class="langs_en display-in-widescreen" @mouseup="handleMouseUp($event)">{{
+                      section.content
+                    }}
+                  </div>
+                  <div class="langs_en display-in-mobile" @click="mobileTranselate($event)"
+                       v-html="wordHtml(section.content)"></div>
                   <div class="langs_zh" @mouseup="hideTip">{{ section.transContent }}</div>
                 </div>
                 <p></p>
@@ -52,7 +58,7 @@
         <div id="meaning" class="dict-picker" style="position: absolute;">
           <audio hidden="" id="dict-picker-audio"></audio>
           <div class="dict-picker-header">
-            <h2>小D划词释义</h2>
+            <h2>翻趣划词释义</h2>
             <div class="dict-picker-header-control">
               <div class="dict-picker-header-close" @click="hideTip"></div>
             </div>
@@ -135,7 +141,6 @@ export default {
         'basic': {}
       },
       apiResultCode: -1,
-      isMobile:false
     }
   },
   methods: {
@@ -267,12 +272,12 @@ export default {
       };
       this.apiResultCode = -1;
     },
-    wordHtml(oldHtml){
+    wordHtml(oldHtml) {
       return oldHtml.replace(/\b(\w+?)\b/g, '<span class="word">$1</span>')
     },
-    mobileTranselate(event){
+    mobileTranselate(event) {
       var text = event.target.innerHTML;
-      if (text.length>20) {
+      if (text.length > 20) {
         return;
       }
       if (!text) {
@@ -281,7 +286,7 @@ export default {
       if (!text.replace(/\s/g, "")) {
         return;
       }
-      if (text.indexOf(',')>0) {
+      if (text.indexOf(',') > 0) {
         return;
       }
 
@@ -348,6 +353,7 @@ h1 {
   word-spacing: 0px;
   color: #333;
 }
+
 .content-post p {
   margin-bottom: 10px;
 }
@@ -555,19 +561,23 @@ figcaption {
   display: flex;
   justify-content: space-between;
 }
+
 .entry-header .post-meta {
   justify-content: initial;
 }
+
 .post-meta, .post-meta-left {
   display: flex;
   align-items: center;
   font-size: 12px;
   color: #666;
 }
+
 .post-meta li {
   margin-right: 24px;
   list-style: none;
 }
+
 .single .post-list-cat {
   position: relative;
   left: 0;
@@ -575,15 +585,19 @@ figcaption {
   display: flex;
   flex-flow: wrap;
 }
+
 .b2-radius {
   border-radius: 5px;
 }
+
 .post-list-cat {
   font-size: 12px;
 }
+
 .post-list-cat a:first-child {
   display: block;
 }
+
 .post-list-cat a {
   height: 30px;
   line-height: 30px;
@@ -592,28 +606,40 @@ figcaption {
   background-color: rgba(0, 132, 255, 0.1);
   color: #0084ff !important;
 }
+
 .post-meta li {
   margin-right: 24px;
   list-style: none;
 }
+
 .post-meta li span {
   margin: 0;
 }
+
 .post-meta li span {
   color: #8590A6;
 }
+
 .post-meta li span {
   margin-left: 0;
   margin-right: 10px;
   display: flex;
   line-height: 1;
 }
+
 .b2timeago {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .post-meta li span {
   color: #8590A6;
+}
+
+@media screen and (max-width: 768px) {
+  .entry {
+    padding: 20px 10px;
+  }
 }
 </style>

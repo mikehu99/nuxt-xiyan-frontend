@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="registerFlag" v-show="registerFlag" width="336px">
+  <b-modal v-model="registerFlag" :width="336">
     <el-card shadow="never">
           <div slot="header" class="has-text-centered has-text-weight-bold">
             新用户入驻
@@ -44,7 +44,7 @@
             </el-form>
           </div>
         </el-card>
-  </el-dialog>
+  </b-modal>
 </template>
 
 <script>

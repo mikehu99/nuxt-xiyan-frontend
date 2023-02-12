@@ -35,14 +35,6 @@ export default {
       document.querySelector('html').setAttribute('theme', theme)
       document.querySelector('body').setAttribute('theme', theme)
     }
-    var token = this.$cookies.get('u_token');
-    if (token){
-      this.$store.commit('user/SET_TOKEN_STATE', token);
-      this.$store.dispatch('user/getInfo');
-    }else {
-      this.$store.commit('user/SET_TOKEN_STATE', '');
-      this.$store.commit('user/SET_USER_STATE', '');
-    }
   },
   async fetch () {
     console.log("defaul fetch 执行")

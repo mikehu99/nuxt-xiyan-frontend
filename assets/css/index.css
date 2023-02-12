@@ -622,6 +622,12 @@ ul {
   .display-in-widescreen{
     display: none;
   }
+  .main-container{
+    margin-top: -11px;
+  }
+  .head-container{
+    padding: 0px 10px;
+  }
 }
 
 @media (max-width: 600px) {

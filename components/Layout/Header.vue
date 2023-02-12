@@ -21,8 +21,9 @@
           </li>
           <ul class="right-side-nav">
             <li v-show="token == null || token === ''" class="nav-item">
-              <el-button type="primary" size="mini" @click="showLoginModel">登录</el-button>
-              <el-button type="primary" plain size="mini" @click="showRegisterModel">注册</el-button>
+              <a  @click="showLoginModel">登录</a>
+              <span style="margin: auto 5px">/</span>
+              <a  @click="showRegisterModel">注册</a>
             </li>
             <li v-show="token != null && token !== ''" class="nav-item menu" @click="showDropDown">
               <img :src="user.avatar" class="avatar">
@@ -50,125 +51,6 @@
         </ul>
       </nav>
     </div>
-    <!--    <b-navbar
-          class="container is-white"
-          :fixed-top="true"
-        >
-          <template slot="brand">
-            <b-navbar-item tag="div">
-              <img :src="doubaoImg" alt="logo">
-            </b-navbar-item>
-
-            <b-navbar-item
-              class="is-hidden-desktop"
-              tag="router-link"
-              :to="{ path: '/' }"
-            >
-              主页
-            </b-navbar-item>
-          </template>
-          <template slot="start">
-            <b-navbar-item
-              tag="router-link"
-              :to="{ path: '/' }"
-            >
-              🌐 主页
-            </b-navbar-item>
-            <b-navbar-item
-              tag="router-link"
-              :to="{ path: '/youtuber' ,query:{category:0}}"
-            >
-              youtuber
-            </b-navbar-item>
-            <b-navbar-item
-              tag="router-link"
-              :to="{ path: '/talk' }"
-            >
-              talk
-            </b-navbar-item>
-          </template>
-
-          <template slot="end">
-            <b-navbar-item tag="div">
-              <b-field position="is-centered">
-                <b-input
-                  v-model="searchKey"
-                  class="s_input"
-                  width="80%"
-                  placeholder="搜索帖子、标签和用户"
-                  rounded
-                  clearable
-                  @keyup.enter.native="search()"
-                />
-
-                <p class="control">
-                  <b-button
-                    class="is-info"
-                    @click="search()"
-                  >检索
-                  </b-button>
-                </p>
-              </b-field>
-            </b-navbar-item>
-
-            <b-navbar-item tag="div">
-              <b-switch
-                v-model="darkMode"
-                passive-type="is-warning"
-                type="is-dark"
-              >
-                {{ darkMode ? "夜" : "日" }}
-              </b-switch>
-            </b-navbar-item>
-
-            <b-navbar-item
-              v-if="token == null || token === ''"
-              tag="div"
-            >
-              <div class="buttons">
-                <button
-                  class="is-light"
-                  tag="router-link"
-                  @click="showRegisterModel"
-                >
-                  注册
-                </button>
-                <button
-                  class="is-light"
-                  tag="router-link"
-                  @click="showLoginModel"
-                >
-                  登录
-                </button>
-              </div>
-            </b-navbar-item>
-
-            <b-navbar-dropdown
-              v-else
-              :label="user.alias"
-            >
-              <b-navbar-item
-                tag="router-link"
-                :to="{ path: `/member/${user.id}`}"
-              >
-                🧘 个人中心
-              </b-navbar-item>
-              <hr class="dropdown-divider">
-              <b-navbar-item
-                tag="router-link"
-                :to="{ path: `/member/setting` }"
-              >
-                ⚙ 设置中心
-              </b-navbar-item>
-              <hr class="dropdown-divider">
-              <b-navbar-item
-                tag="a"
-                @click="logout"
-              > 👋 退出登录
-              </b-navbar-item>
-            </b-navbar-dropdown>
-          </template>
-        </b-navbar>-->
   </header>
 </template>
 
@@ -201,6 +83,16 @@
           this.disableDarkMode()
         }
         this.setDarkMode(this.darkMode)
+      }
+    },
+    async fetch() {
+      var token = this.$cookies.get('u_token');
+      if (token){
+        this.$store.commit('user/SET_TOKEN_STATE', token);
+        await this.$store.dispatch('user/getInfo');
+      }else {
+        this.$store.commit('user/SET_TOKEN_STATE', '');
+        this.$store.commit('user/SET_USER_STATE', '');
       }
     },
     mounted() {
